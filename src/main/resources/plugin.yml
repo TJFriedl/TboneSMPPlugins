@@ -1,0 +1,55 @@
+name: TbonePlugins
+version: '${project.version}'
+main: me.tbonejdi.tboneplugins.Main
+api-version: 1.18
+authors: [ Trevor ]
+description: This for now will run as a test, but we can update this all in the future
+commands:
+  diamonddetect:
+    description: scans diamonds within a 5-radius area!
+    usage: /<command>
+    aliases: dd
+  select:
+    description: Opens the selection screen.
+    usage: /<command>
+  chooseclass:
+    descrption: Opens a selection screen to choose different class roles.
+    usage: /<command>
+    aliases: chooserole
+  tomes:
+    description: Opens a list of player unlocked tomes.
+    usage: /<command>
+    aliases: bookslist
+  detecttome:
+    description: Allows player to see if they have discovered a tome book (debugging command)
+    usage: /<command>
+  summonitem:
+    description: Allows admin to type specific name to summon magic
+    usage: /<command>
+  setplayerxp:
+    description: Allows admin to set user's rpg experience
+    usage: /<command>
+  setplayerlevel:
+    description: Allows admin to set user's rpg level
+    usage: /<command>
+  setplayerclass:
+    description: Allows admin to set user's rpg class name
+    usage: /<command>
+  setclasslevel:
+    description: Allows admin to set user's class level
+    usage: /<command>
+  setclassxp:
+    description: Allows admin to set user's class xp
+    usage: /<command>
+  deletefiledata:
+    description: Allows user to delete their saved data and restart fresh
+    usage: /<command>
+  getplayermaxhealth:
+    description: Admin can display their max health value (for testing)
+    usage: /<command>
+  setplayermaxhealth:
+    description: Admin can set their max health value
+    usage: /<command>
+  setplayerbasearmor:
+    description: Admin can set their base armor value
+    usage: /<command>

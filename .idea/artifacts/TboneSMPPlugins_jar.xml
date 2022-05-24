@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TboneSMPPlugins:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="TboneSMPPlugins.jar">
+      <element id="module-output" name="TboneSMPPlugins" />
+    </root>
+  </artifact>
+</component>

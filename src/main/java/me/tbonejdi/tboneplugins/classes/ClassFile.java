@@ -5,8 +5,6 @@ import org.bukkit.entity.Player;
 
 public abstract class ClassFile {
 
-    public ClassType classType;
-
     // Universal: Resets the player's stats back to normal, usually before a class change.
     public static void resetPlayer(Player player) {
         player.getActivePotionEffects().clear();

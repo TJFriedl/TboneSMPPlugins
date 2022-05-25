@@ -6,7 +6,6 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 public class Warrior extends ClassFile{
-    ClassType classType = ClassType.WARRIOR; // Change this at some point!
 
     public static void setClass() {
         FileStartupEvents.cInfo.setCurrentClass("Fighter");

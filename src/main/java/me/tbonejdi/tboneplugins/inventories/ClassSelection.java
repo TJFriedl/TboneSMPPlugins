@@ -26,8 +26,8 @@ public class ClassSelection implements InventoryHolder {
 
     private void init() {
         ItemStack item;
-        item = createItem("§6§lHunter", Material.IRON_SWORD,
-                Collections.singletonList("§7Select the 'Fighter' Class!"));
+        item = createItem("§6§lWarrior", Material.IRON_SWORD,
+                Collections.singletonList("§7Select the 'Warrior' Class!"));
         inv.setItem(0, item);
 
         item = createItem("§4§lExit", Material.RED_STAINED_GLASS_PANE,

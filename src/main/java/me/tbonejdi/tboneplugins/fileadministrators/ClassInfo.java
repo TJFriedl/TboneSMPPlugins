@@ -1,5 +1,7 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
+import me.tbonejdi.tboneplugins.classes.ClassFile;
+import me.tbonejdi.tboneplugins.classes.Warrior;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -53,6 +55,22 @@ public class ClassInfo {
             currentMaxEXP *= 2;
             player.sendMessage("§6LEVEL UP! You are now level §3" + currentLvl);
             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, (float) 0.4, 1);
+            ClassFile.resetPlayer(player);
+        }
+    }
+
+    public void applyBuffs() {
+        String currentClass = this.currentClass;
+        switch (currentClass) {
+            case "Fighter":
+                player.sendMessage("Applying warrior buffs!");
+                Warrior.setBuffs(this);
+                break;
+            default:
+                player.sendMessage("No class found...");
+                setCurrentClass("None");
+                ClassFile.resetPlayer(player);
+                break;
         }
     }
 }

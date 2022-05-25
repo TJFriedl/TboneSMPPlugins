@@ -24,16 +24,20 @@ public class FileStartupEvents implements Listener {
 
         PackageInitializer pckgInit = new PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
 
-        pckgInit.checkForPlayerLevelsFile(); // Does the player file exist?
+        // Init for fileWorker, playerInfo
+        pckgInit.checkForPlayerLevelsFile();
         this.fw = pckgInit.fw;
         this.pInfo = pckgInit.pInfo;
 
+        // Init for tomesFileworker
         pckgInit.checkForPlayerTomesFile();
         this.tfw = pckgInit.tfw;
 
+        // Init for classWorker, classInfo
         pckgInit.checkForClassInit();
         this.cw = pckgInit.cw;
         this.cInfo = pckgInit.cInfo;
+        cInfo.applyBuffs(); // Initializes default buffs for a player once they join...
 
         playerReset = false;
     }

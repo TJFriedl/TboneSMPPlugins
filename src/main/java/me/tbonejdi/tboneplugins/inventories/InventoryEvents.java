@@ -55,10 +55,11 @@ public class InventoryEvents implements Listener {
                 p.closeInventory();
             }
             else if(e.getSlot() == 0) {
-                p.sendMessage("§6Selecting the fighter class!");
+                p.sendMessage("§6Selecting the §cWarrior §6class!");
                 PackageInitializer.cw.saveToFile(PackageInitializer.cInfo); // Check this, sorta skeptical for errors.
                 ClassFile.resetPlayer(p);
                 Warrior.setClass();
+                Warrior.setBuffs(PackageInitializer.cInfo);
                 p.closeInventory();
             }
         }

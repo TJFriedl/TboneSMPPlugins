@@ -56,6 +56,7 @@ public class ClassInfo {
             player.sendMessage("§6LEVEL UP! You are now level §3" + currentLvl);
             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, (float) 0.4, 1);
             ClassFile.resetPlayer(player);
+            applyBuffs();
         }
     }
 

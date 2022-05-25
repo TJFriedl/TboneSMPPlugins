@@ -65,6 +65,7 @@ public class PlayerInfoCommands implements CommandExecutor {
             }
             String className = args[0];
             FileStartupEvents.cInfo.setCurrentClass(className);
+            FileStartupEvents.cInfo.applyBuffs();
             p.sendMessage("Class name changed to §6" + className);
             try {
                 FileStartupEvents.fw.saveToFile(FileStartupEvents.pInfo);

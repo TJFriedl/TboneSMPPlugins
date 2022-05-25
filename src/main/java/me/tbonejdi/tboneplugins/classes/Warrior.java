@@ -6,7 +6,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 public class Warrior extends ClassFile{
-    ClassType classType = ClassType.WARRIOR; // Do we even need this??
+    ClassType classType = ClassType.WARRIOR; // Change this at some point
 
     public static void setClass() {
         FileStartupEvents.cInfo.setCurrentClass("Fighter");
@@ -28,7 +28,7 @@ public class Warrior extends ClassFile{
         else if (level >= 4 && level < 8) { return 4.0; }
         else if (level >= 8 && level < 10) { return 6.0; }
         else {
-            return 7.0;
+            return 8.0;
         }
     }
 

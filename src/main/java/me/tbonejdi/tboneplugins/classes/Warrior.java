@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class Warrior extends ClassFile{
 
     public static void setClass() {
-        FileStartupEvents.cInfo.setCurrentClass("Fighter");
+        FileStartupEvents.cInfo.setCurrentClass("Warrior");
         setBuffs(FileStartupEvents.cInfo);
     }
 

@@ -27,7 +27,7 @@ public class TomeEvents implements Listener {
              */
             if (e.getItem().getItemMeta()
                     .equals(MobDropEvents.tutorialBook.getItemMeta())) {
-                p.sendMessage(ChatColor.YELLOW + "You have activated a tome!");
+                p.sendMessage(ChatColor.YELLOW + "You have activated a tome! Use /tomes to read");
                 Bukkit.broadcastMessage(ChatColor.AQUA + p.getDisplayName()
                         + " has found their first tome!");
                 p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);

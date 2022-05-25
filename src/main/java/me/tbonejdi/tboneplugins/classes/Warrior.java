@@ -28,7 +28,7 @@ public class Warrior extends ClassFile{
         else if (level >= 4 && level < 8) { return 4.0; }
         else if (level >= 8 && level < 10) { return 6.0; }
         else {
-            return 8.0;
+            return 7.0;
         }
     }
 

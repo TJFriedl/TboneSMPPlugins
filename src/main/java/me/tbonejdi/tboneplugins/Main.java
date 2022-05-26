@@ -1,8 +1,11 @@
 package me.tbonejdi.tboneplugins;
 
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
+import me.tbonejdi.tboneplugins.commands.EnchantCommands;
 import me.tbonejdi.tboneplugins.commands.ItemCommands;
 import me.tbonejdi.tboneplugins.commands.PlayerInfoCommands;
+import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
+import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
@@ -46,6 +49,7 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new TomeEvents(), this);
         getServer().getPluginManager().registerEvents(new ClassXPEvents(), this);
         getServer().getPluginManager().registerEvents(new LevelProgressionEvents(), this);
+        getServer().getPluginManager().registerEvents(new EnchantEvents(), this);
 
          /*
             Score board functionality (in the main method)
@@ -81,6 +85,11 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("getplayermaxhealth").setExecutor(pic);
         getCommand("setplayermaxhealth").setExecutor(pic);
         getCommand("setplayerbasearmor").setExecutor(pic);
+
+        EnchantCommands ec = new EnchantCommands();
+        getCommand("telepathy").setExecutor(ec);
+
+        CustomEnchants.register();
 
          /*
               RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to

@@ -53,3 +53,6 @@ commands:
   setplayerbasearmor:
     description: Admin can set their base armor value
     usage: /<command>
+  telepathy:
+    description: Spawns in a telepathy pickaxe to try
+    usage: /<command>

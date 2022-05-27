@@ -56,3 +56,6 @@ commands:
   telepathy:
     description: Spawns in a telepathy pickaxe to try
     usage: /<command>
+  blazedtip:
+    description: Spawn in a blazed tip pickaxe
+    usage: /<command>

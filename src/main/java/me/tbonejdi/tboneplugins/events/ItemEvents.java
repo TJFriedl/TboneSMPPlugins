@@ -45,9 +45,8 @@ public class ItemEvents implements Listener {
     }
 
     @EventHandler
-    public static void onItemConsume(PlayerItemConsumeEvent e, PlayerTeleportEvent e2) {
+    public static void onItemConsume(PlayerItemConsumeEvent e) {
         if (e.getItem().getItemMeta().equals(CrystalFruit.crystalFruit.getItemMeta())) {
-            e2.setCancelled(true);
             Player player = e.getPlayer();
             Random rand = new Random();
             int randomNum = rand.nextInt(30);
@@ -94,6 +93,13 @@ public class ItemEvents implements Listener {
                 default:
                     return;
             }
+        }
+        }
+    @EventHandler
+    public static void onItemTeleport(PlayerTeleportEvent e) {
+        if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().equals
+                (CrystalFruit.crystalFruit.getItemMeta())) {
+            e.setCancelled(true);
         }
     }
 }

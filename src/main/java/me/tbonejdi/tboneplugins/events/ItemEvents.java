@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -44,8 +45,9 @@ public class ItemEvents implements Listener {
     }
 
     @EventHandler
-    public static void onItemConsume(PlayerItemConsumeEvent e) {
+    public static void onItemConsume(PlayerItemConsumeEvent e, PlayerTeleportEvent e2) {
         if (e.getItem().getItemMeta().equals(CrystalFruit.crystalFruit.getItemMeta())) {
+            e2.setCancelled(true);
             Player player = e.getPlayer();
             Random rand = new Random();
             int randomNum = rand.nextInt(30);

@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.commands;
 
+import me.tbonejdi.tboneplugins.items.CrystalFruit;
 import me.tbonejdi.tboneplugins.items.DiamondWand;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
 import org.bukkit.Material;
@@ -32,6 +33,9 @@ public class ItemCommands implements CommandExecutor {
             else if (itemName.equalsIgnoreCase("magicmirror")) {
                 p.getInventory().addItem(MagicMirror.magicMirror);
             }
+            else if (itemName.equalsIgnoreCase("crystalfruit")) {
+                p.getInventory().addItem(CrystalFruit.crystalFruit);
+            }
             else {
                 p.sendMessage("§4Error: Item does not seem to exist.");
             }
@@ -61,7 +65,6 @@ public class ItemCommands implements CommandExecutor {
                 p.sendMessage("§4No diamonds were found :(");
             }
         }
-
         return true;
     }
 }

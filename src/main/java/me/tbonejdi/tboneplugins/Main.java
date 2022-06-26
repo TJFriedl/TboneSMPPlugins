@@ -8,6 +8,7 @@ import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
+import me.tbonejdi.tboneplugins.items.CrystalFruit;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
@@ -26,7 +27,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
-import java.io.File;
 import java.io.IOException;
 
 public final class Main extends JavaPlugin implements Listener {
@@ -62,6 +62,7 @@ public final class Main extends JavaPlugin implements Listener {
         ItemManager.init();
         DiamondWand.init();
         MagicMirror.init();
+        CrystalFruit.init();
 
         TutorialCommands t = new TutorialCommands();
         getCommand("select").setExecutor(t);
@@ -88,6 +89,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         EnchantCommands ec = new EnchantCommands();
         getCommand("telepathy").setExecutor(ec);
+        getCommand("blazedtip").setExecutor(ec);
 
         CustomEnchants.register();
 
@@ -181,14 +183,18 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }, 0, 10);
     }
-
+    /*
+    TODO: Needs to update personal information... Currently stuck updating everyone's together.
+     */
     public void createBoard(Player player) throws IOException {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
         Objective obj = board.registerNewObjective("ScoreBoard-1", "dummy", "§6§l<<TboneSMP>>");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        PlayerInfo pInfo = FileStartupEvents.pInfo;
-        ClassInfo cInfo = FileStartupEvents.cInfo;
+        PlayerInfo pInfo = new PlayerInfo(player.getName(), FileStartupEvents.pInfo.getLevel(), FileStartupEvents.pInfo.getExp()
+        , FileStartupEvents.pInfo.getMaxExp(), player);
+        ClassInfo cInfo = new ClassInfo(player, FileStartupEvents.cw.parseClass(), FileStartupEvents.cInfo.getClassLvl(),
+                FileStartupEvents.cInfo.getClassExp(), FileStartupEvents.cInfo.getClassMaxExp());
 
         Score score = obj.getScore("§7§l=-=-=-=-=-=-=");
         score.setScore(6);

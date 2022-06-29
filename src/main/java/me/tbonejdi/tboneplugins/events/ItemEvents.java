@@ -44,61 +44,79 @@ public class ItemEvents implements Listener {
         }
     }
 
+    
     @EventHandler
     public static void onItemConsume(PlayerItemConsumeEvent e) {
         if (e.getItem().getItemMeta().equals(CrystalFruit.crystalFruit.getItemMeta())) {
             Player player = e.getPlayer();
             Random rand = new Random();
-            int randomNum = rand.nextInt(30);
+            int randomNum = rand.nextInt(19);
 
             switch (randomNum) {
                 case 0:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1));
+                    break;
                 case 1:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 200, 1));
+                    break;
                 case 2:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 1));
+                    break;
                 case 3:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 200, 1));
+                    break;
                 case 4:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 200, 1));
+                    break;
                 case 5:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
+                    break;
                 case 6:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 1));
+                    break;
                 case 7:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 200, 1));
+                    break;
                 case 8:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 200, 1));
+                    break;
                 case 9:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 1));
+                    break;
                 case 10:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 200, 1));
+                    break;
                 case 11:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 200, 1));
+                    break;
                 case 12:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 1));
+                    break;
                 case 13:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 200, 1));
+                    break;
                 case 14:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1));
+                    break;
                 case 15:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, 200, 1));
+                    break;
                 case 16:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 200, 1));
+                    break;
                 case 17:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 200, 1));
+                    break;
                 case 18:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 200, 1));
-                default:
-                    return;
+                    break;
             }
         }
-        }
+    }
+
     @EventHandler
     public static void onItemTeleport(PlayerTeleportEvent e) {
-        if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().equals
-                (CrystalFruit.crystalFruit.getItemMeta())) {
+        if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT)) {
             e.setCancelled(true);
         }
     }

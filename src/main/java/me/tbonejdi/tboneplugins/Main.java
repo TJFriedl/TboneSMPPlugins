@@ -10,6 +10,8 @@ import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.CrystalFruit;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
+import me.tbonejdi.tboneplugins.testingcases.CountCommand;
+import me.tbonejdi.tboneplugins.testingcases.Counter;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
 import me.tbonejdi.tboneplugins.commands.TutorialCommands;
@@ -90,6 +92,9 @@ public final class Main extends JavaPlugin implements Listener {
         EnchantCommands ec = new EnchantCommands();
         getCommand("telepathy").setExecutor(ec);
         getCommand("blazedtip").setExecutor(ec);
+
+        getCommand("count").setExecutor(new CountCommand());
+
 
         CustomEnchants.register();
 
@@ -191,29 +196,28 @@ public final class Main extends JavaPlugin implements Listener {
         Scoreboard board = manager.getNewScoreboard();
         Objective obj = board.registerNewObjective("ScoreBoard-1", "dummy", "§6§l<<TboneSMP>>");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        PlayerInfo pInfo = new PlayerInfo(player.getName(), FileStartupEvents.pInfo.getLevel(), FileStartupEvents.pInfo.getExp()
-        , FileStartupEvents.pInfo.getMaxExp(), player);
-        ClassInfo cInfo = new ClassInfo(player, FileStartupEvents.cw.parseClass(), FileStartupEvents.cInfo.getClassLvl(),
-                FileStartupEvents.cInfo.getClassExp(), FileStartupEvents.cInfo.getClassMaxExp());
 
         Score score = obj.getScore("§7§l=-=-=-=-=-=-=");
         score.setScore(6);
-        Score score2 = obj.getScore(ChatColor.GOLD +"Online Players: " +
-                Bukkit.getOnlinePlayers().size());
+//        Score score2 = obj.getScore(ChatColor.GOLD +"Online Players: " +
+//                Bukkit.getOnlinePlayers().size());
+        Score score2 = obj.getScore(ChatColor.GOLD + "Current count: " + Counter.count);
         score2.setScore(5);;
-        Score score3 = obj.getScore(ChatColor.GOLD + "Class: §8" + cInfo.getCurrentClass());
+        Score score3 = obj.getScore(ChatColor.GOLD + "Class: §8" + FileStartupEvents.cInfo.getCurrentClass());
         score3.setScore(4);
-        Score score4 = obj.getScore(ChatColor.GOLD + "Player Lvl: " + pInfo.getLevel());
+        Score score4 = obj.getScore(ChatColor.GOLD + "Player Lvl: " + FileStartupEvents.pInfo.getLevel());
         score4.setScore(3);
-        Score score5 = obj.getScore(ChatColor.GOLD + "Player XP: " + "§c" + pInfo.getExp() + "/" +
-                pInfo.getMaxExp() + " [" + (int) Math.floor( ((double) pInfo.getExp() / (double) pInfo.getMaxExp())
+        Score score5 = obj.getScore(ChatColor.GOLD + "Player XP: " + "§c" + FileStartupEvents.pInfo.getExp() + "/" +
+                FileStartupEvents.pInfo.getMaxExp() + " [" +
+                (int) Math.floor( ((double) FileStartupEvents.pInfo.getExp() / (double) FileStartupEvents.pInfo.getMaxExp())
                 * 100) + "%]");
         score5.setScore(2);
-        Score score6 = obj.getScore(ChatColor.GOLD + "Class Lvl: " + cInfo.getClassLvl());
+        Score score6 = obj.getScore(ChatColor.GOLD + "Class Lvl: " + FileStartupEvents.cInfo.getClassLvl());
         score6.setScore(1);
-        Score score7 = obj.getScore(ChatColor.GOLD + "Class XP: " + "§e" + cInfo.getClassExp() + "/" +
-                cInfo.getClassMaxExp() + " [" + (int) Math.floor( ((double) cInfo.getClassExp() / (double)
-                cInfo.getClassMaxExp()) * 100) + "%]");
+        Score score7 = obj.getScore(ChatColor.GOLD + "Class XP: " + "§e" + FileStartupEvents.cInfo.getClassExp() + "/" +
+                FileStartupEvents.cInfo.getClassMaxExp() + " [" +
+                (int) Math.floor( ((double) FileStartupEvents.cInfo.getClassExp() / (double)
+                        FileStartupEvents.cInfo.getClassMaxExp()) * 100) + "%]");
         score7.setScore(0);
         player.setScoreboard(board);
 

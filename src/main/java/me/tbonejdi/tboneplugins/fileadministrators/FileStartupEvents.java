@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
+import me.tbonejdi.tboneplugins.testingcases.Counter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class FileStartupEvents implements Listener {
     public static TomesFileWorker tfw;
     public static ClassWorker cw;
     public static ClassInfo cInfo;
+    public static PackageInitializer pckg;
 
     public static boolean playerReset; // We use this so console doesn't throw errors for resetting player data
 
@@ -40,6 +42,11 @@ public class FileStartupEvents implements Listener {
         cInfo.applyBuffs(); // Initializes default buffs for a player once they join...
 
         playerReset = false;
+        pckg = pckgInit;
+
+        File f = new File("//home//container//plugins//playerFiles//" + username + "//"
+                + username.toLowerCase() + "_count.txt");
+        Counter count = new Counter(f);
     }
 
     @EventHandler

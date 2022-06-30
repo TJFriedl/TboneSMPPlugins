@@ -44,7 +44,7 @@ public class ItemEvents implements Listener {
         }
     }
 
-    
+
     @EventHandler
     public static void onItemConsume(PlayerItemConsumeEvent e) {
         if (e.getItem().getItemMeta().equals(CrystalFruit.crystalFruit.getItemMeta())) {

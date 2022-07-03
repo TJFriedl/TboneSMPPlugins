@@ -16,6 +16,7 @@ public class FileStartupEvents implements Listener {
     public static ClassWorker cw;
     public static ClassInfo cInfo;
     public static PackageInitializer pckg;
+    public Counter count;
 
     public static boolean playerReset; // We use this so console doesn't throw errors for resetting player data
 
@@ -44,9 +45,20 @@ public class FileStartupEvents implements Listener {
         playerReset = false;
         pckg = pckgInit;
 
+        // THIS IS ALL FOR A TEST... MEANT TO BE DELETED LATER ON
         File f = new File("//home//container//plugins//playerFiles//" + username + "//"
                 + username.toLowerCase() + "_count.txt");
-        Counter count = new Counter(f);
+        if (f.exists()) {
+            Counter count = new Counter(f);
+            count.init();
+            this.count = count;
+            Counter.count = 0;
+        }
+        else {
+            Counter count = new Counter(f);
+            this.count = count;
+            Counter.count = this.count.parseCount();
+        }
     }
 
     @EventHandler
@@ -55,6 +67,7 @@ public class FileStartupEvents implements Listener {
         fw.saveToFile(pInfo);
         tfw.saveToFile();
         cw.saveToFile(cInfo);
+        this.count.save();
     }
 
 }

@@ -32,7 +32,7 @@ public class Counter{
         writer.close();
     }
 
-    private int parseCount() throws IOException {
+    public int parseCount() throws IOException {
         resetReader();
         int count = -1;
         String line = reader.readLine();

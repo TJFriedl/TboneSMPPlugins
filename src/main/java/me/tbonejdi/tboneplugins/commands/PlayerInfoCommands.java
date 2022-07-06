@@ -1,6 +1,7 @@
 package me.tbonejdi.tboneplugins.commands;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -30,17 +31,20 @@ public class PlayerInfoCommands implements CommandExecutor {
             return true;
         }
 
+        // TODO: Change to switch cases, replace hash in each case, and add returns for faster runtime
+
         Player p = (Player) sender;
+        PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
 
         if (cmd.getName().equalsIgnoreCase("setplayerxp")) {
             if (args.length != 1) {
                 p.sendMessage("§4Incorrect format: §6/setrpgxp <xp>");
             }
             int xp = Integer.parseInt(args[0]);
-            FileStartupEvents.pInfo.setExp(xp);
+            pckg.pInfo.setExp(xp);
             p.sendMessage("XP value has been set to " + xp);
             try {
-                FileStartupEvents.fw.saveToFile(FileStartupEvents.pInfo);
+                pckg.fw.saveToFile(pckg.pInfo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -51,10 +55,10 @@ public class PlayerInfoCommands implements CommandExecutor {
                 p.sendMessage("§4Incorrect format: §6/setrpglevel <level>");
             }
             int lvl = Integer.parseInt(args[0]);
-            FileStartupEvents.pInfo.setLevel(lvl);
+            pckg.pInfo.setLevel(lvl);
             p.sendMessage("Level value has been set to " + lvl);
             try {
-                FileStartupEvents.fw.saveToFile(FileStartupEvents.pInfo);
+                pckg.fw.saveToFile(pckg.pInfo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -64,11 +68,11 @@ public class PlayerInfoCommands implements CommandExecutor {
                 p.sendMessage("§4Incorrect format: §6/setrpgclassname <className>");
             }
             String className = args[0];
-            FileStartupEvents.cInfo.setCurrentClass(className);
-            FileStartupEvents.cInfo.applyBuffs();
+            pckg.cInfo.setCurrentClass(className);
+            pckg.cInfo.applyBuffs();
             p.sendMessage("Class name changed to §6" + className);
             try {
-                FileStartupEvents.fw.saveToFile(FileStartupEvents.pInfo);
+                pckg.fw.saveToFile(pckg.pInfo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,10 +83,10 @@ public class PlayerInfoCommands implements CommandExecutor {
                 p.sendMessage("§4Incorrect format: §6/setclasslevel <level>");
             }
             int lvl = Integer.parseInt(args[0]);
-            FileStartupEvents.cInfo.setLevel(lvl);
+            pckg.cInfo.setLevel(lvl);
             p.sendMessage("Level value has been set to " + lvl);
             try {
-                FileStartupEvents.cw.saveToFile(FileStartupEvents.cInfo);
+                pckg.cw.saveToFile(pckg.cInfo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,10 +97,10 @@ public class PlayerInfoCommands implements CommandExecutor {
                 p.sendMessage("§4Incorrect format: §6/setclassxp <xp>");
             }
             int xp = Integer.parseInt(args[0]);
-            FileStartupEvents.cInfo.setExp(xp);
+            pckg.cInfo.setExp(xp);
             p.sendMessage("XP value has been set to " + xp);
             try {
-                FileStartupEvents.cw.saveToFile(FileStartupEvents.cInfo);
+                pckg.cw.saveToFile(pckg.cInfo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -104,10 +108,10 @@ public class PlayerInfoCommands implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("deletefiledata")) {
            p.sendMessage("We are deleting your current save file data INCLUDING tomes...");
-           FileStartupEvents.tfw.deleteFile();
-           FileStartupEvents.fw.deleteFile();
-           FileStartupEvents.cw.deleteFile();
-           FileStartupEvents.playerReset = true; // Error prevention
+           pckg.tfw.deleteFile();
+           pckg.fw.deleteFile();
+           pckg.cw.deleteFile();
+           FileStartupEvents.playerReset = true; // Error prevention TODO: Change within package?
            p.kickPlayer(ChatColor.GREEN + "Files deleted successfully! Kicking for security.");
 
         }
@@ -147,6 +151,7 @@ public class PlayerInfoCommands implements CommandExecutor {
             }
         }
 
+        FileStartupEvents.playerData.replace(p.getName(), pckg); //TODO: Follow above instructions
         return true;
     }
 }

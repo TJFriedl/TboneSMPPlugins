@@ -1,10 +1,11 @@
 package me.tbonejdi.tboneplugins.tomes;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
-import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -16,9 +17,11 @@ import java.util.List;
 public class TomeSelection implements InventoryHolder {
 
     private Inventory inv;
+    private Player player;
     public static ItemStack tutorialBook;
 
-    public TomeSelection() {
+    public TomeSelection(Player player) {
+        this.player = player;
         inv = Bukkit.createInventory(this, 36, ChatColor.BOLD +
                 "TOMES KNOWLEDGE");
         init();
@@ -50,8 +53,8 @@ public class TomeSelection implements InventoryHolder {
         inv.setItem(28, item4);
         inv.setItem(34, item4);
 
-        TomesFileWorker tfw = FileStartupEvents.tfw;
-        if (tfw.isBookDiscovered(0)) {
+        PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName()); // Possible error?
+        if (pckg.tfw.isBookDiscovered(0)) {
             ItemStack item5;
             item5 = createItem("Book 1: Tutorial Book", Material.WRITTEN_BOOK,
                     Collections.singletonList(ChatColor.GREEN + "§lCommon: §fOpens tutorial tome"));

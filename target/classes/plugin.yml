@@ -59,6 +59,3 @@ commands:
   blazedtip:
     description: Spawn in a blazed tip pickaxe
     usage: /<command>
-  count:
-    description: Just counts.
-    usage: /<command>

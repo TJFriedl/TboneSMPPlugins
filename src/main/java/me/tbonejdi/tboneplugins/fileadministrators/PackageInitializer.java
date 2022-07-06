@@ -8,11 +8,11 @@ import java.io.IOException;
 public class PackageInitializer {
     private static String directory;
     private Player player;
-    public static PlayerInfo pInfo;
-    public static PlayerFileWorker fw;
-    public static TomesFileWorker tfw;
-    public static ClassWorker cw;
-    public static ClassInfo cInfo;
+    public PlayerInfo pInfo;
+    public PlayerFileWorker fw;
+    public TomesFileWorker tfw;
+    public ClassWorker cw;
+    public ClassInfo cInfo;
 
 
     public PackageInitializer(String directory, Player player) {

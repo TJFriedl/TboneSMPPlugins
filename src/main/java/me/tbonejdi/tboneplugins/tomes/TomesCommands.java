@@ -1,6 +1,7 @@
 package me.tbonejdi.tboneplugins.tomes;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,11 +18,10 @@ public class TomesCommands implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-
-        TomesFileWorker tfw = FileStartupEvents.tfw;
+        PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
 
         if (cmd.getName().equalsIgnoreCase("tomes")) {
-            TomeSelection gui = new TomeSelection();
+            TomeSelection gui = new TomeSelection(p);
             p.openInventory(gui.getInventory());
             p.sendMessage("§6Opening available tomes...");
         }
@@ -31,10 +31,11 @@ public class TomesCommands implements CommandExecutor {
                 p.sendMessage("§6Expected format: /detecttome <bookNum>");
             }
             int bookNum = Integer.parseInt(args[0]);
-            p.sendMessage("Value for book " + bookNum + ": " + tfw.isBookDiscovered(bookNum));
+            p.sendMessage("Value for book " + bookNum + ": " + pckg.tfw.isBookDiscovered(bookNum));
 
         }
 
+        FileStartupEvents.playerData.replace(p.getName(), pckg);
         return true;
     }
 }

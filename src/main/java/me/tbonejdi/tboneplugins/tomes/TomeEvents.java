@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.tomes;
 
 import me.tbonejdi.tboneplugins.events.MobDropEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,6 +21,7 @@ public class TomeEvents implements Listener {
     public static void onTomeRightClick(PlayerInteractEvent e) throws IOException {
         if (e.getItem() == null) { return; }
         Player p = e.getPlayer();
+        PackageInitializer pckg = FileStartupEvents.playerData.get(e.getPlayer().getName());
         if (MobDropEvents.tutorialBook == null) { return; }
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             /*
@@ -32,11 +34,12 @@ public class TomeEvents implements Listener {
                         + " has found their first tome!");
                 p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
                 e.getItem().setAmount(0);
-                TomesFileWorker tfw = FileStartupEvents.tfw;
+                TomesFileWorker tfw = pckg.tfw;
                 tfw.setBookStatus(0, true);
                 tfw.saveToFile();
             }
         }
+        FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
     }
 
 }

@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.inventories;
 
 import me.tbonejdi.tboneplugins.classes.ClassFile;
 import me.tbonejdi.tboneplugins.classes.Warrior;
+import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.tomes.TomeSelection;
 import org.bukkit.ChatColor;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class InventoryEvents implements Listener {
 
+    //TODO: Change to switch cases, add returns for runtime, and add hashmap replacement for any stub needed.
     @EventHandler
     public void onClick(InventoryClickEvent e) throws IOException {
         if (e.getClickedInventory() == null) { return; }
@@ -47,6 +49,7 @@ public class InventoryEvents implements Listener {
         Is an instance of the class selection test inventory
          */
         if (e.getClickedInventory().getHolder() instanceof ClassSelection) {
+            PackageInitializer pckg = FileStartupEvents.playerData.get(e.getWhoClicked().getName());
             e.setCancelled(true);
             Player p = (Player) e.getWhoClicked();
             if (e.getCurrentItem() == null) { return; }
@@ -56,12 +59,14 @@ public class InventoryEvents implements Listener {
             }
             else if(e.getSlot() == 0) {
                 p.sendMessage("§6Selecting the §cWarrior §6class!");
-                PackageInitializer.cw.saveToFile(PackageInitializer.cInfo); // Check this, sorta skeptical for errors.
+                pckg.cw.saveToFile(pckg.cInfo); // Check this, sorta skeptical for errors.
                 ClassFile.resetPlayer(p);
-                Warrior.setClass();
-                Warrior.setBuffs(PackageInitializer.cInfo);
+                Warrior.setClass(p);
+                Warrior.setBuffs(pckg.cInfo);
                 p.closeInventory();
             }
+
+            FileStartupEvents.playerData.replace(e.getWhoClicked().getName(), pckg);
         }
 
         /*

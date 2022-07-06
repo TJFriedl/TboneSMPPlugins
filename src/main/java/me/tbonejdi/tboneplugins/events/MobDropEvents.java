@@ -1,6 +1,7 @@
 package me.tbonejdi.tboneplugins.events;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -31,7 +32,8 @@ public class MobDropEvents implements Listener {
             Player player = e.getEntity().getKiller();
             this.player = player;
         }
-        TomesFileWorker TomesFW = FileStartupEvents.tfw;
+        PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
+        TomesFileWorker TomesFW = pckg.tfw;
         if (!TomesFW.isBookDiscovered(0)) { // Eventually check if item is already on ground
             ItemStack item = new ItemStack(Material.BOOK, 1);
             ItemMeta im = item.getItemMeta();
@@ -51,6 +53,8 @@ public class MobDropEvents implements Listener {
             player.playSound(player.getLocation(), Sound.AMBIENT_CAVE, 1, -1);
 
         }
+
+        FileStartupEvents.playerData.replace(player.getName(), pckg);
 
     }
 

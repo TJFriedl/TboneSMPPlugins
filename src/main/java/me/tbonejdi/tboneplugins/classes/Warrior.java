@@ -2,14 +2,19 @@ package me.tbonejdi.tboneplugins.classes;
 
 import me.tbonejdi.tboneplugins.fileadministrators.ClassInfo;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 public class Warrior extends ClassFile{
 
-    public static void setClass() {
-        FileStartupEvents.cInfo.setCurrentClass("Warrior");
-        setBuffs(FileStartupEvents.cInfo);
+    public static void setClass(Player player) {
+        PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
+
+        pckg.cInfo.setCurrentClass("Warrior");
+        setBuffs(pckg.cInfo);
+
+        FileStartupEvents.playerData.replace(player.getName(), pckg);
     }
 
     public static void setBuffs(ClassInfo classInfo) {

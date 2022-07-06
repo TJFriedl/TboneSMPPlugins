@@ -1,6 +1,5 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
-import me.tbonejdi.tboneplugins.testingcases.Counter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class FileStartupEvents implements Listener {
     public static PlayerInfo pInfo; // Will try to grab information from the onEnable() call
@@ -16,7 +16,8 @@ public class FileStartupEvents implements Listener {
     public static ClassWorker cw;
     public static ClassInfo cInfo;
     public static PackageInitializer pckg;
-    public Counter count;
+
+    public static HashMap<String, PackageInitializer> playerData = new HashMap<>(); // This might be epic
 
     public static boolean playerReset; // We use this so console doesn't throw errors for resetting player data
 
@@ -45,20 +46,7 @@ public class FileStartupEvents implements Listener {
         playerReset = false;
         pckg = pckgInit;
 
-        // THIS IS ALL FOR A TEST... MEANT TO BE DELETED LATER ON
-        File f = new File("//home//container//plugins//playerFiles//" + username + "//"
-                + username.toLowerCase() + "_count.txt");
-        if (f.exists()) {
-            Counter count = new Counter(f);
-            count.init();
-            this.count = count;
-            Counter.count = 0;
-        }
-        else {
-            Counter count = new Counter(f);
-            this.count = count;
-            Counter.count = this.count.parseCount();
-        }
+
     }
 
     @EventHandler
@@ -67,7 +55,6 @@ public class FileStartupEvents implements Listener {
         fw.saveToFile(pInfo);
         tfw.saveToFile();
         cw.saveToFile(cInfo);
-        this.count.save();
     }
 
 }

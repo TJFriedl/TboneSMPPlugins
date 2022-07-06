@@ -10,8 +10,6 @@ import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.CrystalFruit;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
-import me.tbonejdi.tboneplugins.testingcases.CountCommand;
-import me.tbonejdi.tboneplugins.testingcases.Counter;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
 import me.tbonejdi.tboneplugins.commands.TutorialCommands;
@@ -38,7 +36,8 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "TboneSMP plugin is enabled...");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "TboneSMP plugin is enabled!");
+
 
         /*
             THESE ARE PRESET PLUGINS YOU WROTE - DO NOT DELETE!!!
@@ -92,8 +91,6 @@ public final class Main extends JavaPlugin implements Listener {
         EnchantCommands ec = new EnchantCommands();
         getCommand("telepathy").setExecutor(ec);
         getCommand("blazedtip").setExecutor(ec);
-
-        getCommand("count").setExecutor(new CountCommand());
 
 
         CustomEnchants.register();
@@ -197,12 +194,13 @@ public final class Main extends JavaPlugin implements Listener {
         Objective obj = board.registerNewObjective("ScoreBoard-1", "dummy", "§6§l<<TboneSMP>>");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
+        // We need to think about the best way to get the specific... Maybe we can THROW A HASHMAP AT IT!?!?!?!
+
         Score score = obj.getScore("§7§l=-=-=-=-=-=-=");
         score.setScore(6);
-//        Score score2 = obj.getScore(ChatColor.GOLD +"Online Players: " +
-//                Bukkit.getOnlinePlayers().size());
-        Score score2 = obj.getScore(ChatColor.GOLD + "Current count: " + Counter.count);
-        score2.setScore(5);;
+        Score score2 = obj.getScore(ChatColor.GOLD +"Online Players: " +
+                Bukkit.getOnlinePlayers().size());
+        score2.setScore(5);
         Score score3 = obj.getScore(ChatColor.GOLD + "Class: §8" + FileStartupEvents.cInfo.getCurrentClass());
         score3.setScore(4);
         Score score4 = obj.getScore(ChatColor.GOLD + "Player Lvl: " + FileStartupEvents.pInfo.getLevel());

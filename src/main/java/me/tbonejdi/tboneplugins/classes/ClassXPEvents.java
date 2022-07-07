@@ -1,15 +1,11 @@
 package me.tbonejdi.tboneplugins.classes;
 
-import jdk.nashorn.internal.objects.AccessorPropertyDescriptor;
-import me.tbonejdi.tboneplugins.fileadministrators.ClassInfo;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import java.util.HashMap;
 
 public class ClassXPEvents implements Listener {
 
@@ -42,6 +38,8 @@ public class ClassXPEvents implements Listener {
                 player.sendMessage("§6Creeper Gave §d" + xp + " §6experience");
                 pckg.cInfo.gainClassXP(xp);
                 pckg.cInfo.checkForLevelUp();
+                break;
+            default:
                 break;
             // Eventually add a case more all mobs you think apply...
 

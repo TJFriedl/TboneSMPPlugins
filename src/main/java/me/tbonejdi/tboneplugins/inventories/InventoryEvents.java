@@ -43,6 +43,8 @@ public class InventoryEvents implements Listener {
                 p.sendMessage(ChatColor.RED + "You have selected the 'deny' button!");
                 p.closeInventory();
             }
+
+            return;
         }
 
         /*
@@ -67,6 +69,7 @@ public class InventoryEvents implements Listener {
             }
 
             FileStartupEvents.playerData.replace(e.getWhoClicked().getName(), pckg);
+            return;
         }
 
         /*
@@ -108,6 +111,7 @@ public class InventoryEvents implements Listener {
             if (e.getCurrentItem().getType() == Material.BARRIER) {
                 p.closeInventory();
             }
+            return;
         }
 
     }

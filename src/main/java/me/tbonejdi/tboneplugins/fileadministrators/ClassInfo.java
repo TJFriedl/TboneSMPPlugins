@@ -63,7 +63,7 @@ public class ClassInfo {
     public void applyBuffs() {
         String currentClass = this.currentClass;
         switch (currentClass) {
-            case "Fighter":
+            case "Warrior":
                 player.sendMessage("Applying warrior buffs!");
                 Warrior.setBuffs(this);
                 break;

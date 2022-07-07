@@ -31,8 +31,6 @@ public class PlayerInfoCommands implements CommandExecutor {
             return true;
         }
 
-        // TODO: Change to switch cases, replace hash in each case, and add returns for faster runtime
-
         Player p = (Player) sender;
         PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
 
@@ -48,6 +46,8 @@ public class PlayerInfoCommands implements CommandExecutor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            FileStartupEvents.playerData.replace(p.getName(), pckg);
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("setplayerlevel")) {
@@ -62,6 +62,8 @@ public class PlayerInfoCommands implements CommandExecutor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            FileStartupEvents.playerData.replace(p.getName(), pckg);
+            return true;
         }
         if (cmd.getName().equalsIgnoreCase("setplayerclass")) {
             if (args.length != 1) {
@@ -76,6 +78,8 @@ public class PlayerInfoCommands implements CommandExecutor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            FileStartupEvents.playerData.replace(p.getName(), pckg);
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("setclasslevel")) {
@@ -90,6 +94,8 @@ public class PlayerInfoCommands implements CommandExecutor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            FileStartupEvents.playerData.replace(p.getName(), pckg);
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("setclassxp")) {
@@ -104,6 +110,8 @@ public class PlayerInfoCommands implements CommandExecutor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            FileStartupEvents.playerData.replace(p.getName(), pckg);
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("deletefiledata")) {
@@ -111,9 +119,10 @@ public class PlayerInfoCommands implements CommandExecutor {
            pckg.tfw.deleteFile();
            pckg.fw.deleteFile();
            pckg.cw.deleteFile();
-           FileStartupEvents.playerReset = true; // Error prevention TODO: Change within package?
+           FileStartupEvents.playerReset = true; // Error prevention
            p.kickPlayer(ChatColor.GREEN + "Files deleted successfully! Kicking for security.");
-
+           FileStartupEvents.playerData.replace(p.getName(), pckg);
+           return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("getplayermaxhealth")) {
@@ -121,6 +130,7 @@ public class PlayerInfoCommands implements CommandExecutor {
             p.sendMessage("Max player health: " + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             p.sendMessage("Current movement speed: " + p.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue());
             p.sendMessage("Generic armor value: " + p.getAttribute(Attribute.GENERIC_ARMOR).getValue());
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("setplayermaxhealth")) {
@@ -151,7 +161,6 @@ public class PlayerInfoCommands implements CommandExecutor {
             }
         }
 
-        FileStartupEvents.playerData.replace(p.getName(), pckg); //TODO: Follow above instructions
         return true;
     }
 }

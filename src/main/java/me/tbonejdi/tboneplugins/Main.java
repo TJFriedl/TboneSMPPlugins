@@ -9,14 +9,11 @@ import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
-import me.tbonejdi.tboneplugins.items.CrystalFruit;
-import me.tbonejdi.tboneplugins.items.MagicMirror;
+import me.tbonejdi.tboneplugins.items.*;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
 import me.tbonejdi.tboneplugins.commands.TutorialCommands;
 import me.tbonejdi.tboneplugins.events.*;
-import me.tbonejdi.tboneplugins.items.DiamondWand;
-import me.tbonejdi.tboneplugins.items.ItemManager;
 import me.tbonejdi.tboneplugins.scoreboards.LobbyBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -65,6 +62,7 @@ public final class Main extends JavaPlugin implements Listener {
         DiamondWand.init();
         MagicMirror.init();
         CrystalFruit.init();
+        FloatingWand.init();
 
         TutorialCommands t = new TutorialCommands();
         getCommand("select").setExecutor(t);
@@ -186,41 +184,39 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }, 0, 10);
     }
-    /*
-    TODO: Needs to update personal information... Currently stuck updating everyone's together.
-     */
+
     public void createBoard(Player player) throws IOException {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
         Objective obj = board.registerNewObjective("ScoreBoard-1", "dummy", "§6§l<<TboneSMP>>");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        // We need to think about the best way to get the specific... Maybe we can THROW A HASHMAP AT IT!?!?!?!
         PackageInitializer data = FileStartupEvents.playerData.get(player.getName()); // Hash Technology!!
         PlayerInfo playerStats = data.pInfo;
         ClassInfo classStats = data.cInfo;
 
-        Score score = obj.getScore("§7§l=-=-=-=-=-=-=");
-        score.setScore(6);
-        Score score2 = obj.getScore(ChatColor.GOLD +"Online Players: " +
-                Bukkit.getOnlinePlayers().size());
-        score2.setScore(5);
-        Score score3 = obj.getScore(ChatColor.GOLD + "Class: §8" + classStats.getCurrentClass());
-        score3.setScore(4);
-        Score score4 = obj.getScore(ChatColor.GOLD + "Player Lvl: " + playerStats.getLevel());
-        score4.setScore(3);
-        Score score5 = obj.getScore(ChatColor.GOLD + "Player XP: " + "§c" + playerStats.getExp() + "/" +
-                playerStats.getMaxExp() + " [" +
+        Score topBar = obj.getScore("§7§l=-=-=-=-=-=-=");
+        topBar.setScore(8);
+        Score playerCt = obj.getScore(ChatColor.RED +"Players: " + ChatColor.GOLD+Bukkit.getOnlinePlayers().size());
+        playerCt.setScore(7);
+        Score currentClass = obj.getScore(ChatColor.RED + "Class: §c" + classStats.getCurrentClass());
+        currentClass.setScore(6);
+        Score playerLvl = obj.getScore(ChatColor.GOLD + "Player Lv: " + playerStats.getLevel());
+        playerLvl.setScore(5);
+        Score playerXPPct = obj.getScore(ChatColor.GOLD + "Player XP: " + " §e[" +
                 (int) Math.floor( ((double) playerStats.getExp() / (double) playerStats.getMaxExp())
                 * 100) + "%]");
-        score5.setScore(2);
-        Score score6 = obj.getScore(ChatColor.GOLD + "Class Lvl: " + classStats.getClassLvl());
-        score6.setScore(1);
-        Score score7 = obj.getScore(ChatColor.GOLD + "Class XP: " + "§e" + classStats.getClassExp() + "/" +
-                classStats.getClassMaxExp() + " [" +
+        playerXPPct.setScore(4);
+        Score playerXP = obj.getScore("§e§l" + playerStats.getExp() + "/" + playerStats.getMaxExp());
+        playerXP.setScore(3);
+        Score classLvl = obj.getScore(ChatColor.YELLOW + "Class Lvl: " + classStats.getClassLvl());
+        classLvl.setScore(2);
+        Score classXPPct = obj.getScore(ChatColor.YELLOW + "Class XP: " + " §f[" +
                 (int) Math.floor( ((double) classStats.getClassExp() / (double)
                         classStats.getClassMaxExp()) * 100) + "%]");
-        score7.setScore(0);
+        classXPPct.setScore(1);
+        Score classXP = obj.getScore("§f§l" + classStats.getClassExp() + "/" + classStats.getClassMaxExp());
+        classXP.setScore(0);
         player.setScoreboard(board);
 
     }

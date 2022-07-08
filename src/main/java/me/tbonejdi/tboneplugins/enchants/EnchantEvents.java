@@ -46,6 +46,7 @@ public class EnchantEvents implements Listener {
             e.setCancelled(true);
             e.getBlock().getLocation().getWorld().dropItemNaturally(e.getBlock().getLocation(),
                     new ItemStack(Material.IRON_INGOT));
+            e.getBlock().setType(Material.AIR);
         }
     }
 

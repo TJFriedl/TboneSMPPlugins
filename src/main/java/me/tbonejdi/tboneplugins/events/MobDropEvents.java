@@ -21,20 +21,20 @@ import java.util.List;
 
 public class MobDropEvents implements Listener {
 
-    public static ItemStack tutorialBook;
+    public static ItemStack tutorialBook; // Maybe we put this all in the items package eventually?
     private static Player player;
 
     @EventHandler
-    public void onMobDeath(EntityDeathEvent e) { //Followed from a YouTube Tutorial
+    public void onMobDeath(EntityDeathEvent e) {
         if (e.getEntity().getKiller() == null) { return; }
         else if (e.getEntity().getKiller() instanceof Player) {
-            if (e.getEntity().getKiller() == e.getEntity()) { return; } // You caused it, you goof!
+            if (e.getEntity().getKiller() == e.getEntity()) { return; }
             Player player = e.getEntity().getKiller();
             this.player = player;
         }
         PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
-        TomesFileWorker TomesFW = pckg.tfw;
-        if (!TomesFW.isBookDiscovered(0)) { // Eventually check if item is already on ground
+        if (pckg.pInfo.getLevel() < 1) { return; } // Needs at least player lv. 1
+        if (!pckg.tfw.isBookDiscovered(0)) { // Eventually check if item is already on ground
             ItemStack item = new ItemStack(Material.BOOK, 1);
             ItemMeta im = item.getItemMeta();
             im.setDisplayName(ChatColor.DARK_PURPLE + "A mysterious book...");

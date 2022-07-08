@@ -29,14 +29,18 @@ public class TomeEvents implements Listener {
              */
             if (e.getItem().getItemMeta()
                     .equals(MobDropEvents.tutorialBook.getItemMeta())) {
-                p.sendMessage(ChatColor.YELLOW + "You have activated a tome! Use /tomes to read");
+                if (pckg.tfw.isBookDiscovered(0)) {
+                    p.sendMessage(ChatColor.GRAY + "Hey! You've already activated that tome.");
+                    e.getItem().setAmount(0);
+                    return;
+                }
+                p.sendMessage(ChatColor.GRAY + "You have activated a tome! Use /tomes to read");
                 Bukkit.broadcastMessage(ChatColor.AQUA + p.getDisplayName()
                         + " has found their first tome!");
                 p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
                 e.getItem().setAmount(0);
-                TomesFileWorker tfw = pckg.tfw;
-                tfw.setBookStatus(0, true);
-                tfw.saveToFile();
+                pckg.tfw.setBookStatus(0, true);
+                pckg.tfw.saveToFile();
             }
         }
         FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);

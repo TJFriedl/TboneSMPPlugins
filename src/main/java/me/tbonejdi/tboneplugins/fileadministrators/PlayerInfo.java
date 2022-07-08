@@ -43,9 +43,7 @@ public class PlayerInfo {
 
     public int getMaxExp() { return maxExperience; }
 
-    public void gainXP() {
-        int gainedXP = (int) Math.floor(Math.random() * 100);
-        player.sendMessage(ChatColor.GOLD + "+" + gainedXP + " Mined XP");
+    public void gainXP(int gainedXP) {
         experience += gainedXP;
     }
 

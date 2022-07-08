@@ -58,7 +58,7 @@ public class TomeSelection implements InventoryHolder {
             ItemStack item5;
             item5 = createItem("Book 1: Tutorial Book", Material.WRITTEN_BOOK,
                     Collections.singletonList(ChatColor.GREEN + "§lCommon: §fOpens tutorial tome"));
-            tutorialBook = item5;
+            tutorialBook = item5; // Should this be created before we enter this branch?
             inv.setItem(2, item5);
         }
     }

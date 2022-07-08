@@ -11,6 +11,7 @@ public class ClassXPEvents implements Listener {
 
     @EventHandler
     public static void onMobKill(EntityDeathEvent e) {
+        if (!(e.getEntity().getKiller() instanceof Player)) { return; } // Prevents next line errors
         Player player = e.getEntity().getKiller();
         PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
         int xp;

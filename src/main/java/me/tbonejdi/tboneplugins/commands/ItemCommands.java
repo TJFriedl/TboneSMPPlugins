@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.commands;
 
 import me.tbonejdi.tboneplugins.items.CrystalFruit;
 import me.tbonejdi.tboneplugins.items.DiamondWand;
+import me.tbonejdi.tboneplugins.items.FloatingWand;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -26,7 +27,7 @@ public class ItemCommands implements CommandExecutor {
             }
             String itemName = args[0];
 
-            //These only account for items that have been coded so far.
+            // These only account for items that have been coded so far.
             if (itemName.equalsIgnoreCase("diamondwand")) {
                 p.getInventory().addItem(DiamondWand.diamondWand);
             }
@@ -35,6 +36,9 @@ public class ItemCommands implements CommandExecutor {
             }
             else if (itemName.equalsIgnoreCase("crystalfruit")) {
                 p.getInventory().addItem(CrystalFruit.crystalFruit);
+            }
+            else if (itemName.equalsIgnoreCase("floatingwand")) {
+                p.getInventory().addItem(FloatingWand.floatingWand);
             }
             else {
                 p.sendMessage("§4Error: Item does not seem to exist.");
@@ -59,7 +63,7 @@ public class ItemCommands implements CommandExecutor {
             }
             if (diamondsFound) {
                 p.sendMessage("§e§lDiamonds have been found!");
-                p.sendMessage(diamondCtr + " diamonds have been detected nearby...");
+                p.sendMessage(diamondCtr + " diamond(s) have been detected nearby.");
             }
             else {
                 p.sendMessage("§4No diamonds were found :(");

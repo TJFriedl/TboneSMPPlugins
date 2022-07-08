@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.events;
 
 import me.tbonejdi.tboneplugins.items.CrystalFruit;
 import me.tbonejdi.tboneplugins.items.DiamondWand;
+import me.tbonejdi.tboneplugins.items.FloatingWand;
 import me.tbonejdi.tboneplugins.items.MagicMirror;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -40,6 +41,12 @@ public class ItemEvents implements Listener {
                     p.sendMessage(ChatColor.GOLD + "§lWOOSH!");
                     e.getItem().setAmount(0);
                 }
+            }
+
+            if (e.getItem().getItemMeta().equals(FloatingWand.floatingWand.getItemMeta())) {
+                p.sendMessage("§e§lYou have been picked up by the wind, WOOSH!");
+                p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 300, 1));
             }
         }
     }

@@ -1,6 +1,5 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -52,8 +51,21 @@ public class PlayerInfo {
             experience -= maxExperience;
             level += 1;
             maxExperience *= 2;
-            player.sendMessage(ChatColor.DARK_RED + "Level up! Lv. " + level);
+            player.sendMessage( "§6§lLevel up! §7You are now Lv. §b§l" + level);
             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, (float) 0.4, 1);
+            checkPlayerUnlocks();
+        }
+    }
+
+    private void checkPlayerUnlocks() {
+        player.sendMessage("§6§lNew Features at Lv. §b§l" + level);
+        player.sendMessage("§6§l-=-=-=-=-=-=-=-=-=-");
+        switch(level) {
+            case 1:
+                player.sendMessage("§b+5% §7Player Level XP"); // Still needs implementation
+                break;
+            default:
+                break;
         }
     }
 

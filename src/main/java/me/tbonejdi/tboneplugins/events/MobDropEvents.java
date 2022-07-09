@@ -2,7 +2,6 @@ package me.tbonejdi.tboneplugins.events;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
-import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

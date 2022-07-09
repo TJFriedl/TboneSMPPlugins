@@ -41,6 +41,12 @@ public class LevelProgressionEvents implements Listener {
                 player.sendMessage(ChatColor.GOLD + "+" + XP + " §7Mining XP");
                 pckg.pInfo.checkForLevelUp();
                 break;
+            case LAPIS_ORE:
+                XP = rand.nextInt(10) + 25;
+                pckg.pInfo.gainXP(XP);
+                player.sendMessage(ChatColor.GOLD + "+" + XP + " §7Mining XP");
+                pckg.pInfo.checkForLevelUp();
+                break;
             case IRON_ORE:
                 XP = rand.nextInt(10) + 15;
                 pckg.pInfo.gainXP(XP);
@@ -49,6 +55,12 @@ public class LevelProgressionEvents implements Listener {
                 break;
             case COAL_ORE:
                 XP = rand.nextInt(10) + 10;
+                pckg.pInfo.gainXP(XP);
+                player.sendMessage(ChatColor.GOLD + "+" + XP + " §7Mining XP");
+                pckg.pInfo.checkForLevelUp();
+                break;
+            case COPPER_ORE:
+                XP = rand.nextInt(15) + 5;
                 pckg.pInfo.gainXP(XP);
                 player.sendMessage(ChatColor.GOLD + "+" + XP + " §7Mining XP");
                 pckg.pInfo.checkForLevelUp();

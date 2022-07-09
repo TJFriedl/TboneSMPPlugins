@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class InventoryEvents implements Listener {
 
-    //TODO: Change to switch cases, add returns for runtime, and add hashmap replacement for any stub needed.
     @EventHandler
     public void onClick(InventoryClickEvent e) throws IOException {
         if (e.getClickedInventory() == null) { return; }
@@ -89,15 +88,15 @@ public class InventoryEvents implements Listener {
                 meta.setAuthor("TboneSMP");
                 meta.setTitle(ChatColor.GOLD + "Tutorial book [#1]");
                 ArrayList<String> pages = new ArrayList<>();
-                pages.add(0, "§7Hello there stranger.\n" +
-                        "§8Who I am does not matter, but you shall know me as someone who might come as great help " +
-                        "to you. The knowledge you might discover from now on is quite discrete to your nature. " +
-                        "Only those strong enough may know how to harness this kind of knowledge.");
+                pages.add(0, "§8Hello there stranger.\n\n" +
+                        "§0Who I am should not matter to you. Somehow you have discovered this tome through some sense " +
+                        "of magic. The knowledge you'll discover is quite discrete to your nature. " +
+                        "Only those strong enough may know how to use this knowledge.");
                 pages.add(1, "As you might now notice, there seems to be lots of secrets to explore, " +
-                        "and I do believe that you hold the potential to collect it all. The most important part " +
-                        "is that you stay hungry to stay searching.");
-                pages.add(2, "I would advise you to let nature take its course. The secrets of the land " +
-                        "shall come to you. I wish you good luck.\n\n\n§6~Guide");
+                        "and I do believe that you hold the potential to seek it all. The most important part " +
+                        "is that you stay hungry and patient in your searching.");
+                pages.add(2, "I would advise you to let nature take its course. The secrets of the " +
+                        "universe shall come to you. I wish you good luck.\n\n\n§5Signed §d§kTobias");
                 meta.setPages(pages);
                 book.setItemMeta(meta);
                 p.closeInventory();

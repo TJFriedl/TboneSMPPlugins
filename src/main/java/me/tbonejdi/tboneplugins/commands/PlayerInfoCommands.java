@@ -34,6 +34,11 @@ public class PlayerInfoCommands implements CommandExecutor {
         Player p = (Player) sender;
         PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
 
+        if (!(p.isOp())) {
+            p.sendMessage("§4You do not have sufficient permissions.");
+            return true;
+        }
+
         if (cmd.getName().equalsIgnoreCase("setplayerxp")) {
             if (args.length != 1) {
                 p.sendMessage("§4Incorrect format: §6/setrpgxp <xp>");

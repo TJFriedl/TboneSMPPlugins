@@ -1,6 +1,5 @@
 package me.tbonejdi.tboneplugins;
 
-import com.google.common.base.Equivalence;
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
 import me.tbonejdi.tboneplugins.commands.EnchantCommands;
 import me.tbonejdi.tboneplugins.commands.ItemCommands;
@@ -12,7 +11,7 @@ import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.*;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
-import me.tbonejdi.tboneplugins.commands.TutorialCommands;
+import me.tbonejdi.tboneplugins.commands.ClassCommands;
 import me.tbonejdi.tboneplugins.events.*;
 import me.tbonejdi.tboneplugins.scoreboards.LobbyBoard;
 import org.bukkit.Bukkit;
@@ -64,7 +63,7 @@ public final class Main extends JavaPlugin implements Listener {
         CrystalFruit.init();
         FloatingWand.init();
 
-        TutorialCommands t = new TutorialCommands();
+        ClassCommands t = new ClassCommands();
         getCommand("select").setExecutor(t);
         getCommand("chooseclass").setExecutor(t);
 

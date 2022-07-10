@@ -24,29 +24,6 @@ public class InventoryEvents implements Listener {
         if (e.getClickedInventory() == null) { return; }
 
         /*
-        Is an instance of the default test inventory
-         */
-        if (e.getClickedInventory().getHolder() instanceof SelectionScreen) {
-            e.setCancelled(true);
-            Player p = (Player) e.getWhoClicked();
-            if (e.getCurrentItem() == null) { return; }
-            if (e.getCurrentItem().getType() == Material.LIME_STAINED_GLASS_PANE) {
-                p.sendMessage(ChatColor.GREEN + "You have selected the 'accept'" +
-                        "button!");
-                p.closeInventory();
-            }
-            else if(e.getSlot() == 4) {
-                p.sendMessage(ChatColor.AQUA + "Please make a selection...");
-            }
-            else if(e.getCurrentItem().getType() == Material.RED_STAINED_GLASS_PANE) {
-                p.sendMessage(ChatColor.RED + "You have selected the 'deny' button!");
-                p.closeInventory();
-            }
-
-            return;
-        }
-
-        /*
         Is an instance of the class selection test inventory
          */
         if (e.getClickedInventory().getHolder() instanceof ClassSelection) {

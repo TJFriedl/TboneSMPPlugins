@@ -78,14 +78,34 @@ public class InventoryEvents implements Listener {
                 book.setItemMeta(meta);
                 p.closeInventory();
                 p.openBook(book);
+                return;
             }
+
+            if (e.getCurrentItem().getItemMeta().equals(TomeSelection.magicCraftingBook.getItemMeta())) {
+                //TODO: Add different tiers so that we can have players "unlock" the missing pages.
+                ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                BookMeta meta = (BookMeta) book.getItemMeta();
+                meta.setAuthor("TboneSMP");
+                meta.setTitle(ChatColor.RED + "Magic Crafting Handbook [#2]");
+                ArrayList<String> pages = new ArrayList<>();
+                pages.add(0, "\n\n\n\n\n§lMAGIC\nCRAFTING\nHANDBOOK\n\n\n\n\n");
+                //Add more later... just testing for looks.
+                meta.setPages(pages);
+                book.setItemMeta(meta);
+                p.closeInventory();
+                p.openBook(book);
+                return;
+            }
+
 
             if (e.getCurrentItem().getType() == Material.BOOK) {
                 p.sendMessage(ChatColor.GRAY + "Hmmm... It seems this knowledge is still undiscovered.");
+                return;
             }
 
             if (e.getCurrentItem().getType() == Material.BARRIER) {
                 p.closeInventory();
+                return;
             }
             return;
         }

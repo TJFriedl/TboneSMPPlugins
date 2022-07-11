@@ -48,6 +48,7 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ClassXPEvents(), this);
         getServer().getPluginManager().registerEvents(new LevelProgressionEvents(), this);
         getServer().getPluginManager().registerEvents(new EnchantEvents(), this);
+        getServer().getPluginManager().registerEvents(new CraftingEvents(), this);
 
          /*
             Score board functionality (in the main method)

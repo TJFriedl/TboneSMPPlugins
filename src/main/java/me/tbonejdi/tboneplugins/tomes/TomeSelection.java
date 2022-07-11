@@ -19,6 +19,7 @@ public class TomeSelection implements InventoryHolder {
     private Inventory inv;
     private Player player;
     public static ItemStack tutorialBook;
+    public static ItemStack magicCraftingBook;
 
     public TomeSelection(Player player) {
         this.player = player;
@@ -53,14 +54,19 @@ public class TomeSelection implements InventoryHolder {
         inv.setItem(28, item4);
         inv.setItem(34, item4);
 
-        PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName()); // Possible error?
-        if (pckg.tfw.isBookDiscovered(0)) {
-            ItemStack item5;
-            item5 = createItem("Book 1: Tutorial Book", Material.WRITTEN_BOOK,
-                    Collections.singletonList(ChatColor.GREEN + "§lCommon: §fOpens tutorial tome"));
-            tutorialBook = item5; // Should this be created before we enter this branch?
-            inv.setItem(2, item5);
-        }
+        PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
+
+        /*
+        LIST OF TOMES NEEDED TO UPDATE THE INVENTORY -> ONCE FOUND
+         */
+        ItemStack item5 = createItem("Book 1: Tutorial Book", Material.WRITTEN_BOOK,
+                Collections.singletonList(ChatColor.GREEN + "§lCommon: §fOpens tutorial tome"));
+        tutorialBook = item5;
+        ItemStack item6 = createItem("Book 2: Magician's Crafting Guide", Material.WRITTEN_BOOK,
+                Collections.singletonList(ChatColor.GREEN + "§lCommon: §fOpens magic crafting guide"));
+        magicCraftingBook = item6;
+        if (pckg.tfw.isBookDiscovered(0)) { inv.setItem(2, item5); }
+        if (pckg.tfw.isBookDiscovered(1)) { inv.setItem(7, item6); }
     }
 
     private ItemStack createItem(String name, Material mat, List<String> lore) {

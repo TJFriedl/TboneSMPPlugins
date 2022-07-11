@@ -2,7 +2,6 @@ package me.tbonejdi.tboneplugins.tomes;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
-import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

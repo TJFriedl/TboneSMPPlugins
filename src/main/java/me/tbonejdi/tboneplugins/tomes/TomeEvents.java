@@ -1,9 +1,9 @@
 package me.tbonejdi.tboneplugins.tomes;
 
+import me.tbonejdi.tboneplugins.events.CraftingEvents;
 import me.tbonejdi.tboneplugins.events.MobDropEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
-import me.tbonejdi.tboneplugins.fileadministrators.TomesFileWorker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -27,20 +27,43 @@ public class TomeEvents implements Listener {
             /*
             Preset designed for the first tome
              */
-            if (e.getItem().getItemMeta()
-                    .equals(MobDropEvents.tutorialBook.getItemMeta())) {
+            if (e.getItem().getItemMeta().equals(MobDropEvents.tutorialBook.getItemMeta())) {
                 if (pckg.tfw.isBookDiscovered(0)) {
                     p.sendMessage(ChatColor.GRAY + "Hey! You've already activated that tome.");
                     e.getItem().setAmount(0);
                     return;
                 }
-                p.sendMessage(ChatColor.GRAY + "You have activated a tome! Use /tomes to read");
-                Bukkit.broadcastMessage(ChatColor.AQUA + p.getDisplayName()
+
+                //TODO: Add conditional so player cannot activate tome meant for someone else.
+
+                p.sendMessage(ChatColor.GRAY + "You have activated a tome! Use §e/tomes §7to read.");
+                Bukkit.broadcastMessage(ChatColor.BLUE + p.getDisplayName()
                         + " has found their first tome!");
                 p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
                 e.getItem().setAmount(0);
                 pckg.tfw.setBookStatus(0, true);
                 pckg.tfw.saveToFile();
+                FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
+                return;
+            }
+
+            if (e.getItem().getItemMeta().equals(CraftingEvents.magicCraftingBook.getItemMeta())) {
+                if (pckg.tfw.isBookDiscovered(1)) {
+                    p.sendMessage(ChatColor.GRAY + "Hey! You've already activated that tome.");
+                    e.getItem().setAmount(0);
+                    return;
+                }
+
+                //TODO: Add conditional so player cannot activate tome meant for someone else.
+
+                p.sendMessage(ChatColor.GRAY + "You have activated a tome! Use §e/tomes §7to read.");
+                Bukkit.broadcastMessage(ChatColor.AQUA + p.getDisplayName() + " has found a new tome!");
+                p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
+                e.getItem().setAmount(0);
+                pckg.tfw.setBookStatus(1, true);
+                pckg.tfw.saveToFile();
+                FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
+                return;
             }
         }
         FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);

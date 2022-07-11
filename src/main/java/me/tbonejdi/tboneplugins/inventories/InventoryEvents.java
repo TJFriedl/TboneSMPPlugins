@@ -88,8 +88,13 @@ public class InventoryEvents implements Listener {
                 meta.setAuthor("TboneSMP");
                 meta.setTitle(ChatColor.RED + "Magic Crafting Handbook [#2]");
                 ArrayList<String> pages = new ArrayList<>();
-                pages.add(0, "\n\n\n\n\n§lMAGIC\nCRAFTING\nHANDBOOK\n\n\n\n\n");
-                //Add more later... just testing for looks.
+                pages.add(0, "\n\n\n\n          §lMAGIC\n\n      CRAFTING\n\n      HANDBOOK\n\n\n\n");
+                pages.add(1, "§8§lJuly 10th\n\n§0I can no longer distinguish between my lucidity " +
+                        "and the voices. They all seem to be so real. Just last night I had the same friendly spirit " +
+                        "remind me of that damn symbol. What is it??");
+                pages.add(2, "\n\n\n\n\n|﹉|   |﹉|   |﹉|\n|﹉|   |﹉|   |﹉|  ->  |§kx§0|" +
+                        "\n|﹉|   |﹉|   |﹉|\n§f|§0﹉    ﹉    ﹉§f|");
+                pages.add(2, ""); // Add more later...
                 meta.setPages(pages);
                 book.setItemMeta(meta);
                 p.closeInventory();

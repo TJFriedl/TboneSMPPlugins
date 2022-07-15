@@ -94,7 +94,7 @@ public class InventoryEvents implements Listener {
                         "remind me of that damn symbol. What is it??");
                 pages.add(2, "\n\n\n\n\n|﹉|   |﹉|   |﹉|\n|﹉|   |﹉|   |﹉|  ->  |§kx§0|" +
                         "\n|﹉|   |﹉|   |﹉|\n§f|§0﹉    ﹉    ﹉§f|");
-                pages.add(2, ""); // Add more later...
+                pages.add(2, ""); // Add more later... Remember to leave room for the "missing page".
                 meta.setPages(pages);
                 book.setItemMeta(meta);
                 p.closeInventory();

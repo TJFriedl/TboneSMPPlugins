@@ -53,6 +53,10 @@ public class TomeEvents implements Listener {
                     e.getItem().setAmount(0);
                     return;
                 }
+                else if (!(pckg.tfw.isBookDiscovered(0))) {
+                    p.sendMessage(ChatColor.GRAY + "Hey, I cannot do that for you right now.");
+                    return;
+                }
 
                 //TODO: Add conditional so player cannot activate tome meant for someone else.
 

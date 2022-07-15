@@ -54,6 +54,7 @@ public class CraftingEvents implements Listener {
                         craftingTable.getWorld().dropItemNaturally(craftingTable, item);
                         player.closeInventory();
                         player.sendMessage("§7Wha- ? This was not what I had tried crafting...");
+                        craftingTable.getWorld().dropItemNaturally(craftingTable, e.getCurrentItem());
                         return;
                     }
                 }

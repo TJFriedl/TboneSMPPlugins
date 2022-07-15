@@ -26,5 +26,10 @@ public class CantripEvents implements Listener {
                 block.setType(Material.AIR);
             }
         }
+
+        if (block.getType() == Material.CRAFTING_TABLE) {
+            // Do some kind of cantrip logic, then does magic event
+            // Drops missing page and a "magic crafting table"
+        }
     }
 }

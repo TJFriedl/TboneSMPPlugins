@@ -1,12 +1,15 @@
 package me.tbonejdi.tboneplugins.events;
 
+import me.tbonejdi.tboneplugins.items.MagicTable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Lectern;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class CantripEvents implements Listener {
 
@@ -36,17 +39,41 @@ public class CantripEvents implements Listener {
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) { // These loops will check for the surrounding 3x3 below the table.
                     if (p.getWorld().getBlockAt(location.getBlockX() + x, location.getBlockY() - 1,
-                            location.getBlockZ() + z).getType() != Material.AMETHYST_BLOCK) { return; }
+                            location.getBlockZ() + z).getType() != Material.AMETHYST_BLOCK) {
+                        return;
+                    }
                 }
             }
+            p.sendMessage("Amethyst test passed!");
+
+            // Check to make sure there are four lecterns surrounding the
             if (p.getWorld().getBlockAt(location.getBlockX() - 1, location.getBlockY(),
-                    location.getBlockZ()).getType() != Material.LECTERN) { return; }
-            else if (p.getWorld().getBlockAt(location.getBlockX() + 1, location.getBlockY(),
-                    location.getBlockZ()).getType() != Material.LECTERN) { return; }
-            else if (p.getWorld().getBlockAt(location.getBlockX(), location.getBlockY(),
-                    location.getBlockZ() - 1).getType() != Material.LECTERN) { return; }
-            else if (p.getWorld().getBlockAt(location.getBlockX(), location.getBlockY(),
-                    location.getBlockZ() + 1).getType() != Material.LECTERN) { return; }
+                    location.getBlockZ()).getType() != Material.LECTERN) {
+                return;
+            } else if (p.getWorld().getBlockAt(location.getBlockX() + 1, location.getBlockY(),
+                    location.getBlockZ()).getType() != Material.LECTERN) {
+                return;
+            } else if (p.getWorld().getBlockAt(location.getBlockX(), location.getBlockY(),
+                    location.getBlockZ() - 1).getType() != Material.LECTERN) {
+                return;
+            } else if (p.getWorld().getBlockAt(location.getBlockX(), location.getBlockY(),
+                    location.getBlockZ() + 1).getType() != Material.LECTERN) {
+                return;
+            }
+            p.sendMessage("Lectern test passed!");
+
+            // Test Sequence... Error might occur on cast?
+            Lectern lectern = (Lectern) p.getWorld().getBlockAt(location.getBlockX()+1,
+                    location.getBlockY(), location.getBlockZ()).getState();
+            if (!(lectern.getInventory().isEmpty())) {
+                p.getWorld().strikeLightningEffect(location);
+                block.setType(Material.AIR);
+                location.getWorld().dropItemNaturally(location, new ItemStack(Material.PAPER));
+                location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
+                p.sendMessage("Tests have passed!");
+            }
         }
+
+        return;
     }
 }

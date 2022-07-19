@@ -1,5 +1,7 @@
 package me.tbonejdi.tboneplugins.events;
 
+import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.MagicTable;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -33,8 +35,7 @@ public class CantripEvents implements Listener {
         }
 
         if (block.getType() == Material.CRAFTING_TABLE) {
-            // Do some kind of cantrip logic, then does magic event
-            // First, check to make sure that the crafting table is laying on at LEAST the center of a 3x3 of amethyst
+            PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
             Location location = e.getBlock().getLocation();
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) { // These loops will check for the surrounding 3x3 below the table.
@@ -44,9 +45,7 @@ public class CantripEvents implements Listener {
                     }
                 }
             }
-            p.sendMessage("Amethyst test passed!");
 
-            // Check to make sure there are four lecterns surrounding the
             if (p.getWorld().getBlockAt(location.getBlockX() - 1, location.getBlockY(),
                     location.getBlockZ()).getType() != Material.LECTERN) {
                 return;
@@ -56,22 +55,35 @@ public class CantripEvents implements Listener {
             } else if (p.getWorld().getBlockAt(location.getBlockX(), location.getBlockY(),
                     location.getBlockZ() - 1).getType() != Material.LECTERN) {
                 return;
-            } else if (p.getWorld().getBlockAt(location.getBlockX(), location.getBlockY(),
-                    location.getBlockZ() + 1).getType() != Material.LECTERN) {
+            }
+
+            if (p.getWorld().getBlockAt(location.getBlockX()-1, location.getBlockY(),
+                    location.getBlockZ()-1).getType() != Material.BOOKSHELF) {
+                return;
+            } else if (p.getWorld().getBlockAt(location.getBlockX()+1, location.getBlockY(),
+                    location.getBlockZ()-1).getType() != Material.BOOKSHELF) {
                 return;
             }
-            p.sendMessage("Lectern test passed!");
 
-            // Test Sequence... Error might occur on cast?
-            Lectern lectern = (Lectern) p.getWorld().getBlockAt(location.getBlockX()+1,
-                    location.getBlockY(), location.getBlockZ()).getState();
-            if (!(lectern.getInventory().isEmpty())) {
-                p.getWorld().strikeLightningEffect(location);
-                block.setType(Material.AIR);
-                location.getWorld().dropItemNaturally(location, new ItemStack(Material.PAPER));
-                location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
-                p.sendMessage("Tests have passed!");
+            Lectern lectern = (Lectern) p.getWorld().getBlockAt(location.getBlockX(),
+                    location.getBlockY(), location.getBlockZ()-1).getState();
+
+            if (lectern.getInventory().isEmpty()) { return; }
+            p.getWorld().strikeLightningEffect(location);
+            block.setType(Material.AIR);
+            location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
+            if (!(pckg.tfw.isBookDiscovered(2))) {
+                location.getWorld().dropItemNaturally(location, new ItemStack(Material.PAPER)); // TODO: Change
             }
+            for (int x = -1; x <= 1; x++) {
+                for (int z = -1; z <= 1; z++) {
+                    p.getWorld().getBlockAt(location.getBlockX()+x, location.getBlockY()-1,
+                            location.getBlockZ()+z).setType(Material.COBBLED_DEEPSLATE);
+                    p.getWorld().getBlockAt(location.getBlockX()+x, location.getBlockY(),
+                            location.getBlockZ()+z).setType(Material.AIR);
+                }
+            }
+            return;
         }
 
         return;

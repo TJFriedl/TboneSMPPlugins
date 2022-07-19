@@ -37,7 +37,7 @@ public class MobDropEvents implements Listener {
             im.setDisplayName(ChatColor.DARK_PURPLE + "A mysterious book...");
             List<String> lore = new ArrayList<>();
             lore.add(ChatColor.GRAY + "Appears to be a book like no other...");
-            lore.add(ChatColor.BLUE + "Right click in hand to activate");
+            lore.add(ChatColor.BLUE + "Right click in hand to activate.");
             lore.add(ChatColor.DARK_BLUE + "Book magically created for " + ChatColor.GOLD + player.getName());
             im.setLore(lore);
             im.addEnchant(Enchantment.LUCK, 1, false);

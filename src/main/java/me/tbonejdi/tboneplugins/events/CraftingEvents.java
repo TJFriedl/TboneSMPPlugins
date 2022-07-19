@@ -2,17 +2,24 @@ package me.tbonejdi.tboneplugins.events;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
+import me.tbonejdi.tboneplugins.items.MagicTable;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.TileState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +66,20 @@ public class CraftingEvents implements Listener {
                     }
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void placeMagicTableEvent (BlockPlaceEvent e) {
+        if (e.getBlockPlaced() != MagicTable.magicTable) { return; }
+
+        Block block = e.getBlock();
+        BlockState blockState = block.getState();
+
+        if (blockState instanceof TileState) {
+            TileState tileState = (TileState) blockState;
+            PersistentDataContainer container = tileState.getPersistentDataContainer();
+            // Stopped here... Relook at next time
         }
     }
 }

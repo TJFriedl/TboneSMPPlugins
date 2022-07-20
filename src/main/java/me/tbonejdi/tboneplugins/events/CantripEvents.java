@@ -3,17 +3,26 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.MagicTable;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Lectern;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CantripEvents implements Listener {
+
+    public static ItemStack firstMissingPage;
 
     @EventHandler
     public static void playerStrike(BlockPlaceEvent e) {
@@ -73,7 +82,19 @@ public class CantripEvents implements Listener {
             block.setType(Material.AIR);
             location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
             if (!(pckg.tfw.isBookDiscovered(2))) {
-                location.getWorld().dropItemNaturally(location, new ItemStack(Material.PAPER)); // TODO: Change
+                ItemStack item = new ItemStack(Material.PAPER, 1);
+                ItemMeta im = item.getItemMeta();
+                im.setDisplayName(ChatColor.GOLD + "Woodsmith's Missing Pages");
+                List<String> lore = new ArrayList<>();
+                lore.add(ChatColor.GRAY + "Hey! I've been looking for these.");
+                lore.add(ChatColor.BLUE + "Right click in hand to activate.");
+                lore.add((ChatColor.DARK_BLUE + "Book magically created for " + ChatColor.GOLD + p.getName()));
+                im.setLore(lore);
+                im.addEnchant(Enchantment.LUCK, 1, false);
+                im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                item.setItemMeta(im);
+                firstMissingPage = item;
+                location.getWorld().dropItemNaturally(location, item);
             }
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {

@@ -83,6 +83,26 @@ public class InventoryEvents implements Listener {
 
             if (e.getCurrentItem().getItemMeta().equals(TomeSelection.magicCraftingBook.getItemMeta())) {
                 //TODO: Add different tiers so that we can have players "unlock" the missing pages.
+                PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
+                if (pckg.tfw.isBookDiscovered(2)) {
+                    ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+                    BookMeta meta = (BookMeta) book.getItemMeta();
+                    meta.setAuthor("TboneSMP");
+                    meta.setTitle(ChatColor.RED + "Magic Crafting Handbook [#2]");
+                    ArrayList<String> pages = new ArrayList<>();
+                    pages.add(0, "\n\n\n\n          §lMAGIC\n\n      CRAFTING\n\n      HANDBOOK\n\n\n\n");
+                    pages.add(1, "§8§lJuly 10th\n\n§0I can no longer distinguish between my lucidity " +
+                            "and the voices. They all seem to be so real. Just last night I had the same friendly spirit " +
+                            "remind me of that damn symbol. What is it??");
+                    pages.add(2, "\n\n\n\n\n|﹉|   |﹉|   |﹉|\n|﹉|   |﹉|   |﹉|  ->  |§kx§0|" +
+                            "\n|﹉|   |﹉|   |﹉|\n§f|§0﹉    ﹉    ﹉§f|");
+                    pages.add(3, "TODO: Add more later :) Good job!");
+                    meta.setPages(pages);
+                    book.setItemMeta(meta);
+                    p.closeInventory();
+                    p.openBook(book);
+                    return;
+                }
                 ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
                 BookMeta meta = (BookMeta) book.getItemMeta();
                 meta.setAuthor("TboneSMP");
@@ -94,7 +114,7 @@ public class InventoryEvents implements Listener {
                         "remind me of that damn symbol. What is it??");
                 pages.add(2, "\n\n\n\n\n|﹉|   |﹉|   |﹉|\n|﹉|   |﹉|   |﹉|  ->  |§kx§0|" +
                         "\n|﹉|   |﹉|   |﹉|\n§f|§0﹉    ﹉    ﹉§f|");
-                pages.add(2, ""); // Add more later... Remember to leave room for the "missing page".
+                pages.add(3, "No missing page found!"); // Add more later... Remember to leave room for the "missing page".
                 meta.setPages(pages);
                 book.setItemMeta(meta);
                 p.closeInventory();

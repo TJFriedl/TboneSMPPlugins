@@ -64,7 +64,6 @@ public final class Main extends JavaPlugin implements Listener {
         CrystalFruit.init();
         FloatingWand.init();
         MagicTable.init();
-        FirstMissingPage.init();
 
         ClassCommands t = new ClassCommands();
         getCommand("select").setExecutor(t);

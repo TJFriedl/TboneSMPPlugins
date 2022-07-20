@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.tomes;
 
+import me.tbonejdi.tboneplugins.events.CantripEvents;
 import me.tbonejdi.tboneplugins.events.CraftingEvents;
 import me.tbonejdi.tboneplugins.events.MobDropEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
@@ -65,6 +66,29 @@ public class TomeEvents implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
                 e.getItem().setAmount(0);
                 pckg.tfw.setBookStatus(1, true);
+                pckg.tfw.saveToFile();
+                FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
+                return;
+            }
+
+            if (e.getItem().equals(CantripEvents.firstMissingPage.getItemMeta())) {
+                if (pckg.tfw.isBookDiscovered(2)) {
+                    p.sendMessage(ChatColor.GRAY + "Hey! You've already activated this page.");
+                    e.getItem().setAmount(0);
+                    return;
+                }
+                else if (!(pckg.tfw.isBookDiscovered(1))) {
+                    p.sendMessage(ChatColor.GRAY + "Hey, I cannot do that for you right now.");
+                    return;
+                }
+
+                //TODO: Add conditional so player cannot activate tome meant for someone else.
+
+                p.sendMessage(ChatColor.GRAY + "Hmm... This fits right into the magic crafting tome.");
+                Bukkit.broadcastMessage(ChatColor.AQUA + p.getDisplayName() + " has found a missing page!");
+                p.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
+                e.getItem().setAmount(0);
+                pckg.tfw.setBookStatus(2, true);
                 pckg.tfw.saveToFile();
                 FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
                 return;

@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.events;
 
+import me.tbonejdi.tboneplugins.Main;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.MagicTable;
@@ -7,18 +8,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.TileState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,15 +70,27 @@ public class CraftingEvents implements Listener {
 
     @EventHandler
     public void placeMagicTableEvent (BlockPlaceEvent e) {
-        if (e.getBlockPlaced() != MagicTable.magicTable) { return; }
+        if (e.getItemInHand().getItemMeta().equals(MagicTable.magicTable.getItemMeta())) {
+            e.getPlayer().sendMessage("This is in fact a magic table!");
 
-        Block block = e.getBlock();
-        BlockState blockState = block.getState();
-
-        if (blockState instanceof TileState) {
-            TileState tileState = (TileState) blockState;
-            PersistentDataContainer container = tileState.getPersistentDataContainer();
-            // Stopped here... Relook at next time
+            Block block = e.getBlockPlaced();
+            block.setMetadata("MagicCraftingTable",
+                    new FixedMetadataValue(Main.mainClassCall, "magic-craft"));
+            e.getPlayer().sendMessage(ChatColor.GOLD + "MetaData assigned to magic crafting table");
         }
+        return;
+    }
+
+    @EventHandler
+    public void breakMagicTableEvent (BlockBreakEvent e) {
+        if (e.getBlock().hasMetadata("MagicCraftingTable")) {
+            e.getPlayer().sendMessage(ChatColor.GOLD + "This was a magic crafting table!");
+            e.setCancelled(true);
+            e.getBlock().setType(Material.AIR);
+            e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(),
+                    MagicTable.magicTable);
+            e.getBlock().removeMetadata("MagicCraftingTable", Main.mainClassCall);
+        }
+        return;
     }
 }

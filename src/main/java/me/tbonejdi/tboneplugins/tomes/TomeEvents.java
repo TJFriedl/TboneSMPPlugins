@@ -71,7 +71,7 @@ public class TomeEvents implements Listener {
                 return;
             }
 
-            if (e.getItem().equals(CantripEvents.firstMissingPage.getItemMeta())) {
+            if (e.getItem().getItemMeta().equals(CantripEvents.firstMissingPage.getItemMeta())) {
                 if (pckg.tfw.isBookDiscovered(2)) {
                     p.sendMessage(ChatColor.GRAY + "Hey! You've already activated this page.");
                     e.getItem().setAmount(0);

@@ -1,9 +1,6 @@
 package me.tbonejdi.tboneplugins.commands;
 
-import me.tbonejdi.tboneplugins.items.CrystalFruit;
-import me.tbonejdi.tboneplugins.items.DiamondWand;
-import me.tbonejdi.tboneplugins.items.FloatingWand;
-import me.tbonejdi.tboneplugins.items.MagicMirror;
+import me.tbonejdi.tboneplugins.items.*;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,6 +36,9 @@ public class ItemCommands implements CommandExecutor {
             }
             else if (itemName.equalsIgnoreCase("floatingwand")) {
                 p.getInventory().addItem(FloatingWand.floatingWand);
+            }
+            else if (itemName.equalsIgnoreCase("magicworkbench")) {
+                p.getInventory().addItem(MagicTable.magicTable);
             }
             else {
                 p.sendMessage("§4Error: Item does not seem to exist.");

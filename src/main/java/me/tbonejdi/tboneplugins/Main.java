@@ -26,9 +26,11 @@ import org.bukkit.scoreboard.*;
 
 import java.io.IOException;
 
+
 public final class Main extends JavaPlugin implements Listener {
 
     private int taskID;
+    public static Main mainClassCall;
 
     @Override
     public void onEnable() {
@@ -114,6 +116,7 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
 
+        mainClassCall = this;
     }
 
     @Override

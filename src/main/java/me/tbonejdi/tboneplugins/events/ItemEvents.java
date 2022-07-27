@@ -28,6 +28,7 @@ public class ItemEvents implements Listener {
 
             if (e.getItem().getItemMeta().equals(DiamondWand.diamondWand.getItemMeta())) {
                 p.performCommand("diamonddetect");
+                return;
             }
 
             if (e.getItem().getItemMeta().equals(MagicMirror.magicMirror.getItemMeta())) {
@@ -41,12 +42,14 @@ public class ItemEvents implements Listener {
                     p.sendMessage(ChatColor.GOLD + "§lWOOSH!");
                     e.getItem().setAmount(0);
                 }
+                return;
             }
 
             if (e.getItem().getItemMeta().equals(FloatingWand.floatingWand.getItemMeta())) {
                 p.sendMessage("§e§lYou have been picked up by the wind, WOOSH!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 300, 1));
+                return;
             }
         }
     }

@@ -3,20 +3,24 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.Main;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
+import me.tbonejdi.tboneplugins.inventories.MagicCraftingInventory;
+import me.tbonejdi.tboneplugins.items.MagicMirror;
 import me.tbonejdi.tboneplugins.items.MagicTable;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.inventory.*;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -78,7 +82,6 @@ public class CraftingEvents implements Listener {
                     new FixedMetadataValue(Main.mainClassCall, "magic-craft"));
             e.getPlayer().sendMessage(ChatColor.GOLD + "MetaData assigned to magic crafting table");
         }
-        return;
     }
 
     @EventHandler
@@ -91,6 +94,66 @@ public class CraftingEvents implements Listener {
                     MagicTable.magicTable);
             e.getBlock().removeMetadata("MagicCraftingTable", Main.mainClassCall);
         }
-        return;
+    }
+    // TODO: Maybe try to improve this algorithm in the future... Currently brute-force.
+    @EventHandler
+    public void openCraftingTable (InventoryOpenEvent e) {
+        if (!(e.getInventory() instanceof CraftingInventory))
+            return;
+        Player player = (Player) e.getPlayer();
+        Location location = player.getLocation();
+        for (int x = -4; x <= 4; x++) {
+            for (int y = -4; y <= 4; y++) {
+                for (int z = -4; z <= 4; z++) {
+                    if (player.getWorld().getBlockAt(location.getBlockX() + x,
+                            location.getBlockY() + y, location.getBlockZ() + z)
+                            .hasMetadata("MagicCraftingTable")) {
+                        player.sendMessage(ChatColor.GOLD + " OPENING MAGIC WORKBENCH");
+                        e.setCancelled(true);
+                        MagicCraftingInventory gui = new MagicCraftingInventory();
+                        player.openInventory(gui.getInventory());
+
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    // FOR SLOTS: 0 = Result, 1-9 = Recipe
+    @EventHandler
+    public void craftMagicItem (InventoryClickEvent e) throws NullPointerException {
+        if (e.getView().getTitle() != "§6§kiii§5Magic Crafting Table§6§kiii")
+            return;
+
+        Player player = (Player) e.getWhoClicked();
+        InventoryView inv = e.getView();
+
+        Bukkit.broadcastMessage(e.getAction().toString());
+
+        if ((e.getAction() == InventoryAction.PICKUP_ALL ||
+                e.getAction() == InventoryAction.PICKUP_HALF) && e.getSlot() == 0) {
+            ItemStack itemStack = inv.getItem(0);
+            player.closeInventory();
+            player.getWorld().dropItemNaturally(e.getWhoClicked().getEyeLocation(),
+                    itemStack);
+            return;
+        }
+        // Shaped Recipe for Magic Mirror
+        try {
+            if (inv.getItem(1).getType() == Material.OBSIDIAN && inv.getItem(2).getType()
+                    == Material.REDSTONE_BLOCK && inv.getItem(3).getType() == Material.OBSIDIAN &&
+                    inv.getItem(4).getType() == Material.REDSTONE_BLOCK && inv.getItem(5).getType()
+                    == Material.COMPASS && inv.getItem(6).getType() == Material.REDSTONE_BLOCK &&
+                    inv.getItem(7).getType() == Material.OBSIDIAN && inv.getItem(8).getType()
+                    == Material.REDSTONE_BLOCK && inv.getItem(9).getType() == Material.OBSIDIAN) {
+                inv.setItem(0, MagicMirror.magicMirror);
+                return;
+            }
+            else {
+                inv.setItem(0, null);
+            }
+        } catch (NullPointerException exception) {}
+
     }
 }

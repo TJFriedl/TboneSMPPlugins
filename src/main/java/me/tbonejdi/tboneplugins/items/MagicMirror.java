@@ -7,6 +7,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class MagicMirror {
 
     public static ItemStack magicMirror;
+    public static ItemStack[] recipe;
 
     public static void init() { createMagicMirror(); }
 

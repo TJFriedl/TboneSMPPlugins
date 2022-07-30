@@ -10,12 +10,6 @@ import java.io.*;
 import java.util.HashMap;
 
 public class FileStartupEvents implements Listener {
-//    public static PlayerInfo pInfo; // Will try to grab information from the onEnable() call
-//    public static PlayerFileWorker fw; // Same as above, it should instantiate from onEnable()
-//    public static TomesFileWorker tfw;
-//    public static ClassWorker cw;
-//    public static ClassInfo cInfo;
-//    public static PackageInitializer pckg;
 
     // HashMap stores loads and updates data from files : HashMap<Username, MacroDataObject>
     public static HashMap<String, PackageInitializer> playerData = new HashMap<>(); // This might be epic
@@ -29,23 +23,14 @@ public class FileStartupEvents implements Listener {
 
         PackageInitializer pckgInit = new PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
 
-        // Init for fileWorker, playerInfo
         pckgInit.checkForPlayerLevelsFile();
-//        this.fw = pckgInit.fw;
-//        this.pInfo = pckgInit.pInfo;
 
-        // Init for tomesFileworker
         pckgInit.checkForPlayerTomesFile();
-//        this.tfw = pckgInit.tfw;
 
-        // Init for classWorker, classInfo
         pckgInit.checkForClassInit();
-//        this.cw = pckgInit.cw;
-//        this.cInfo = pckgInit.cInfo;
         pckgInit.cInfo.applyBuffs(); // Initializes default buffs for a player once they join...
 
         playerReset = false;
-//        pckg = pckgInit;
 
         playerData.put(username, pckgInit);
     }

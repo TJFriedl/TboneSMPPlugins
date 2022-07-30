@@ -1,10 +1,9 @@
 package me.tbonejdi.tboneplugins.events;
 
 import me.tbonejdi.tboneplugins.Main;
+import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
-import me.tbonejdi.tboneplugins.inventories.MagicCraftingInventory;
-import me.tbonejdi.tboneplugins.items.MagicMirror;
 import me.tbonejdi.tboneplugins.items.MagicTable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,11 +11,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.*;
@@ -109,10 +106,11 @@ public class CraftingEvents implements Listener {
                             location.getBlockY() + y, location.getBlockZ() + z)
                             .hasMetadata("MagicCraftingTable")) {
                         player.sendMessage(ChatColor.GOLD + " OPENING MAGIC WORKBENCH");
+                        //TODO: Add particle effect here!
+                        PlayerStates.playerState.get(player.getName()).isMagicCrafting = true;
+                        player.sendMessage("MagicCraftingState: true");
                         e.setCancelled(true);
-                        MagicCraftingInventory gui = new MagicCraftingInventory();
-                        player.openInventory(gui.getInventory());
-
+                        player.openWorkbench(null, true); // Opens magic crafting table.
                         return;
                     }
                 }
@@ -120,40 +118,11 @@ public class CraftingEvents implements Listener {
         }
     }
 
-    // FOR SLOTS: 0 = Result, 1-9 = Recipe
     @EventHandler
-    public void craftMagicItem (InventoryClickEvent e) throws NullPointerException {
-        if (e.getView().getTitle() != "§6§kiii§5Magic Crafting Table§6§kiii")
-            return;
-
-        Player player = (Player) e.getWhoClicked();
-        InventoryView inv = e.getView();
-
-        Bukkit.broadcastMessage(e.getAction().toString());
-
-        if ((e.getAction() == InventoryAction.PICKUP_ALL ||
-                e.getAction() == InventoryAction.PICKUP_HALF) && e.getSlot() == 0) {
-            ItemStack itemStack = inv.getItem(0);
-            player.closeInventory();
-            player.getWorld().dropItemNaturally(e.getWhoClicked().getEyeLocation(),
-                    itemStack);
-            return;
+    public void closeCraftingTable (InventoryCloseEvent e) {
+        if (PlayerStates.playerState.get(e.getPlayer().getName()).isMagicCrafting) {
+            e.getPlayer().sendMessage("Removing MagicCraftingState!");
+            PlayerStates.playerState.get(e.getPlayer().getName()).isMagicCrafting = false;
         }
-        // Shaped Recipe for Magic Mirror
-        try {
-            if (inv.getItem(1).getType() == Material.OBSIDIAN && inv.getItem(2).getType()
-                    == Material.REDSTONE_BLOCK && inv.getItem(3).getType() == Material.OBSIDIAN &&
-                    inv.getItem(4).getType() == Material.REDSTONE_BLOCK && inv.getItem(5).getType()
-                    == Material.COMPASS && inv.getItem(6).getType() == Material.REDSTONE_BLOCK &&
-                    inv.getItem(7).getType() == Material.OBSIDIAN && inv.getItem(8).getType()
-                    == Material.REDSTONE_BLOCK && inv.getItem(9).getType() == Material.OBSIDIAN) {
-                inv.setItem(0, MagicMirror.magicMirror);
-                return;
-            }
-            else {
-                inv.setItem(0, null);
-            }
-        } catch (NullPointerException exception) {}
-
     }
 }

@@ -97,6 +97,13 @@ public final class Main extends JavaPlugin implements Listener {
 
         CustomEnchants.register();
 
+        /* Sets all of the magic crafting tables in the game. */
+        try {
+            MagicCraftingContainer.initializeWorld();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
          /*
               RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to
               be a static call from main...

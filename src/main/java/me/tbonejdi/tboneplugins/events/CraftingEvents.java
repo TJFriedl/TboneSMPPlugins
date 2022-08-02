@@ -3,9 +3,9 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.Main;
 import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
+import me.tbonejdi.tboneplugins.fileadministrators.MagicCraftingContainer;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.MagicTable;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -72,33 +72,33 @@ public class CraftingEvents implements Listener {
     @EventHandler
     public void placeMagicTableEvent (BlockPlaceEvent e) {
         if (e.getItemInHand().getItemMeta().equals(MagicTable.magicTable.getItemMeta())) {
-            e.getPlayer().sendMessage("This is in fact a magic table!");
-
             Block block = e.getBlockPlaced();
             block.setMetadata("MagicCraftingTable",
                     new FixedMetadataValue(Main.mainClassCall, "magic-craft"));
-            e.getPlayer().sendMessage(ChatColor.GOLD + "MetaData assigned to magic crafting table");
+            MagicCraftingContainer.tableLocations.add(e.getBlock().getLocation());
         }
     }
 
     @EventHandler
     public void breakMagicTableEvent (BlockBreakEvent e) {
         if (e.getBlock().hasMetadata("MagicCraftingTable")) {
-            e.getPlayer().sendMessage(ChatColor.GOLD + "This was a magic crafting table!");
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
             e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(),
                     MagicTable.magicTable);
             e.getBlock().removeMetadata("MagicCraftingTable", Main.mainClassCall);
+            MagicCraftingContainer.tableLocations.remove(e.getBlock().getLocation());
         }
     }
     // TODO: Maybe try to improve this algorithm in the future... Currently brute-force.
     @EventHandler
     public void openCraftingTable (InventoryOpenEvent e) {
-        if (!(e.getInventory() instanceof CraftingInventory))
+        PlayerStates states = FileStartupEvents.playerStates.get(e.getPlayer().getName());
+        if (!(e.getInventory() instanceof CraftingInventory) || states.isMagicCrafting)
             return;
         Player player = (Player) e.getPlayer();
         Location location = player.getLocation();
+
         for (int x = -4; x <= 4; x++) {
             for (int y = -4; y <= 4; y++) {
                 for (int z = -4; z <= 4; z++) {
@@ -106,10 +106,14 @@ public class CraftingEvents implements Listener {
                             location.getBlockY() + y, location.getBlockZ() + z)
                             .hasMetadata("MagicCraftingTable")) {
                         player.sendMessage(ChatColor.GOLD + " OPENING MAGIC WORKBENCH");
+
                         //TODO: Add particle effect here!
-                        PlayerStates.playerState.get(player.getName()).isMagicCrafting = true;
+
+                        states.isMagicCrafting = true;
+                        FileStartupEvents.playerStates.replace(player.getName(), states);
                         player.sendMessage("MagicCraftingState: true");
                         e.setCancelled(true);
+                        // ERROR HAPPENING ON RECUSION
                         player.openWorkbench(null, true); // Opens magic crafting table.
                         return;
                     }
@@ -118,11 +122,19 @@ public class CraftingEvents implements Listener {
         }
     }
 
+
+    // Throwing an error: Called once data is deleted?
     @EventHandler
     public void closeCraftingTable (InventoryCloseEvent e) {
-        if (PlayerStates.playerState.get(e.getPlayer().getName()).isMagicCrafting) {
-            e.getPlayer().sendMessage("Removing MagicCraftingState!");
-            PlayerStates.playerState.get(e.getPlayer().getName()).isMagicCrafting = false;
+        if (!(e.getInventory() instanceof CraftingInventory)) { return; }
+
+        // Sometimes thrown after player leaves game.
+        PlayerStates state = FileStartupEvents.playerStates.get(e.getPlayer().getName());
+        if (!(FileStartupEvents.playerStates.containsKey(e.getPlayer().getName()))) { return; }
+
+        if (state.isMagicCrafting) {
+            state.isMagicCrafting = false;
+            FileStartupEvents.playerStates.replace(e.getPlayer().getName(), state);
         }
     }
 }

@@ -89,6 +89,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("getplayermaxhealth").setExecutor(pic);
         getCommand("setplayermaxhealth").setExecutor(pic);
         getCommand("setplayerbasearmor").setExecutor(pic);
+        getCommand("printlocation").setExecutor(pic);
 
         EnchantCommands ec = new EnchantCommands();
         getCommand("telepathy").setExecutor(ec);
@@ -96,13 +97,6 @@ public final class Main extends JavaPlugin implements Listener {
 
 
         CustomEnchants.register();
-
-        /* Sets all of the magic crafting tables in the game. */
-        try {
-            MagicCraftingContainer.initializeWorld();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
          /*
               RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to
@@ -124,11 +118,23 @@ public final class Main extends JavaPlugin implements Listener {
         }
 
         mainClassCall = this;
+
+        /* Sets all of the magic crafting tables in the game. */
+        try {
+            MagicCraftingContainer.initializeWorld();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onDisable() {
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "TboneSMP plugin shutting down!");
+        try {
+            MagicCraftingContainer.saveToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @EventHandler

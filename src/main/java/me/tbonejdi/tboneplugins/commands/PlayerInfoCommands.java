@@ -150,6 +150,7 @@ public class PlayerInfoCommands implements CommandExecutor {
                 p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
                 p.sendMessage("New max health value: " + maxHealth);
             }
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("setplayerbasearmor")) {
@@ -164,6 +165,12 @@ public class PlayerInfoCommands implements CommandExecutor {
                 p.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(baseArmor);
                 p.sendMessage("New base armor value:" + baseArmor);
             }
+            return true;
+        }
+
+        if(cmd.getName().equalsIgnoreCase("printlocation")) {
+            p.sendMessage(p.getLocation().toString());
+            return true;
         }
 
         return true;

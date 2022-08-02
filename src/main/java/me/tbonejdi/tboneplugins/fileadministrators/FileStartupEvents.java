@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
+import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +13,8 @@ import java.util.HashMap;
 public class FileStartupEvents implements Listener {
 
     // HashMap stores loads and updates data from files : HashMap<Username, MacroDataObject>
-    public static HashMap<String, PackageInitializer> playerData = new HashMap<>(); // This might be epic
+    public static HashMap<String, PackageInitializer> playerData = new HashMap<>();
+    public static HashMap<String, PlayerStates> playerStates = new HashMap<>();
 
     public static boolean playerReset; // We use this so console doesn't throw errors for resetting player data
 
@@ -33,6 +35,9 @@ public class FileStartupEvents implements Listener {
         playerReset = false;
 
         playerData.put(username, pckgInit);
+
+        PlayerStates states = new PlayerStates();
+        playerStates.put(username, states);
     }
 
     @EventHandler
@@ -45,6 +50,7 @@ public class FileStartupEvents implements Listener {
         pckg.cw.saveToFile(pckg.cInfo);
 
         playerData.remove(e.getPlayer().getName()); // Removes current player from the Map
+        playerStates.remove(e.getPlayer().getName());
     }
 
 }

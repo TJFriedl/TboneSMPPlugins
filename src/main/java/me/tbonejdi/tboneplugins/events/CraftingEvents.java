@@ -76,6 +76,7 @@ public class CraftingEvents implements Listener {
             block.setMetadata("MagicCraftingTable",
                     new FixedMetadataValue(Main.mainClassCall, "magic-craft"));
             MagicCraftingContainer.tableLocations.add(e.getBlock().getLocation());
+            MagicCraftingContainer.createTextEntity(e.getBlock().getLocation());
         }
     }
 
@@ -88,6 +89,7 @@ public class CraftingEvents implements Listener {
                     MagicTable.magicTable);
             e.getBlock().removeMetadata("MagicCraftingTable", Main.mainClassCall);
             MagicCraftingContainer.tableLocations.remove(e.getBlock().getLocation());
+            MagicCraftingContainer.removeTextEntity(e.getBlock().getLocation());
         }
     }
     // TODO: Maybe try to improve this algorithm in the future... Currently brute-force.

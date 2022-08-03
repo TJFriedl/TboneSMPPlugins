@@ -4,11 +4,18 @@ import me.tbonejdi.tboneplugins.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class MagicCraftingContainer implements Listener {
 
@@ -52,6 +59,7 @@ public class MagicCraftingContainer implements Listener {
 
         for (Location loc : tableLocations) {
             updateTableData(loc);
+            createTextEntity(loc);
         }
 
     }
@@ -98,6 +106,27 @@ public class MagicCraftingContainer implements Listener {
             writer.write(loc.toString() + "\n");
         }
         writer.close();
+    }
+
+    public static void createTextEntity(Location location) {
+        ArmorStand stand = (ArmorStand) Bukkit.getWorlds().get(0).spawnEntity(location, EntityType.ARMOR_STAND);
+        stand.setVisible(false);
+        stand.setCustomName("§6§lMagic Workbench");
+    }
+
+    public static void removeTextEntity(Location location) {
+        Entity[] entities = location.getChunk().getEntities();
+
+        for (Entity e : entities) {
+            if (e.getLocation().equals(location) && e instanceof ArmorStand) {
+
+                if (e.getCustomName().equals("§6§lMagic Workbench")) {
+                    e.remove();
+                    return;
+                }
+
+            }
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.MagicCraftingContainer;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
+import me.tbonejdi.tboneplugins.items.MagicMirror;
 import me.tbonejdi.tboneplugins.items.MagicTable;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -115,7 +116,6 @@ public class CraftingEvents implements Listener {
                         FileStartupEvents.playerStates.replace(player.getName(), states);
                         player.sendMessage("MagicCraftingState: true");
                         e.setCancelled(true);
-                        // ERROR HAPPENING ON RECUSION
                         player.openWorkbench(null, true); // Opens magic crafting table.
                         return;
                     }
@@ -138,5 +138,26 @@ public class CraftingEvents implements Listener {
             state.isMagicCrafting = false;
             FileStartupEvents.playerStates.replace(e.getPlayer().getName(), state);
         }
+    }
+
+    @EventHandler
+    public void handleMagicCrafting (PrepareItemCraftEvent e) throws NullPointerException {
+        Player player = (Player) e.getViewers().get(0); // Assuming only one person is viewing this inventory?
+        if (!(FileStartupEvents.playerStates.get(player.getName()).isMagicCrafting)) {
+            player.sendMessage("This is not a crafting table :)");
+            return;
+        }
+
+        ArrayList<Material> recipeList = new ArrayList<>();
+        for (ItemStack i : e.getInventory().getMatrix()) {
+            try {
+                recipeList.add(i.getType());
+            } catch (NullPointerException ne) {}
+        }
+
+        if (recipeList.equals(MagicMirror.recipeList)) {
+            e.getInventory().setResult(MagicMirror.magicMirror);
+        }
+
     }
 }

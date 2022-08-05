@@ -16,8 +16,6 @@ public class FileStartupEvents implements Listener {
     public static HashMap<String, PackageInitializer> playerData = new HashMap<>();
     public static HashMap<String, PlayerStates> playerStates = new HashMap<>();
 
-    public static boolean playerReset; // We use this so console doesn't throw errors for resetting player data
-
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) throws IOException{
         Player p = e.getPlayer();
@@ -32,8 +30,6 @@ public class FileStartupEvents implements Listener {
         pckgInit.checkForClassInit();
         pckgInit.cInfo.applyBuffs(); // Initializes default buffs for a player once they join...
 
-        playerReset = false;
-
         playerData.put(username, pckgInit);
 
         PlayerStates states = new PlayerStates();
@@ -44,7 +40,7 @@ public class FileStartupEvents implements Listener {
     public void onPlayerQuit(PlayerQuitEvent e) throws IOException {
         PackageInitializer pckg = playerData.get(e.getPlayer().getName());
 
-        if (playerReset) { return; }
+        if (playerStates.get(e.getPlayer().getName()).isPlayerReset) { return; }
         pckg.fw.saveToFile(pckg.pInfo);
         pckg.tfw.saveToFile();
         pckg.cw.saveToFile(pckg.cInfo);

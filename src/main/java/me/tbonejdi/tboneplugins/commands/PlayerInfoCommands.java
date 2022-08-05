@@ -124,7 +124,7 @@ public class PlayerInfoCommands implements CommandExecutor {
            pckg.tfw.deleteFile();
            pckg.fw.deleteFile();
            pckg.cw.deleteFile();
-           FileStartupEvents.playerReset = true; // Error prevention
+           FileStartupEvents.playerStates.get(p.getName()).isPlayerReset = true;
            p.kickPlayer(ChatColor.GREEN + "Files deleted successfully! Kicking for security.");
            FileStartupEvents.playerData.replace(p.getName(), pckg);
            return true;

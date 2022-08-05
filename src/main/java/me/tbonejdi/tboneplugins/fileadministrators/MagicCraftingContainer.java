@@ -107,18 +107,24 @@ public class MagicCraftingContainer implements Listener {
         }
         writer.close();
     }
-
+    //TODO: Update player for additional parameter, change world to player.getWorld()...
     public static void createTextEntity(Location location) {
-        ArmorStand stand = (ArmorStand) Bukkit.getWorlds().get(0).spawnEntity(location, EntityType.ARMOR_STAND);
+        Location updatedLoc = new Location(Bukkit.getWorlds().get(0), location.getBlockX() + 0.5, location.getBlockY() - 0.75,
+                location.getBlockZ() + 0.5 );
+        ArmorStand stand = (ArmorStand) Bukkit.getWorlds().get(0).spawnEntity(updatedLoc, EntityType.ARMOR_STAND);
         stand.setVisible(false);
+        stand.setInvulnerable(true);
+        stand.setGravity(false);
+        stand.setCustomNameVisible(true);
         stand.setCustomName("§6§lMagic Workbench");
     }
 
     public static void removeTextEntity(Location location) {
         Entity[] entities = location.getChunk().getEntities();
-
+        Location updatedLoc = new Location(Bukkit.getWorlds().get(0), location.getBlockX() + 0.5, location.getBlockY() - 0.75,
+                location.getBlockZ() + 0.5);
         for (Entity e : entities) {
-            if (e.getLocation().equals(location) && e instanceof ArmorStand) {
+            if (e.getLocation().equals(updatedLoc) && e instanceof ArmorStand) {
 
                 if (e.getCustomName().equals("§6§lMagic Workbench")) {
                     e.remove();

@@ -62,3 +62,6 @@ commands:
   printlocation:
     description: Prints player's current location. Used for testing
     usage: /<command>
+  removechunkentities:
+    description: Removes all entities within player's chunk
+    usage: /<command>

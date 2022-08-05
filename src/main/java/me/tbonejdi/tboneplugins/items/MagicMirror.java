@@ -1,13 +1,10 @@
 package me.tbonejdi.tboneplugins.items;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.List;
 public class MagicMirror {
 
     public static ItemStack magicMirror;
+    public static ArrayList<Material> recipeList = new ArrayList<>();
 
     public static void init() { createMagicMirror(); }
 
@@ -32,12 +30,15 @@ public class MagicMirror {
         item.setItemMeta(im);
         magicMirror = item;
 
-        //Shaped Recipe
-        ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("magic_mirror"), item);
-        sr.shape("ORO", "RCR", "ORO");
-        sr.setIngredient('O', Material.OBSIDIAN);
-        sr.setIngredient('R', Material.REDSTONE_BLOCK);
-        sr.setIngredient('C', Material.COMPASS);
-        Bukkit.getServer().addRecipe(sr);
+        // RECIPE
+        recipeList.add(Material.OBSIDIAN);
+        recipeList.add(Material.REDSTONE_BLOCK);
+        recipeList.add(Material.OBSIDIAN);
+        recipeList.add(Material.REDSTONE_BLOCK);
+        recipeList.add(Material.COMPASS);
+        recipeList.add(Material.REDSTONE_BLOCK);
+        recipeList.add(Material.OBSIDIAN);
+        recipeList.add(Material.REDSTONE_BLOCK);
+        recipeList.add(Material.OBSIDIAN);
     }
 }

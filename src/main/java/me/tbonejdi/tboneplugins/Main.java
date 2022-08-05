@@ -1,9 +1,7 @@
 package me.tbonejdi.tboneplugins;
 
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
-import me.tbonejdi.tboneplugins.commands.EnchantCommands;
-import me.tbonejdi.tboneplugins.commands.ItemCommands;
-import me.tbonejdi.tboneplugins.commands.PlayerInfoCommands;
+import me.tbonejdi.tboneplugins.commands.*;
 import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
@@ -11,7 +9,6 @@ import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.*;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
-import me.tbonejdi.tboneplugins.commands.ClassCommands;
 import me.tbonejdi.tboneplugins.events.*;
 import me.tbonejdi.tboneplugins.scoreboards.LobbyBoard;
 import org.bukkit.Bukkit;
@@ -94,6 +91,9 @@ public final class Main extends JavaPlugin implements Listener {
         EnchantCommands ec = new EnchantCommands();
         getCommand("telepathy").setExecutor(ec);
         getCommand("blazedtip").setExecutor(ec);
+
+        EntityCommands enc = new EntityCommands();
+        getCommand("removechunkentities").setExecutor(enc);
 
 
         CustomEnchants.register();

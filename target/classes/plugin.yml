@@ -1,7 +1,7 @@
 name: TbonePlugins
-version: '1.0-SNAPSHOT'
+version: '1.19-SNAPSHOT'
 main: me.tbonejdi.tboneplugins.Main
-api-version: 1.18
+api-version: 1.19
 authors: [ Trevor ]
 description: This for now will run as a test, but we can update this all in the future
 commands:

@@ -13,6 +13,9 @@ import me.tbonejdi.tboneplugins.events.*;
 import me.tbonejdi.tboneplugins.scoreboards.LobbyBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -147,6 +150,14 @@ public final class Main extends JavaPlugin implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         LobbyBoard board = new LobbyBoard(event.getPlayer().getUniqueId());
         if (board.hasID()) { board.stop(); }
+
+        for (Location loc : MagicCraftingContainer.tableLocations) {
+            Entity[] entities = loc.getChunk().getEntities();
+            for (Entity e : entities) {
+                if (e.getType() == EntityType.ARMOR_STAND)
+                    e.remove();
+            }
+        }
     }
 
     public void start(Player player) throws IOException{

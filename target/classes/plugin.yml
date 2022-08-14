@@ -65,3 +65,9 @@ commands:
   removechunkentities:
     description: Removes all entities within player's chunk
     usage: /<command>
+  sendtoaether:
+    description: Sends player to new dimension!
+    usage: /<command>
+  returnfromaether:
+    description: Sends player back to main world!
+    usage: /<command>

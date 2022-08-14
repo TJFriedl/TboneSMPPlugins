@@ -7,6 +7,7 @@ import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.*;
+import me.tbonejdi.tboneplugins.portals.PortalEvents;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
 import me.tbonejdi.tboneplugins.events.*;
@@ -51,6 +52,7 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new LevelProgressionEvents(), this);
         getServer().getPluginManager().registerEvents(new EnchantEvents(), this);
         getServer().getPluginManager().registerEvents(new CraftingEvents(), this);
+        getServer().getPluginManager().registerEvents(new PortalEvents(), this);
 
          /*
             Score board functionality (in the main method)
@@ -97,6 +99,10 @@ public final class Main extends JavaPlugin implements Listener {
 
         EntityCommands enc = new EntityCommands();
         getCommand("removechunkentities").setExecutor(enc);
+
+        WorldCommands wc = new WorldCommands();
+        getCommand("sendtoaether").setExecutor(wc);
+        getCommand("returnfromaether").setExecutor(wc);
 
 
         CustomEnchants.register();

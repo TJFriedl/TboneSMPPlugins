@@ -3,13 +3,15 @@ package me.tbonejdi.tboneplugins.portals;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import java.util.ArrayList;
+
 public class AetherPortal {
     private World world;
-    private Location[] portal;
-    private Location[] frame;
+    private ArrayList<Location> portal;
+    private ArrayList<Location> frame;
 
 
-    public AetherPortal(World world, Location[] portal, Location[] frame) {
+    public AetherPortal(World world, ArrayList<Location> portal, ArrayList<Location> frame) {
         this.world = world;
         this.frame = frame;
         this.portal = portal;
@@ -19,11 +21,11 @@ public class AetherPortal {
         return world;
     }
 
-    public Location[] getPortalFrame() {
+    public ArrayList<Location> getPortalFrame() {
         return frame;
     }
 
-    public Location[] getPortal() {
+    public ArrayList<Location> getPortal() {
         return portal;
     }
 }

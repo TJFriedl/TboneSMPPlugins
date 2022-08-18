@@ -160,7 +160,7 @@ public final class Main extends JavaPlugin implements Listener {
         for (Location loc : MagicCraftingContainer.tableLocations) {
             Entity[] entities = loc.getChunk().getEntities();
             for (Entity e : entities) {
-                if (e.getType() == EntityType.ARMOR_STAND)
+                if (e.getType().equals(EntityType.ARMOR_STAND))
                     e.remove();
             }
         }

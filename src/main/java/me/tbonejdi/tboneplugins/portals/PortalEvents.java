@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
+import java.util.ArrayList;
+
 public class PortalEvents implements Listener {
 
     @EventHandler
@@ -29,6 +31,8 @@ public class PortalEvents implements Listener {
         Location smallBlock = null, bigBlock = null;
         int localSum, specificSum; // This seems very complicated...
         boolean isZaxis = false;
+        ArrayList<Location> portalFrame = new ArrayList<>();
+        ArrayList<Location> portal = new ArrayList<>();
 
         // Setting up portal frame search algo
         for (int x = -3; x <= 3; x++) {
@@ -45,6 +49,7 @@ public class PortalEvents implements Listener {
                         if (specificSum >= localSum) {
                             bigBlock = new Location(w, trueX+x, trueY+y, trueZ+z);
                         }
+                        portalFrame.add(new Location(w, trueX+x, trueY+y, trueZ+z));
                     }
                 }
             }
@@ -69,6 +74,8 @@ public class PortalEvents implements Listener {
                             (y == 2 && z == 3 && w.getBlockAt(tempBlock).getType() != Material.GLOWSTONE) ||
                             y == 3 && z == 3 && w.getBlockAt(tempBlock).getType() != Material.GLOWSTONE) {
                         return;
+                    } else {
+                        portal.add(tempBlock);
                     }
 
                 }
@@ -84,6 +91,8 @@ public class PortalEvents implements Listener {
                              new FixedMetadataValue(Main.mainClassCall, "aether-portal"));
                 }
             }
+
+            AetherPortal aetherPortal = new AetherPortal(w, portal, portalFrame);
         }
         else {
             for (int y = 0; y <= 4; y++) {
@@ -103,6 +112,8 @@ public class PortalEvents implements Listener {
                             (y == 2 && x == 3 && w.getBlockAt(tempBlock).getType() != Material.GLOWSTONE) ||
                             y == 3 && x == 3 && w.getBlockAt(tempBlock).getType() != Material.GLOWSTONE) {
                         return;
+                    } else {
+                        portal.add(tempBlock);
                     }
                 }
             }

@@ -4,6 +4,7 @@ import me.tbonejdi.tboneplugins.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -21,7 +22,6 @@ public class MagicCraftingContainer implements Listener {
     private static File file;
 
 
-    //TODO: Add entity spawn for name :)
     public static void updateTableData(Location location) {
         location.getBlock().setMetadata("MagicCraftingTable",
                 new FixedMetadataValue(Main.mainClassCall, "magic-craft"));
@@ -62,8 +62,12 @@ public class MagicCraftingContainer implements Listener {
 
     public static Location parseLocation(String dataString) {
         double x = 0, y = 0, z = 0;
+        World world = null;
 
         for (int i = 0; i < dataString.length(); i++) {
+            if (dataString.charAt(i-1) == 'e' && dataString.charAt(i) == '=') {
+                world = parseWorld(i+1, dataString);
+            }
             if (dataString.charAt(i) == 'x') { x = parseCoord(i+2, dataString); }
             else if (dataString.charAt(i) == 'y') { y = parseCoord(i+2, dataString); }
             else if (dataString.charAt(i) == 'z') {
@@ -72,7 +76,7 @@ public class MagicCraftingContainer implements Listener {
             }
         }
 
-        Location location = new Location(Bukkit.getWorlds().get(0), x, y, z);
+        Location location = new Location(world, x, y, z);
 
         return location;
     }
@@ -95,6 +99,17 @@ public class MagicCraftingContainer implements Listener {
         if (negative) { coord *= -1.0; }
         return coord;
     }
+    private static World parseWorld(int index, String dataString) {
+        String worldName = "";
+
+        while (dataString.charAt(index) != '}') {
+            worldName += dataString.charAt(index);
+        }
+
+        World world = Bukkit.getWorld(worldName);
+
+        return world;
+    }
 
     public static void saveToFile() throws IOException {
         writer = new BufferedWriter(new FileWriter(file)); // Resets file
@@ -103,11 +118,11 @@ public class MagicCraftingContainer implements Listener {
         }
         writer.close();
     }
-    //TODO: Update player for additional parameter, change world to player.getWorld()...
+
     public static void createTextEntity(Location location) {
-        Location updatedLoc = new Location(Bukkit.getWorlds().get(0), location.getBlockX() + 0.5, location.getBlockY() - 0.75,
+        Location updatedLoc = new Location(location.getWorld(), location.getBlockX() + 0.5, location.getBlockY() - 0.75,
                 location.getBlockZ() + 0.5 );
-        ArmorStand stand = (ArmorStand) Bukkit.getWorlds().get(0).spawnEntity(updatedLoc, EntityType.ARMOR_STAND);
+        ArmorStand stand = (ArmorStand) location.getWorld().spawnEntity(updatedLoc, EntityType.ARMOR_STAND);
         stand.setVisible(false);
         stand.setInvulnerable(true);
         stand.setGravity(false);

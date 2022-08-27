@@ -26,10 +26,7 @@ public class WorldCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("sendtoaether")) {
-            p.sendMessage("§2§lSending to Aether Realm!");
-            WorldCreator c = new WorldCreator("aether");
-            c.type(WorldType.AMPLIFIED);
-            World world = c.createWorld();
+            World world = Bukkit.getWorld("aether");
             p.teleport(world.getSpawnLocation());
             return true;
         }

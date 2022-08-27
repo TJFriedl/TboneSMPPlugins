@@ -12,9 +12,7 @@ import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
 import me.tbonejdi.tboneplugins.events.*;
 import me.tbonejdi.tboneplugins.scoreboards.LobbyBoard;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -25,6 +23,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
+import java.io.Console;
 import java.io.IOException;
 
 
@@ -36,7 +35,7 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "TboneSMP plugin is enabled!");
+        getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Starting up...");
 
 
         /*
@@ -126,6 +125,11 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
 
+        getServer().getConsoleSender().sendMessage("§6Creating \"Aether\" dimension... may take a minute.");
+        WorldCreator c = new WorldCreator("aether");
+        c.type(WorldType.AMPLIFIED);
+        c.createWorld();
+
         mainClassCall = this;
 
         /* Sets all of the magic crafting tables in the game. */
@@ -134,6 +138,8 @@ public final class Main extends JavaPlugin implements Listener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "TboneSMPPlugins: Boot success!");
     }
 
     @Override

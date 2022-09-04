@@ -59,12 +59,12 @@ public class MagicCraftingContainer implements Listener {
         }
 
     }
-
+    // Throwing out of bounds error, needs to be fixed eventually
     public static Location parseLocation(String dataString) {
         double x = 0, y = 0, z = 0;
         World world = null;
 
-        for (int i = 0; i < dataString.length(); i++) {
+        for (int i = 1; i < dataString.length(); i++) {
             if (dataString.charAt(i-1) == 'e' && dataString.charAt(i) == '=') {
                 world = parseWorld(i+1, dataString);
             }

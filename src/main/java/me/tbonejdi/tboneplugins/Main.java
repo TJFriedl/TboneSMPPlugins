@@ -150,6 +150,14 @@ public final class Main extends JavaPlugin implements Listener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // TODO: Make offset of 0.5 to actually grab entities
+        for (Location loc : MagicCraftingContainer.tableLocations) {
+            Entity[] entities = loc.getChunk().getEntities();
+            for (Entity e : entities) {
+                if (e.getType().equals(EntityType.ARMOR_STAND))
+                    e.remove();
+            }
+        }
     }
 
     @EventHandler
@@ -162,14 +170,6 @@ public final class Main extends JavaPlugin implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         LobbyBoard board = new LobbyBoard(event.getPlayer().getUniqueId());
         if (board.hasID()) { board.stop(); }
-
-        for (Location loc : MagicCraftingContainer.tableLocations) {
-            Entity[] entities = loc.getChunk().getEntities();
-            for (Entity e : entities) {
-                if (e.getType().equals(EntityType.ARMOR_STAND))
-                    e.remove();
-            }
-        }
     }
 
     public void start(Player player) throws IOException{

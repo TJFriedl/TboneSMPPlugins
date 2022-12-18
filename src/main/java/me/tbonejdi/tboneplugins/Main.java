@@ -23,7 +23,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
-import java.io.Console;
 import java.io.IOException;
 
 
@@ -125,10 +124,13 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
 
-        getServer().getConsoleSender().sendMessage("§6Creating \"Aether\" dimension... may take a minute.");
-        WorldCreator c = new WorldCreator("aether");
-        c.type(WorldType.AMPLIFIED);
-        c.createWorld();
+        /**
+         * This is disabled for now. Look at issues later and look into why there are potential errors?
+         */
+//        getServer().getConsoleSender().sendMessage("§6Creating \"Aether\" dimension... may take a minute.");
+//        WorldCreator c = new WorldCreator("aether");
+//        c.type(WorldType.AMPLIFIED);
+//        c.createWorld();
 
         mainClassCall = this;
 

@@ -71,8 +71,8 @@ public class MagicCraftingContainer implements Listener {
             if (dataString.charAt(i-1) == 'e' && dataString.charAt(i) == '=') {
                 world = parseWorld(i+1, dataString);
             }
-            if (dataString.charAt(i) == 'x') { x = parseCoord(i+2, dataString); }
-            else if (dataString.charAt(i) == 'y') { y = parseCoord(i+2, dataString); }
+            if (dataString.charAt(i) == 'x') x = parseCoord(i+2, dataString);
+            else if (dataString.charAt(i) == 'y') y = parseCoord(i+2, dataString);
             else if (dataString.charAt(i) == 'z') {
                 z = parseCoord(i+2, dataString);
                 break;
@@ -107,6 +107,7 @@ public class MagicCraftingContainer implements Listener {
 
         while (dataString.charAt(index) != '}') {
             worldName += dataString.charAt(index);
+            index++;
         }
 
         World world = Bukkit.getWorld(worldName);

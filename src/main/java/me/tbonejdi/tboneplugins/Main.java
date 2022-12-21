@@ -134,7 +134,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         mainClassCall = this;
 
-        /* Sets all of the magic crafting tables in the game. */
+        /* Sets all the magic crafting tables in the game. */
         try {
             MagicCraftingContainer.initializeWorld();
         } catch (IOException e) {

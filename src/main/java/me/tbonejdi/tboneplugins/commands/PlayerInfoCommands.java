@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.commands;
 
+import me.tbonejdi.tboneplugins.classes.ClassType;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.ChatColor;
@@ -74,10 +75,10 @@ public class PlayerInfoCommands implements CommandExecutor {
             if (args.length != 1) {
                 p.sendMessage("§4Incorrect format: §6/setrpgclassname <className>");
             }
-            String className = args[0];
-            pckg.cInfo.setCurrentClass(className);
+            ClassType classType = ClassType.valueOf(args[0]); // If errors are presented, check here
+            pckg.cInfo.setCurrentClass(classType);
             pckg.cInfo.applyBuffs();
-            p.sendMessage("Class name changed to §6" + className);
+            p.sendMessage("Class name changed to §6" + classType);
             try {
                 pckg.fw.saveToFile(pckg.pInfo);
             } catch (IOException e) {

@@ -21,7 +21,8 @@ public class FileStartupEvents implements Listener {
         Player p = e.getPlayer();
         String username = p.getName();
 
-        PackageInitializer pckgInit = new PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
+        PackageInitializer pckgInit = new
+                PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
 
         pckgInit.checkForPlayerLevelsFile();
 

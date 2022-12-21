@@ -3,6 +3,7 @@ package me.tbonejdi.tboneplugins.classes;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -20,6 +21,14 @@ public class ClassXPEvents implements Listener {
 
         switch (e.getEntity().getType()) {
             case ZOMBIE:
+                Zombie zombie = (Zombie) e.getEntity();
+                if (!zombie.isAdult()) {
+                    xp = (int) Math.floor((Math.random() * 55));
+                    player.sendMessage("§6Baby Zombie Gave §d" + xp + " §6experience");
+                    pckg.cInfo.gainClassXP(xp);
+                    pckg.cInfo.checkForLevelUp();
+                    break;
+                }
                 xp = (int) Math.floor((Math.random() * 50) *
                         (1.0 + 0.1 * pckg.cInfo.currentLvl));
                 player.sendMessage("§6Zombie Gave §d" + xp + " §6experience");

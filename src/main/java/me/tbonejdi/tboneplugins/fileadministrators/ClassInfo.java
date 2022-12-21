@@ -1,6 +1,7 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
 import me.tbonejdi.tboneplugins.classes.ClassFile;
+import me.tbonejdi.tboneplugins.classes.ClassType;
 import me.tbonejdi.tboneplugins.classes.Warrior;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -8,15 +9,15 @@ import org.bukkit.entity.Player;
 public class ClassInfo {
 
     public Player player;
-    public String currentClass;
+    public ClassType classType;
     public int currentLvl;
     public int currentXP;
     public int currentMaxEXP;
 
-    public ClassInfo(Player player, String currentClass, int currentLvl, int currentXP,
+    public ClassInfo(Player player, ClassType classType, int currentLvl, int currentXP,
                      int currentMaxExp) {
         this.player = player;
-        this.currentClass = currentClass;
+        this.classType = classType;
         this.currentLvl = currentLvl;
         this.currentXP = currentXP;
         this.currentMaxEXP = currentMaxExp;
@@ -38,9 +39,9 @@ public class ClassInfo {
 
     public void setExp(int xp) { currentXP = xp; }
 
-    public String getCurrentClass() { return currentClass; }
+    public ClassType getCurrentClass() { return classType; }
 
-    public void setCurrentClass(String newClass) { currentClass = newClass; }
+    public void setCurrentClass(ClassType newClass) { classType = newClass; }
 
     public int getClassMaxExp() { return currentMaxEXP; }
 
@@ -61,15 +62,15 @@ public class ClassInfo {
     }
 
     public void applyBuffs() {
-        String currentClass = this.currentClass;
-        switch (currentClass) {
-            case "Warrior":
+        ClassType classType = this.classType;
+        switch (classType) {
+            case WARRIOR:
                 player.sendMessage("Applying warrior buffs!");
                 Warrior.setBuffs(this);
                 break;
             default:
                 player.sendMessage("No class found...");
-                setCurrentClass("None");
+                setCurrentClass(ClassType.NONE);
                 ClassFile.resetPlayer(player);
                 break;
         }

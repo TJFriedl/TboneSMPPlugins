@@ -1,5 +1,5 @@
 package me.tbonejdi.tboneplugins.classes;
 
 public enum ClassType {
-    WARRIOR, RANGER, WIZARD;
+    NONE, WARRIOR, RANGER, WIZARD;
 }

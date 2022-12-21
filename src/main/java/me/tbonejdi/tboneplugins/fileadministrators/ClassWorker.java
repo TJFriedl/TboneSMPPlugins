@@ -1,5 +1,7 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
+import me.tbonejdi.tboneplugins.classes.ClassType;
+
 import java.io.*;
 
 public class ClassWorker {
@@ -28,7 +30,7 @@ public class ClassWorker {
         writer.close();
     }
 
-    public String parseClass() throws IOException {
+    public ClassType parseClass() throws IOException {
         resetReader();
         String line = reader.readLine();
         while (line != null) {
@@ -38,9 +40,13 @@ public class ClassWorker {
             }
             line = reader.readLine();
         }
-        if (line == null) { return "error"; }
+        if (line == null) {
+            System.out.printf("There seems to have been an error parsing class from file.");
+            return ClassType.NONE;
+        }
 
-        return line; // THIS IS WHERE YOU LEFT OFF 3/18/2022 @ 10:24 PM
+        ClassType classType = ClassType.valueOf(line.toUpperCase());
+        return classType;
     }
 
     public int parseLevel() throws IOException {

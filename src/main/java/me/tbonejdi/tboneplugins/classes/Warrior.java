@@ -11,7 +11,7 @@ public class Warrior extends ClassFile{
     public static void setClass(Player player) {
         PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
 
-        pckg.cInfo.setCurrentClass("Warrior");
+        pckg.cInfo.setCurrentClass(ClassType.WARRIOR);
         setBuffs(pckg.cInfo);
 
         FileStartupEvents.playerData.replace(player.getName(), pckg);

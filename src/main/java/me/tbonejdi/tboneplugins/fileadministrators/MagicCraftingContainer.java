@@ -31,20 +31,23 @@ public class MagicCraftingContainer implements Listener {
 
         String directory = "//home//container//plugins//playerFiles//";
         File dir = new File(directory);
-        File tableFile = new File(directory + "magictables.txt");
-        writer = new BufferedWriter(new FileWriter(tableFile, true));
-        reader = new BufferedReader(new FileReader(tableFile));
-        tableLocations = new HashSet<>();
-        file = tableFile;
 
         if (!(dir.exists())) {
             dir.mkdirs();
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "New Crafting File Created...");
         }
-        else if (!(tableFile.exists())) {
+
+        File tableFile = new File(directory + "magictables.txt");
+
+        if (!(tableFile.exists())) {
             tableFile.createNewFile();
             return;
         }
+
+        writer = new BufferedWriter(new FileWriter(tableFile, true));
+        reader = new BufferedReader(new FileReader(tableFile));
+        tableLocations = new HashSet<>();
+        file = tableFile;
 
         String line = reader.readLine();
         while(line != null) {

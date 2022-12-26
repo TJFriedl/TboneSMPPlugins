@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.commands;
 
+import me.tbonejdi.tboneplugins.mobs.LeapingSpiderEvents;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,6 +29,10 @@ public class EntityCommands implements CommandExecutor {
                 e.remove();
             }
             p.sendMessage("Chunk entities removed!");
+            return true;
+        }
+        if (cmd.getName().equalsIgnoreCase("leapingspider")) {
+            LeapingSpiderEvents.spawnLeadingSpider(p.getLocation());
             return true;
         }
 

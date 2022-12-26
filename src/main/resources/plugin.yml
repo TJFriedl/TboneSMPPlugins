@@ -71,3 +71,6 @@ commands:
   returnfromaether:
     description: Sends player back to main world!
     usage: /<command>
+  leapingspider:
+    description: Spawns a leaping spider custom mob
+    usage: /<command>

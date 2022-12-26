@@ -132,7 +132,6 @@ public class InventoryEvents implements Listener {
                 p.closeInventory();
                 return;
             }
-            return;
         }
 
     }

@@ -29,6 +29,7 @@ public class CantripEvents implements Listener {
         Player p = e.getPlayer();
         Block block = e.getBlockPlaced();
 
+        /** This below is just some test code, remove this at some point. **/
         if (block.getType() == Material.LAPIS_BLOCK) {
             int x = block.getLocation().getBlockX();
             int y = block.getLocation().getBlockY();

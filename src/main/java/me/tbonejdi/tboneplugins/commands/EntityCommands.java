@@ -32,7 +32,7 @@ public class EntityCommands implements CommandExecutor {
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("leapingspider")) {
-            SpiderEvents.spawnLeadingSpider(p.getLocation());
+            SpiderEvents.spawnLeapingSpider(p.getLocation());
             return true;
         }
 

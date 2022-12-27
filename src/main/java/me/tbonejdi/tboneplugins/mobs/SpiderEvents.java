@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class SpiderEvents implements Listener {
 
-    public static void spawnLeadingSpider(Location location) {
+    public static void spawnLeapingSpider(Location location) {
 
         Spider spider = location.getWorld().spawn(location, Spider.class);
         spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
@@ -88,7 +88,7 @@ public class SpiderEvents implements Listener {
         else if (seed % 9 != 0) return;
 
         e.setCancelled(true);
-        spawnLeadingSpider(e.getLocation());
+        spawnLeapingSpider(e.getLocation());
 
         /** Try the above code instead? **/
 //        Spider spider = (Spider) e.getEntity();

@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.classes;
 
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -46,6 +47,23 @@ public class ClassXPEvents implements Listener {
                 xp = (int) Math.floor((Math.random() * 60) *
                         (1.0 + 0.1 * pckg.cInfo.currentLvl));
                 player.sendMessage("§6Creeper Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case SPIDER:
+
+                if (e.getEntity().getCustomName() != null &&
+                        e.getEntity().getCustomName().contains("Leaping Spider")) {
+                    xp = (int) Math.floor((Math.random() * 250) *
+                            (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                    player.sendMessage(ChatColor.DARK_GRAY + "Leaping Spider §6Gave §d" + xp + " §6experience");
+                    pckg.cInfo.gainClassXP(xp);
+                    pckg.cInfo.checkForLevelUp();
+                    break;
+                }
+                xp = (int) Math.floor((Math.random() * 50) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Spider Gave §d" + xp + " §6experience");
                 pckg.cInfo.gainClassXP(xp);
                 pckg.cInfo.checkForLevelUp();
                 break;

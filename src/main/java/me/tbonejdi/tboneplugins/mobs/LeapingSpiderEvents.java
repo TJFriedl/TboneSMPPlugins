@@ -1,10 +1,7 @@
 package me.tbonejdi.tboneplugins.mobs;
 
 import me.tbonejdi.tboneplugins.Main;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -15,16 +12,20 @@ import org.bukkit.entity.Spider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Random;
 
 public class LeapingSpiderEvents implements Listener {
 
     public static void spawnLeadingSpider(Location location) {
 
         Spider spider = location.getWorld().spawn(location, Spider.class);
-        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider");
+        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
         spider.setCustomNameVisible(true);
         Attributable spiderAt = spider;
         AttributeInstance attribute = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
@@ -60,10 +61,38 @@ public class LeapingSpiderEvents implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Spider && e.getDamager().getCustomName() != null &&
-        e.getDamager().getCustomName().equals(ChatColor.DARK_GRAY + "Leaping Spider")) {
+        e.getDamager().getCustomName().contains("Leaping Spider")) {
             Player player = (Player) e.getEntity();
             player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 0));
         }
     }
 
+    @EventHandler
+    public void onSpiderDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof  Spider && e.getEntity().getCustomName() != null &&
+        e.getEntity().getCustomName().contains("Leaping Spider")) {
+
+            Spider spider = (Spider) e.getEntity();
+            int health = (int) (spider.getHealth() - e.getDamage());
+            spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c("+ health + "/100❤)");
+        }
+    }
+
+    @EventHandler
+    public void castSpiderSpawn(EntitySpawnEvent e) {
+
+        Random randGen = new Random();
+        int seed = randGen.nextInt(9);
+
+        if (!(e.getEntity() instanceof Spider)) return;
+        else if (seed % 9 != 0) return;
+
+        Spider spider = (Spider) e.getEntity();
+        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
+        spider.setCustomNameVisible(true);
+        Attributable spiderAt = spider;
+        AttributeInstance attribute = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        attribute.setBaseValue(100);
+        spider.setHealth(100);
+    }
 }

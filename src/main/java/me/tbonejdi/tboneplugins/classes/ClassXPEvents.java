@@ -51,7 +51,6 @@ public class ClassXPEvents implements Listener {
                 pckg.cInfo.checkForLevelUp();
                 break;
             case SPIDER:
-
                 if (e.getEntity().getCustomName() != null &&
                         e.getEntity().getCustomName().contains("Leaping Spider")) {
                     xp = (int) Math.floor((Math.random() * 250) *
@@ -64,6 +63,48 @@ public class ClassXPEvents implements Listener {
                 xp = (int) Math.floor((Math.random() * 50) *
                         (1.0 + 0.1 * pckg.cInfo.currentLvl));
                 player.sendMessage("§6Spider Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case ENDERMAN:
+                xp = (int) Math.floor((Math.random() * 100) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Enderman Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case WITHER_SKELETON:
+                xp = (int) Math.floor((Math.random() * 50) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Wither Skeleton Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case BLAZE:
+                xp = (int) Math.floor((Math.random() * 80) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Blaze Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case GHAST:
+                xp = (int) Math.floor((Math.random() * 100) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Ghast Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case ZOMBIFIED_PIGLIN:
+                xp = (int) Math.floor((Math.random() * 50) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Zombified Piglin Gave §d" + xp + " §6experience");
+                pckg.cInfo.gainClassXP(xp);
+                pckg.cInfo.checkForLevelUp();
+                break;
+            case WITCH:
+                xp = (int) Math.floor((Math.random() * 90) *
+                        (1.0 + 0.1 * pckg.cInfo.currentLvl));
+                player.sendMessage("§6Witch Gave §d" + xp + " §6experience");
                 pckg.cInfo.gainClassXP(xp);
                 pckg.cInfo.checkForLevelUp();
                 break;

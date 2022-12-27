@@ -7,7 +7,7 @@ import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.*;
-import me.tbonejdi.tboneplugins.mobs.LeapingSpiderEvents;
+import me.tbonejdi.tboneplugins.mobs.SpiderEvents;
 import me.tbonejdi.tboneplugins.portals.PortalEvents;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
@@ -52,7 +52,7 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new EnchantEvents(), this);
         getServer().getPluginManager().registerEvents(new CraftingEvents(), this);
         getServer().getPluginManager().registerEvents(new PortalEvents(), this);
-        getServer().getPluginManager().registerEvents(new LeapingSpiderEvents(), this);
+        getServer().getPluginManager().registerEvents(new SpiderEvents(), this);
 
          /*
             Score board functionality (in the main method)

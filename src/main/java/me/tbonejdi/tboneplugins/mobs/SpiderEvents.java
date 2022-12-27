@@ -20,7 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-public class LeapingSpiderEvents implements Listener {
+public class SpiderEvents implements Listener {
 
     public static void spawnLeadingSpider(Location location) {
 
@@ -87,12 +87,16 @@ public class LeapingSpiderEvents implements Listener {
         if (!(e.getEntity() instanceof Spider)) return;
         else if (seed % 9 != 0) return;
 
-        Spider spider = (Spider) e.getEntity();
-        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
-        spider.setCustomNameVisible(true);
-        Attributable spiderAt = spider;
-        AttributeInstance attribute = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-        attribute.setBaseValue(100);
-        spider.setHealth(100);
+        e.setCancelled(true);
+        spawnLeadingSpider(e.getLocation());
+
+        /** Try the above code instead? **/
+//        Spider spider = (Spider) e.getEntity();
+//        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
+//        spider.setCustomNameVisible(true);
+//        Attributable spiderAt = spider;
+//        AttributeInstance attribute = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+//        attribute.setBaseValue(100);
+//        spider.setHealth(100);
     }
 }

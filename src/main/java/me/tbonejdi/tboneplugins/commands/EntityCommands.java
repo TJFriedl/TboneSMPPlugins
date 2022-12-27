@@ -1,6 +1,6 @@
 package me.tbonejdi.tboneplugins.commands;
 
-import me.tbonejdi.tboneplugins.mobs.LeapingSpiderEvents;
+import me.tbonejdi.tboneplugins.mobs.SpiderEvents;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,7 +32,7 @@ public class EntityCommands implements CommandExecutor {
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("leapingspider")) {
-            LeapingSpiderEvents.spawnLeadingSpider(p.getLocation());
+            SpiderEvents.spawnLeadingSpider(p.getLocation());
             return true;
         }
 

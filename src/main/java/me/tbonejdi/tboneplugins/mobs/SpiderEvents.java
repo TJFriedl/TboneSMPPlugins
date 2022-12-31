@@ -89,14 +89,5 @@ public class SpiderEvents implements Listener {
 
         e.setCancelled(true);
         spawnLeapingSpider(e.getLocation());
-
-        /** Try the above code instead? **/
-//        Spider spider = (Spider) e.getEntity();
-//        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
-//        spider.setCustomNameVisible(true);
-//        Attributable spiderAt = spider;
-//        AttributeInstance attribute = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-//        attribute.setBaseValue(100);
-//        spider.setHealth(100);
     }
 }

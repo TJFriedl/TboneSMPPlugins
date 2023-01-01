@@ -22,6 +22,19 @@ import java.util.Random;
 
 public class SpiderEvents implements Listener {
 
+    public static void spawnLeveledSpider(Location location) {
+        Spider spider = location.getWorld().spawn(location, Spider.class);
+        int level = new Random().nextInt(20) + 1;
+
+        spider.setCustomName("Spider | §6Lv. " + level);
+        spider.setCustomNameVisible(true);
+        Attributable spiderAt = spider;
+        AttributeInstance health = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        health.setBaseValue(health.getBaseValue() * 1.0 + (0.1 * level));
+        AttributeInstance damage = spiderAt.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        damage.setBaseValue(damage.getBaseValue() * 1.0 + (0.1 * level));
+    }
+
     public static void spawnLeapingSpider(Location location) {
 
         Spider spider = location.getWorld().spawn(location, Spider.class);
@@ -81,13 +94,18 @@ public class SpiderEvents implements Listener {
     @EventHandler
     public void castSpiderSpawn(EntitySpawnEvent e) {
 
-        Random randGen = new Random();
-        int seed = randGen.nextInt(9);
+        int seed = new Random().nextInt(9);
 
         if (!(e.getEntity() instanceof Spider)) return;
-        else if (seed % 9 != 0) return;
 
-        e.setCancelled(true);
-        spawnLeapingSpider(e.getLocation());
+        if (seed % 9 == 0) {
+            e.setCancelled(true);
+            spawnLeapingSpider(e.getLocation());
+        }
+        else if (seed % 9 == 1) {
+            e.setCancelled(true);
+            spawnLeveledSpider(e.getLocation());
+        }
+
     }
 }

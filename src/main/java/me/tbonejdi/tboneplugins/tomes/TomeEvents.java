@@ -55,6 +55,7 @@ public class TomeEvents implements Listener {
             /*
             Preset designed for the second tome (with missing page)
              */
+            //TODO: This will sometimes throw a null pointer exception, double check to see why this might be.
             if (e.getItem().getItemMeta().equals(CraftingEvents.magicCraftingBook.getItemMeta())) {
                 if (pckg.tfw.isBookDiscovered(1)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated that tome.");

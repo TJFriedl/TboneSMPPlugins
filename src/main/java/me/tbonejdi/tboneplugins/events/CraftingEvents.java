@@ -144,7 +144,6 @@ public class CraftingEvents implements Listener {
     public void handleMagicCrafting (PrepareItemCraftEvent e) throws NullPointerException {
         Player player = (Player) e.getViewers().get(0); // Assuming only one person is viewing this inventory?
         if (!(FileStartupEvents.playerStates.get(player.getName()).isMagicCrafting)) {
-            player.sendMessage("This is not a crafting table :)");
             return;
         }
 

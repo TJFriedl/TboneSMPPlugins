@@ -15,6 +15,8 @@ public class FirstTome {
 
     public static ItemStack firstTome;
 
+    public static void resetItem() { registerItem(); }
+
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.BOOK, 1);
         ItemMeta im = item.getItemMeta();

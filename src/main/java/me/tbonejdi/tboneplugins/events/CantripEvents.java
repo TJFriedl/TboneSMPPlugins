@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CantripEvents implements Listener {
-
-    public static ItemStack firstMissingPage;
 
     @EventHandler
     public static void playerStrike(BlockPlaceEvent e) {
@@ -84,10 +81,11 @@ public class CantripEvents implements Listener {
             block.setType(Material.AIR);
             location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
             if (!(pckg.tfw.isBookDiscovered(2))) {
+                SecondTomePage.resetItem();
                 ItemStack item = SecondTomePage.secondTomePage;
                 ItemMeta im = item.getItemMeta();
                 List<String> lore = im.getLore();
-                lore.add((ChatColor.DARK_BLUE + "Book magically created for " + ChatColor.GOLD + p.getName()));
+                lore.add((ChatColor.DARK_BLUE + "Page magically created for " + ChatColor.GOLD + p.getName()));
                 im.setLore(lore);
                 item.setItemMeta(im);
 

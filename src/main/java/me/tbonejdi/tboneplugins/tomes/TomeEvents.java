@@ -1,8 +1,5 @@
 package me.tbonejdi.tboneplugins.tomes;
 
-import me.tbonejdi.tboneplugins.events.CantripEvents;
-import me.tbonejdi.tboneplugins.events.CraftingEvents;
-import me.tbonejdi.tboneplugins.events.MobDropEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.FirstTome;
@@ -16,7 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.IOException;
 
@@ -64,7 +60,7 @@ public class TomeEvents implements Listener {
                 } else if (!(pckg.tfw.isBookDiscovered(0))) {
                     p.sendMessage(ChatColor.GRAY + "I cannot do that for you right now.");
                     return;
-                } else if (SecondTome.isIntendedUser(e.getItem(), p)) {
+                } else if (!SecondTome.isIntendedUser(e.getItem(), p)) {
                     p.sendMessage(ChatColor.GRAY + "Hey! This item is not meant for you.");
                     return;
                 }
@@ -81,7 +77,7 @@ public class TomeEvents implements Listener {
             /*
             Preset designed for the second tome's missing page
              */
-            if (e.getItem().getItemMeta().getDisplayName().equals(SecondTomePage.secondTomePage.getItemMeta().toString())) {
+            if (e.getItem().getItemMeta().getDisplayName().equals(SecondTomePage.secondTomePage.getItemMeta().getDisplayName())) {
                 if (pckg.tfw.isBookDiscovered(2)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated this page.");
                     e.getItem().setAmount(0);

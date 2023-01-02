@@ -27,7 +27,8 @@ public class MobDropEvents implements Listener {
 
         if (pckg.pInfo.getLevel() < 1) { return; } // Needs at least player lv. 1
         if (!pckg.tfw.isBookDiscovered(0)) { // Eventually check if item is already on ground
-            // Below code are all new changes
+
+            FirstTome.resetItem();
             ItemStack item = FirstTome.firstTome;
             ItemMeta im = item.getItemMeta();
             List<String> lore = im.getLore();

@@ -46,6 +46,7 @@ public class CraftingEvents implements Listener {
                     if (block == Material.CRAFTING_TABLE) {
                         craftingTable = new Location(player.getWorld(), loc.getBlockX()+x, loc.getBlockY()+y,
                                 loc.getBlockZ()+z);
+                        SecondTome.resetItem();
                         ItemStack item = SecondTome.secondTome;
                         ItemMeta im = item.getItemMeta();
                         List<String> lore = im.getLore();

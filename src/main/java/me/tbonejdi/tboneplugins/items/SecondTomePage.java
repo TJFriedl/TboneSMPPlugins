@@ -15,6 +15,8 @@ public class SecondTomePage {
 
     public static ItemStack secondTomePage;
 
+    public static void resetItem() { registerItem(); }
+
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.PAPER, 1);
         ItemMeta im = item.getItemMeta();

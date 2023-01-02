@@ -60,14 +60,10 @@ public final class Main extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
 
          /*
-            These are for messing around with custom items and commands
+            Registers all the custom items into static objects
           */
-        ItemManager.init();
-        DiamondWand.init();
-        MagicMirror.init();
-        CrystalFruit.init();
-        FloatingWand.init();
-        MagicTable.init();
+        getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Registering Items...");
+        ItemHandler.implementCustomItems();
 
         ClassCommands t = new ClassCommands();
         getCommand("select").setExecutor(t);

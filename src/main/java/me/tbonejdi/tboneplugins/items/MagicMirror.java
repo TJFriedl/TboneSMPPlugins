@@ -15,9 +15,7 @@ public class MagicMirror {
     public static ItemStack magicMirror;
     public static ArrayList<Material> recipeList = new ArrayList<>();
 
-    public static void init() { createMagicMirror(); }
-
-    private static void createMagicMirror() {
+    protected static void registerItem() {
         ItemStack item = new ItemStack(Material.CLOCK, 1);
         ItemMeta im = item.getItemMeta();
         im.setDisplayName("§bMagic Mirror");

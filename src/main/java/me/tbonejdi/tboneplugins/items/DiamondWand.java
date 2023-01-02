@@ -16,9 +16,7 @@ public class DiamondWand {
 
     public static ItemStack diamondWand;
 
-    public static void init() { createDiamondWand();}
-
-    private static void createDiamondWand() {
+    protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
         ItemMeta im = item.getItemMeta();
         im.setDisplayName("§bDiamond Detecting Wand");

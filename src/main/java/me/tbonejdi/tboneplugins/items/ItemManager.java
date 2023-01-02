@@ -14,11 +14,7 @@ public class ItemManager {
 
     public static ItemStack wand;
 
-    public static void init() {
-        createWand();
-    }
-
-    private static void createWand() {
+    protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§fStick of Truth");

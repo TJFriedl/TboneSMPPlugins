@@ -3,6 +3,7 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.MagicTable;
+import me.tbonejdi.tboneplugins.items.SecondTomePage;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -83,18 +84,13 @@ public class CantripEvents implements Listener {
             block.setType(Material.AIR);
             location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
             if (!(pckg.tfw.isBookDiscovered(2))) {
-                ItemStack item = new ItemStack(Material.PAPER, 1);
+                ItemStack item = SecondTomePage.secondTomePage;
                 ItemMeta im = item.getItemMeta();
-                im.setDisplayName(ChatColor.GOLD + "Woodsmith's Missing Pages");
-                List<String> lore = new ArrayList<>();
-                lore.add(ChatColor.GRAY + "Hey! I've been looking for these.");
-                lore.add(ChatColor.BLUE + "Right click in hand to activate.");
+                List<String> lore = im.getLore();
                 lore.add((ChatColor.DARK_BLUE + "Book magically created for " + ChatColor.GOLD + p.getName()));
                 im.setLore(lore);
-                im.addEnchant(Enchantment.LUCK, 1, false);
-                im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 item.setItemMeta(im);
-                firstMissingPage = item;
+
                 location.getWorld().dropItemNaturally(location, item);
             }
             for (int x = -1; x <= 1; x++) {

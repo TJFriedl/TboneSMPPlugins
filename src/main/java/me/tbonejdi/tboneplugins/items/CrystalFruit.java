@@ -16,9 +16,7 @@ public class CrystalFruit {
 
     public static ItemStack crystalFruit;
 
-    public static void init() { createItem(); }
-
-    private static void createItem() {
+    protected static void registerItem() {
         ItemStack item = new ItemStack(Material.CHORUS_FRUIT, 1);
         ItemMeta im = item.getItemMeta();
         im.setDisplayName("§bCrystal Fruit");

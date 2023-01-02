@@ -5,6 +5,9 @@ import me.tbonejdi.tboneplugins.events.CraftingEvents;
 import me.tbonejdi.tboneplugins.events.MobDropEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
+import me.tbonejdi.tboneplugins.items.FirstTome;
+import me.tbonejdi.tboneplugins.items.SecondTome;
+import me.tbonejdi.tboneplugins.items.SecondTomePage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -24,19 +27,17 @@ public class TomeEvents implements Listener {
         if (e.getItem() == null) { return; }
         Player p = e.getPlayer();
         PackageInitializer pckg = FileStartupEvents.playerData.get(e.getPlayer().getName());
-        if (MobDropEvents.tutorialBook == null) { return; }
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
             /*
             Preset designed for the first tome
              */
-            if (e.getItem().getItemMeta().equals(MobDropEvents.tutorialBook.getItemMeta())) {
+            if (e.getItem().getItemMeta().getDisplayName().equals(FirstTome.firstTome.getItemMeta().getDisplayName())) {
                 if (pckg.tfw.isBookDiscovered(0)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated that tome.");
                     e.getItem().setAmount(0);
                     return;
-                }
-                else if (!isIntendedUser(e.getItem(), p)) {
+                } else if (!FirstTome.isIntendedUser(e.getItem(), p)) {
                     p.sendMessage(ChatColor.GRAY + "Hey! This item is not meant for you.");
                     return;
                 }
@@ -55,18 +56,15 @@ public class TomeEvents implements Listener {
             /*
             Preset designed for the second tome (with missing page)
              */
-            //TODO: This will sometimes throw a null pointer exception, double check to see why this might be.
-            if (e.getItem().getItemMeta().equals(CraftingEvents.magicCraftingBook.getItemMeta())) {
+            if (e.getItem().getItemMeta().getDisplayName().equals(SecondTome.secondTome.getItemMeta().getDisplayName())) {
                 if (pckg.tfw.isBookDiscovered(1)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated that tome.");
                     e.getItem().setAmount(0);
                     return;
-                }
-                else if (!(pckg.tfw.isBookDiscovered(0))) {
+                } else if (!(pckg.tfw.isBookDiscovered(0))) {
                     p.sendMessage(ChatColor.GRAY + "I cannot do that for you right now.");
                     return;
-                }
-                else if (!isIntendedUser(e.getItem(), p)) {
+                } else if (SecondTome.isIntendedUser(e.getItem(), p)) {
                     p.sendMessage(ChatColor.GRAY + "Hey! This item is not meant for you.");
                     return;
                 }
@@ -80,18 +78,18 @@ public class TomeEvents implements Listener {
                 FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
                 return;
             }
-
-            if (e.getItem().getItemMeta().equals(CantripEvents.firstMissingPage.getItemMeta())) {
+            /*
+            Preset designed for the second tome's missing page
+             */
+            if (e.getItem().getItemMeta().getDisplayName().equals(SecondTomePage.secondTomePage.getItemMeta().toString())) {
                 if (pckg.tfw.isBookDiscovered(2)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated this page.");
                     e.getItem().setAmount(0);
                     return;
-                }
-                else if (!(pckg.tfw.isBookDiscovered(1))) {
+                } else if (!(pckg.tfw.isBookDiscovered(1))) {
                     p.sendMessage(ChatColor.GRAY + "I cannot do that for you right now.");
                     return;
-                }
-                else if (!isIntendedUser(e.getItem(), p)) {
+                } else if (!SecondTomePage.isIntendedUser(e.getItem(), p)) {
                     p.sendMessage(ChatColor.GRAY + "Hey! This item is not meant for you.");
                     return;
                 }
@@ -107,15 +105,6 @@ public class TomeEvents implements Listener {
             }
         }
         FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
-    }
-
-    //TODO: Method still needs testing. Eventually change to compare UID?
-    private static boolean isIntendedUser(ItemStack item, Player player) {
-
-        if (item.getItemMeta().toString().contains(player.getName())) return true;
-
-        return false;
-
     }
 
 }

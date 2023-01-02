@@ -16,9 +16,7 @@ public class FloatingWand {
 
     public static ItemStack floatingWand;
 
-    public static void init() { createFloatingWand(); }
-
-    private static void createFloatingWand() {
+    protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
         ItemMeta im = item.getItemMeta();
         im.setDisplayName("§eFloating Wand");

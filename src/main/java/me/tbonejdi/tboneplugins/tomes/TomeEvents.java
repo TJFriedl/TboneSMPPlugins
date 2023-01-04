@@ -21,6 +21,7 @@ public class TomeEvents implements Listener {
     @EventHandler
     public static void onTomeRightClick(PlayerInteractEvent e) throws IOException {
         if (e.getItem() == null) { return; }
+        else if (e.getItem().getItemMeta() == null) { return; }
         Player p = e.getPlayer();
         PackageInitializer pckg = FileStartupEvents.playerData.get(e.getPlayer().getName());
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {

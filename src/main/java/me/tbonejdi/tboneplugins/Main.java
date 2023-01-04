@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins;
 
+import com.google.gson.JsonObject;
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
 import me.tbonejdi.tboneplugins.commands.*;
 import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
@@ -7,6 +8,7 @@ import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
 import me.tbonejdi.tboneplugins.items.*;
+import me.tbonejdi.tboneplugins.mobs.PigEvents;
 import me.tbonejdi.tboneplugins.mobs.SpiderEvents;
 import me.tbonejdi.tboneplugins.portals.PortalEvents;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
@@ -32,8 +34,11 @@ public final class Main extends JavaPlugin implements Listener {
     private int taskID;
     public static Main mainClassCall;
 
+    private PlayerData playerData;
+
     @Override
     public void onEnable() {
+
         // Plugin startup logic
         getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Starting up...");
 
@@ -53,11 +58,21 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new CraftingEvents(), this);
         getServer().getPluginManager().registerEvents(new PortalEvents(), this);
         getServer().getPluginManager().registerEvents(new SpiderEvents(), this);
+        getServer().getPluginManager().registerEvents(new PigEvents(), this);
 
          /*
             Score board functionality (in the main method)
           */
         this.getServer().getPluginManager().registerEvents(this, this);
+
+        /*
+            This will be for testing player data through yml files
+         */
+        getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Testing data config...");
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+        this.playerData = new PlayerData(this);
 
          /*
             Registers all the custom items into static objects
@@ -165,12 +180,14 @@ public final class Main extends JavaPlugin implements Listener {
     public void onJoin(PlayerJoinEvent event) throws IOException {
         createBoard(event.getPlayer());
         start(event.getPlayer());
+        playerData.newPlayer(event.getPlayer());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         LobbyBoard board = new LobbyBoard(event.getPlayer().getUniqueId());
         if (board.hasID()) { board.stop(); }
+        playerData.save();
     }
 
     public void start(Player player) throws IOException{

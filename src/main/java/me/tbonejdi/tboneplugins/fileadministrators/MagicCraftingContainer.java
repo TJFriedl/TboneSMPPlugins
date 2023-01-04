@@ -13,6 +13,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class MagicCraftingContainer implements Listener {
 
@@ -116,11 +117,18 @@ public class MagicCraftingContainer implements Listener {
     }
 
     public static void saveToFile() throws IOException {
-        writer = new BufferedWriter(new FileWriter(file)); // Resets file
-        for (Location loc : tableLocations) {
-            writer.write(loc.toString() + "\n");
+        try {
+            BufferedWriter newWriter = new BufferedWriter(new FileWriter(file, true)); // Resets file
+
+            for (Location location : tableLocations) {
+                newWriter.write(location.toString() + "\n");
+                Bukkit.broadcastMessage("Saved table: " + location);
+            }
+            newWriter.close();
+        } catch (NullPointerException e) {
+            System.out.println("NULL POINTER THROWN");
+            Bukkit.broadcastMessage("Exception thrown");
         }
-        writer.close();
     }
 
     public static void createTextEntity(Location location) {

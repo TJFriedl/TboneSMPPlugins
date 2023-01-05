@@ -1,6 +1,5 @@
 package me.tbonejdi.tboneplugins;
 
-import com.google.gson.JsonObject;
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
 import me.tbonejdi.tboneplugins.commands.*;
 import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
@@ -21,12 +20,15 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public final class Main extends JavaPlugin implements Listener {
@@ -34,10 +36,14 @@ public final class Main extends JavaPlugin implements Listener {
     private int taskID;
     public static Main mainClassCall;
 
-    private PlayerData playerData;
+    public DataManager data;
+    public MagicBlockManager magicBlock;
 
     @Override
     public void onEnable() {
+
+        this.data = new DataManager(this);
+        this.magicBlock = new MagicBlockManager(this);
 
         // Plugin startup logic
         getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Starting up...");
@@ -64,15 +70,6 @@ public final class Main extends JavaPlugin implements Listener {
             Score board functionality (in the main method)
           */
         this.getServer().getPluginManager().registerEvents(this, this);
-
-        /*
-            This will be for testing player data through yml files
-         */
-        getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Testing data config...");
-        if (!getDataFolder().exists()) {
-            getDataFolder().mkdirs();
-        }
-        this.playerData = new PlayerData(this);
 
          /*
             Registers all the custom items into static objects
@@ -126,6 +123,8 @@ public final class Main extends JavaPlugin implements Listener {
         if(!Bukkit.getOnlinePlayers().isEmpty()) {
             for (Player online: Bukkit.getOnlinePlayers()) {
                 try {
+                    FileStartupEvents.initPlayerData(online);
+                    online.sendMessage(ChatColor.GOLD + "Server is restarting, reloading all of your data...");
                     createBoard(online);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -163,10 +162,15 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "TboneSMP plugin shutting down!");
         try {
             MagicCraftingContainer.saveToFile();
+            // TODO: Make sure this doesnt throw any errors (TEST)
+            List<Location> tables = new ArrayList<>();
+            tables.addAll(MagicCraftingContainer.tableLocations);
+            this.magicBlock.getConfig().set("magictables", tables);
+            this.magicBlock.saveConfig();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // TODO: Make offset of 0.5 to actually grab entities
+        // TODO: Make offset of 0.5 to actually grab entities (has this already been done?)
         for (Location loc : MagicCraftingContainer.tableLocations) {
             Entity[] entities = loc.getChunk().getEntities();
             for (Entity e : entities) {
@@ -180,14 +184,28 @@ public final class Main extends JavaPlugin implements Listener {
     public void onJoin(PlayerJoinEvent event) throws IOException {
         createBoard(event.getPlayer());
         start(event.getPlayer());
-        playerData.newPlayer(event.getPlayer());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         LobbyBoard board = new LobbyBoard(event.getPlayer().getUniqueId());
         if (board.hasID()) { board.stop(); }
-        playerData.save();
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent e) {
+        if (e.getBlock().getType().equals(Material.DIAMOND_ORE)) {
+            Player player = e.getPlayer();
+            int amount = 0;
+            String username = e.getPlayer().getName();
+
+            if (this.data.getConfig().contains("players." + player.getUniqueId() + ".total"))
+                amount = this.data.getConfig().getInt("players." + player.getUniqueId() + ".total");
+
+            this.data.getConfig().set("players." + player.getUniqueId() + ".username", username);
+            this.data.getConfig().set("players." + player.getUniqueId() + ".total", (amount + 1));
+            data.saveConfig();
+        }
     }
 
     public void start(Player player) throws IOException{

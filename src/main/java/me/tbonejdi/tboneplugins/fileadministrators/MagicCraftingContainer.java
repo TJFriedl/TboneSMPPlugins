@@ -39,16 +39,15 @@ public class MagicCraftingContainer implements Listener {
         }
 
         File tableFile = new File(directory + "magictables.txt");
+        writer = new BufferedWriter(new FileWriter(tableFile, true));
+        reader = new BufferedReader(new FileReader(tableFile));
+        tableLocations = new HashSet<>();
+        file = tableFile;
 
         if (!(tableFile.exists())) {
             tableFile.createNewFile();
             return;
         }
-
-        writer = new BufferedWriter(new FileWriter(tableFile, true));
-        reader = new BufferedReader(new FileReader(tableFile));
-        tableLocations = new HashSet<>();
-        file = tableFile;
 
         String line = reader.readLine();
         while(line != null) {
@@ -56,6 +55,8 @@ public class MagicCraftingContainer implements Listener {
             tableLocations.add(loc);
             line = reader.readLine();
         }
+
+        if (tableLocations.isEmpty()) return;
 
         for (Location loc : tableLocations) {
             updateTableData(loc);
@@ -117,18 +118,16 @@ public class MagicCraftingContainer implements Listener {
     }
 
     public static void saveToFile() throws IOException {
-        try {
-            BufferedWriter newWriter = new BufferedWriter(new FileWriter(file, true)); // Resets file
 
-            for (Location location : tableLocations) {
-                newWriter.write(location.toString() + "\n");
-                Bukkit.broadcastMessage("Saved table: " + location);
-            }
-            newWriter.close();
-        } catch (NullPointerException e) {
-            System.out.println("NULL POINTER THROWN");
-            Bukkit.broadcastMessage("Exception thrown");
+        if (tableLocations == null) return;
+
+        writer = new BufferedWriter(new FileWriter(file)); // Resets file
+
+        for (Location location : tableLocations) {
+            writer.write(location.toString() + "\n");
         }
+
+        writer.close();
     }
 
     public static void createTextEntity(Location location) {

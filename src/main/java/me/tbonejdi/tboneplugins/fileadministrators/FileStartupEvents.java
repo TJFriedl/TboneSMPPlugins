@@ -18,23 +18,7 @@ public class FileStartupEvents implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) throws IOException{
-        Player p = e.getPlayer();
-        String username = p.getName();
-
-        PackageInitializer pckgInit = new
-                PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
-
-        pckgInit.checkForPlayerLevelsFile();
-
-        pckgInit.checkForPlayerTomesFile();
-
-        pckgInit.checkForClassInit();
-        pckgInit.cInfo.applyBuffs(); // Initializes default buffs for a player once they join...
-
-        playerData.put(username, pckgInit);
-
-        PlayerStates states = new PlayerStates();
-        playerStates.put(username, states);
+        initPlayerData(e.getPlayer());
     }
 
     @EventHandler
@@ -48,6 +32,29 @@ public class FileStartupEvents implements Listener {
 
         playerData.remove(e.getPlayer().getName()); // Removes current player from the Map
         playerStates.remove(e.getPlayer().getName());
+    }
+
+    public static void initPlayerData(Player p) throws IOException {
+        String username = p.getName();
+
+        PackageInitializer pckgInit = new
+                PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
+
+        try {
+            pckgInit.checkForPlayerLevelsFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        pckgInit.checkForPlayerTomesFile();
+
+        pckgInit.checkForClassInit();
+        pckgInit.cInfo.applyBuffs(); // Initializes default buffs for a player once they join...
+
+        playerData.put(username, pckgInit);
+
+        PlayerStates states = new PlayerStates();
+        playerStates.put(username, states);
     }
 
 }

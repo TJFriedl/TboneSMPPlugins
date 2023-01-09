@@ -1,15 +1,16 @@
 package me.tbonejdi.tboneplugins.events;
 
-import me.tbonejdi.tboneplugins.items.CrystalFruit;
-import me.tbonejdi.tboneplugins.items.DiamondWand;
-import me.tbonejdi.tboneplugins.items.FloatingWand;
-import me.tbonejdi.tboneplugins.items.MagicMirror;
+import me.tbonejdi.tboneplugins.items.*;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -50,6 +51,12 @@ public class ItemEvents implements Listener {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 300, 1));
                 return;
+            }
+
+            if (e.getItem().getItemMeta().equals(Blunt.blunt.getItemMeta())) {
+                p.sendMessage("§2lFADED THAN A HOE!!!");
+                p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1000, 10));
+                e.getItem().setAmount(e.getItem().getAmount()-1);
             }
         }
     }
@@ -128,6 +135,34 @@ public class ItemEvents implements Listener {
     public static void onItemTeleport(PlayerTeleportEvent e) {
         if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT)) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public static void onBlockBreak(BlockBreakEvent e) {
+
+        if (!e.getBlock().getType().equals(Material.LARGE_FERN) || e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
+
+        int X = e.getBlock().getX();
+        int Y = e.getBlock().getY();
+        int Z = e.getBlock().getZ();
+
+        for (int x = -2; x <= 2; x++) {
+            for (int y = -2; y <= 2; y++) {
+                for (int z = -2; z <= 2; z++) {
+
+                    Block block = e.getBlock().getWorld().getBlockAt(X+x, Y+y, Z+z);
+                    if (block.getType().equals(Material.END_ROD)) {
+                        e.setCancelled(true);
+                        e.getBlock().setType(Material.AIR);
+                        Block belowBlock = e.getBlock().getWorld().getBlockAt(X, Y-1, Z);
+                        belowBlock.setType(Material.FERN);
+                        e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), Marijuana.marijuana);
+                        return;
+                    }
+
+                }
+            }
         }
     }
 }

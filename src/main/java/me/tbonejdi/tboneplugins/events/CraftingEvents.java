@@ -3,16 +3,14 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.Main;
 import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
-import me.tbonejdi.tboneplugins.fileadministrators.MagicCraftingContainer;
+import me.tbonejdi.tboneplugins.fileadministrators.MagicBlockManager;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
-import me.tbonejdi.tboneplugins.items.MagicMirror;
-import me.tbonejdi.tboneplugins.items.MagicTable;
-import me.tbonejdi.tboneplugins.items.SecondTome;
+import me.tbonejdi.tboneplugins.items.*;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -71,21 +69,24 @@ public class CraftingEvents implements Listener {
             Block block = e.getBlockPlaced();
             block.setMetadata("MagicCraftingTable",
                     new FixedMetadataValue(Main.mainClassCall, "magic-craft"));
-            MagicCraftingContainer.tableLocations.add(e.getBlock().getLocation());
-            MagicCraftingContainer.createTextEntity(e.getBlock().getLocation());
+            MagicBlockManager.tables.add(e.getBlock().getLocation());
+            MagicBlockManager.createTextEntity(e.getBlock().getLocation());
         }
     }
 
     @EventHandler
     public void breakMagicTableEvent (BlockBreakEvent e) {
+
+        if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
+
         if (e.getBlock().hasMetadata("MagicCraftingTable")) {
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
             e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(),
                     MagicTable.magicTable);
             e.getBlock().removeMetadata("MagicCraftingTable", Main.mainClassCall);
-            MagicCraftingContainer.tableLocations.remove(e.getBlock().getLocation());
-            MagicCraftingContainer.removeTextEntity(e.getBlock().getLocation());
+            MagicBlockManager.tables.remove(e.getBlock().getLocation());
+            MagicBlockManager.removeTextEntity(e.getBlock().getLocation());
         }
     }
     // TODO: Maybe try to improve this algorithm in the future... Currently brute-force.

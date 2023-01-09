@@ -74,3 +74,7 @@ commands:
   leapingspider:
     description: Spawns a leaping spider custom mob
     usage: /<command>
+  quit:
+    description: Disconnects a player quickly through chat
+    usage: /<command>
+    aliases: q

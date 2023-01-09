@@ -27,8 +27,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public final class Main extends JavaPlugin implements Listener {
@@ -42,8 +40,10 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
-        this.data = new DataManager(this);
-        this.magicBlock = new MagicBlockManager(this);
+        mainClassCall = this;
+
+        this.data = new DataManager(mainClassCall);
+        this.magicBlock = new MagicBlockManager(mainClassCall);
 
         // Plugin startup logic
         getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Starting up...");
@@ -100,6 +100,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("setplayermaxhealth").setExecutor(pic);
         getCommand("setplayerbasearmor").setExecutor(pic);
         getCommand("printlocation").setExecutor(pic);
+        getCommand("quit").setExecutor(pic);
 
         EnchantCommands ec = new EnchantCommands();
         getCommand("telepathy").setExecutor(ec);
@@ -145,33 +146,17 @@ public final class Main extends JavaPlugin implements Listener {
 //        c.type(WorldType.AMPLIFIED);
 //        c.createWorld();
 
-        mainClassCall = this;
-
-        /* Sets all the magic crafting tables in the game. */
-        try {
-            MagicCraftingContainer.initializeWorld();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "TboneSMPPlugins: Boot success!");
     }
 
     @Override
     public void onDisable() {
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "TboneSMP plugin shutting down!");
-        try {
-            MagicCraftingContainer.saveToFile();
-            // TODO: Make sure this doesnt throw any errors (TEST)
-            List<Location> tables = new ArrayList<>();
-            tables.addAll(MagicCraftingContainer.tableLocations);
-            this.magicBlock.getConfig().set("magictables", tables);
-            this.magicBlock.saveConfig();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.magicBlock.getConfig().set("magictables", MagicBlockManager.tables);
+        this.magicBlock.saveConfig();
+
         // TODO: Make offset of 0.5 to actually grab entities (has this already been done?)
-        for (Location loc : MagicCraftingContainer.tableLocations) {
+        for (Location loc : MagicBlockManager.tables) {
             Entity[] entities = loc.getChunk().getEntities();
             for (Entity e : entities) {
                 if (e.getType().equals(EntityType.ARMOR_STAND))

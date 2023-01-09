@@ -169,8 +169,13 @@ public class PlayerInfoCommands implements CommandExecutor {
             return true;
         }
 
-        if(cmd.getName().equalsIgnoreCase("printlocation")) {
+        if (cmd.getName().equalsIgnoreCase("printlocation")) {
             p.sendMessage(p.getLocation().toString());
+            return true;
+        }
+
+        if (cmd.getName().equalsIgnoreCase("quit")) {
+            p.kickPlayer(ChatColor.BLUE + "Quitting now!");
             return true;
         }
 

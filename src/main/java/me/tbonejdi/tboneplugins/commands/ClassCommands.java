@@ -18,9 +18,9 @@ public class ClassCommands implements CommandExecutor {
         Player p = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("chooseclass")) {
+            p.sendMessage("§6Change your class!");
             ClassSelection gui = new ClassSelection();
             p.openInventory(gui.getInventory());
-            p.sendMessage("§6Change your class now!");
         }
 
         return true;

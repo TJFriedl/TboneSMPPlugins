@@ -53,7 +53,7 @@ public class ItemEvents implements Listener {
                 return;
             }
 
-            if (e.getItem().getItemMeta().equals(Blunt.blunt.getItemMeta())) {
+            if (e.getItem().getItemMeta().equals(MysteriousItem.mysteriousItem.getItemMeta())) {
                 p.sendMessage("§2lFADED THAN A HOE!!!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1000, 10));
                 e.getItem().setAmount(e.getItem().getAmount()-1);
@@ -157,7 +157,7 @@ public class ItemEvents implements Listener {
                         e.getBlock().setType(Material.AIR);
                         Block belowBlock = e.getBlock().getWorld().getBlockAt(X, Y-1, Z);
                         belowBlock.setType(Material.FERN);
-                        e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), Marijuana.marijuana);
+                        e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation(), GreenStuff.greenStuff);
                         return;
                     }
 

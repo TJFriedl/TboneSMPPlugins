@@ -40,11 +40,11 @@ public class ItemCommands implements CommandExecutor {
             else if (itemName.equalsIgnoreCase("magicworkbench")) {
                 p.getInventory().addItem(MagicTable.magicTable);
             }
-            else if (itemName.equalsIgnoreCase("weed") || itemName.equalsIgnoreCase("marijuana")) {
-                p.getInventory().addItem(Marijuana.marijuana);
+            else if (itemName.equalsIgnoreCase("goodgood")) {
+                p.getInventory().addItem(GreenStuff.greenStuff);
             }
-            else if (itemName.equalsIgnoreCase("blunt")) {
-                p.getInventory().addItem(Blunt.blunt);
+            else if (itemName.equalsIgnoreCase("mysteriousitem")) {
+                p.getInventory().addItem(MysteriousItem.mysteriousItem);
             }
             else {
                 p.sendMessage("§4Error: Item does not seem to exist.");

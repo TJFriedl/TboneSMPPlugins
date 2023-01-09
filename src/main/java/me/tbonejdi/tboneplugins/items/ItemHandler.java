@@ -16,8 +16,8 @@ public class ItemHandler {
         MagicTable.registerItem();
         SecondTome.registerItem();
         SecondTomePage.registerItem();
-        Marijuana.registerItem();
-        Blunt.registerItem();
+        GreenStuff.registerItem();
+        MysteriousItem.registerItem();
 
     }
 

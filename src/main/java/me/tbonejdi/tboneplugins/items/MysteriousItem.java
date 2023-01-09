@@ -14,9 +14,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Blunt {
+public class MysteriousItem {
 
-    public static ItemStack blunt;
+    public static ItemStack mysteriousItem;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.BROWN_CANDLE,1);
@@ -29,13 +29,13 @@ public class Blunt {
         im.addEnchant(Enchantment.LUCK, 1, false);
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(im);
-        blunt = item;
+        mysteriousItem = item;
 
         // Shaped Recipe
         ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("mc_blunt"), item);
         sr.shape("  P", " W ", "B  ");
         sr.setIngredient('P', Material.PAPER);
-        sr.setIngredient('W', new RecipeChoice.ExactChoice(Marijuana.marijuana));
+        sr.setIngredient('W', new RecipeChoice.ExactChoice(GreenStuff.greenStuff));
         sr.setIngredient('B', Material.BROWN_CANDLE);
         Bukkit.getServer().addRecipe(sr);
     }

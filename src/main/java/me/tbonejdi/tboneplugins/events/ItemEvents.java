@@ -54,7 +54,7 @@ public class ItemEvents implements Listener {
             }
 
             if (e.getItem().getItemMeta().equals(MysteriousItem.mysteriousItem.getItemMeta())) {
-                p.sendMessage("§2lFADED THAN A HOE!!!");
+                p.sendMessage("§2§lZOO WEE MAMA!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1000, 10));
                 e.getItem().setAmount(e.getItem().getAmount()-1);
             }

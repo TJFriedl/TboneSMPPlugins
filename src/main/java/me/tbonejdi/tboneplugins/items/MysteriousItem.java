@@ -21,10 +21,10 @@ public class MysteriousItem {
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.BROWN_CANDLE,1);
         ItemMeta im = item.getItemMeta();
-        im.setDisplayName(ChatColor.DARK_RED + "§lBlunt");
+        im.setDisplayName(ChatColor.DARK_RED + "§lA quite mysterious item");
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.LIGHT_PURPLE + "§lVery Rare Item");
-        lore.add("§8Zoo wee mama!");
+        lore.add("§8Quick trip to Yodieland!");
         im.setLore(lore);
         im.addEnchant(Enchantment.LUCK, 1, false);
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -32,7 +32,7 @@ public class MysteriousItem {
         mysteriousItem = item;
 
         // Shaped Recipe
-        ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("mc_blunt"), item);
+        ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("mc_smoke"), item);
         sr.shape("  P", " W ", "B  ");
         sr.setIngredient('P', Material.PAPER);
         sr.setIngredient('W', new RecipeChoice.ExactChoice(GreenStuff.greenStuff));

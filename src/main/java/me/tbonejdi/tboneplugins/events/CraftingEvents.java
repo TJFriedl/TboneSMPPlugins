@@ -77,7 +77,11 @@ public class CraftingEvents implements Listener {
     @EventHandler
     public void breakMagicTableEvent (BlockBreakEvent e) {
 
-        if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
+        if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+            MagicBlockManager.tables.remove(e.getBlock().getLocation());
+            MagicBlockManager.removeTextEntity(e.getBlock().getLocation());
+            return;
+        }
 
         if (e.getBlock().hasMetadata("MagicCraftingTable")) {
             e.setCancelled(true);

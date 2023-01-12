@@ -41,7 +41,8 @@ public class ItemEvents implements Listener {
                 else {
                     p.teleport(bedSpawnLoc);
                     p.sendMessage(ChatColor.GOLD + "§lWOOSH!");
-                    e.getItem().setAmount(0);
+                    if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
+                    e.getItem().setAmount(e.getItem().getAmount()-1);
                 }
                 return;
             }
@@ -56,6 +57,7 @@ public class ItemEvents implements Listener {
             if (e.getItem().getItemMeta().equals(MysteriousItem.mysteriousItem.getItemMeta())) {
                 p.sendMessage("§2§lZOO WEE MAMA!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1000, 10));
+                if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
                 e.getItem().setAmount(e.getItem().getAmount()-1);
             }
         }

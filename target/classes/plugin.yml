@@ -23,9 +23,6 @@ commands:
   detecttome:
     description: Allows player to see if they have discovered a tome book (debugging command)
     usage: /<command>
-  summonitem:
-    description: Allows admin to type specific name to summon magic
-    usage: /<command>
   setplayerxp:
     description: Allows admin to set user's rpg experience
     usage: /<command>
@@ -78,3 +75,6 @@ commands:
     description: Disconnects a player quickly through chat
     usage: /<command>
     aliases: q
+  magicitems:
+    description: Opens an inventory to add new items
+    usage: /<command>

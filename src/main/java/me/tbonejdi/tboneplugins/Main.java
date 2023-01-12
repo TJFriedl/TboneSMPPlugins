@@ -76,6 +76,7 @@ public final class Main extends JavaPlugin implements Listener {
           */
         getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Registering Items...");
         ItemHandler.implementCustomItems();
+        ItemHandler.populateStaticList();
 
         ClassCommands t = new ClassCommands();
         getCommand("select").setExecutor(t);
@@ -86,8 +87,8 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("detecttome").setExecutor(tc);
 
         ItemCommands ic = new ItemCommands();
-        getCommand("summonitem").setExecutor(ic);
         getCommand("diamonddetect").setExecutor(ic);
+        getCommand("magicitems").setExecutor(ic);
 
         PlayerInfoCommands pic = new PlayerInfoCommands();
         getCommand("setplayerxp").setExecutor(pic);

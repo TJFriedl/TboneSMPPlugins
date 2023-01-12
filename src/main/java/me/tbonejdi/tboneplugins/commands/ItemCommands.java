@@ -1,6 +1,6 @@
 package me.tbonejdi.tboneplugins.commands;
 
-import me.tbonejdi.tboneplugins.items.*;
+import me.tbonejdi.tboneplugins.inventories.MagicItemsList;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,39 +17,6 @@ public class ItemCommands implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-
-        if (cmd.getName().equalsIgnoreCase("summonitem")) {
-            if (args.length != 1) {
-                p.sendMessage("§4Incorrect format: §6/summonitem <itemname>");
-            }
-            String itemName = args[0];
-
-            // These only account for items that have been coded so far.
-            if (itemName.equalsIgnoreCase("diamondwand")) {
-                p.getInventory().addItem(DiamondWand.diamondWand);
-            }
-            else if (itemName.equalsIgnoreCase("magicmirror")) {
-                p.getInventory().addItem(MagicMirror.magicMirror);
-            }
-            else if (itemName.equalsIgnoreCase("crystalfruit")) {
-                p.getInventory().addItem(CrystalFruit.crystalFruit);
-            }
-            else if (itemName.equalsIgnoreCase("floatingwand")) {
-                p.getInventory().addItem(FloatingWand.floatingWand);
-            }
-            else if (itemName.equalsIgnoreCase("magicworkbench")) {
-                p.getInventory().addItem(MagicTable.magicTable);
-            }
-            else if (itemName.equalsIgnoreCase("goodgood")) {
-                p.getInventory().addItem(GreenStuff.greenStuff);
-            }
-            else if (itemName.equalsIgnoreCase("mysteriousitem")) {
-                p.getInventory().addItem(MysteriousItem.mysteriousItem);
-            }
-            else {
-                p.sendMessage("§4Error: Item does not seem to exist.");
-            }
-        }
 
         if (cmd.getName().equalsIgnoreCase("diamonddetect")) {
             boolean diamondsFound = false;
@@ -74,6 +41,12 @@ public class ItemCommands implements CommandExecutor {
             else {
                 p.sendMessage("§4No diamonds were found :(");
             }
+        }
+
+        if (cmd.getName().equalsIgnoreCase("magicitems")) {
+            p.sendMessage("Select some magic items!");
+            MagicItemsList gui = new MagicItemsList();
+            p.openInventory(gui.getInventory());
         }
         return true;
     }

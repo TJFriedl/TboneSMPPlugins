@@ -130,8 +130,19 @@ public class InventoryEvents implements Listener {
 
             if (e.getCurrentItem().getType() == Material.BARRIER) {
                 p.closeInventory();
+            }
+        }
+
+        if (e.getClickedInventory().getHolder() instanceof MagicItemsList) {
+
+            if (e.getCurrentItem().getType().equals(Material.BARRIER)) {
+                e.getWhoClicked().closeInventory();
                 return;
             }
+
+            Player player = (Player) e.getWhoClicked();
+            player.getInventory().addItem(e.getCurrentItem());
+            player.closeInventory();
         }
 
     }

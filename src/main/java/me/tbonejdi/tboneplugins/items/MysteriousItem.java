@@ -24,7 +24,7 @@ public class MysteriousItem {
         im.setDisplayName(ChatColor.DARK_RED + "§lA quite mysterious item");
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.LIGHT_PURPLE + "§lVery Rare Item");
-        lore.add("§8Quick trip to Yodieland!");
+        lore.add("§8Quick trip to Yodie-land!");
         im.setLore(lore);
         im.addEnchant(Enchantment.LUCK, 1, false);
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);

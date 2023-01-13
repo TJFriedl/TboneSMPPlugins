@@ -141,8 +141,32 @@ public class InventoryEvents implements Listener {
             }
 
             Player player = (Player) e.getWhoClicked();
-            player.getInventory().addItem(e.getCurrentItem());
             player.closeInventory();
+            MagicItemAmount gui = new MagicItemAmount(e.getCurrentItem());
+            player.openInventory(gui.getInventory());
+        }
+
+        if (e.getClickedInventory().getHolder() instanceof  MagicItemAmount) {
+
+            if (e.getCurrentItem().getType().equals(Material.BARRIER)) {
+                e.getWhoClicked().closeInventory();
+                return;
+            }
+
+            MagicItemAmount inventory = (MagicItemAmount) e.getClickedInventory();
+
+            Player player = (Player) e.getWhoClicked();
+            if (e.getCurrentItem().getItemMeta().toString().contains("1")) {
+                player.getInventory().addItem(inventory.getCustomItem());
+            } else if (e.getCurrentItem().getItemMeta().toString().contains("8")) {
+                for (int i = 0; i < 7; i++) {
+                    player.getInventory().addItem(inventory.getCustomItem());
+                }
+            } else if (e.getCurrentItem().getItemMeta().toString().contains("64")) {
+                for (int i = 0; i < 63; i++) {
+                    player.getInventory().addItem(inventory.getCustomItem());
+                }
+            }
         }
 
     }

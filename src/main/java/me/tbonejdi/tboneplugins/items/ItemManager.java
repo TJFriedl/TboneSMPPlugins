@@ -13,6 +13,8 @@ import java.util.List;
 public class ItemManager {
 
     public static ItemStack wand;
+    public static ItemStack wandEight;
+    public static ItemStack wandStack;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
@@ -26,6 +28,30 @@ public class ItemManager {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
         wand = item;
+
+        item = new ItemStack(Material.STICK, 8);
+        meta = item.getItemMeta();
+        meta.setDisplayName("§fStick of Truth");
+        lore = new ArrayList<>();
+        lore.add("§7This powerful artifact is a relic of");
+        lore.add("§7Minecraft's ancient history!");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.LUCK, 1, false);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(meta);
+        wandEight = item;
+
+        item = new ItemStack(Material.STICK, 64);
+        meta = item.getItemMeta();
+        meta.setDisplayName("§fStick of Truth");
+        lore = new ArrayList<>();
+        lore.add("§7This powerful artifact is a relic of");
+        lore.add("§7Minecraft's ancient history!");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.LUCK, 1, false);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(meta);
+        wandStack = item;
 
         // Shaped Recipe
         ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("wand"), item);

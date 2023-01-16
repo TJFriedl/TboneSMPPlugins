@@ -17,6 +17,8 @@ import java.util.List;
 public class MysteriousItem {
 
     public static ItemStack mysteriousItem;
+    public static ItemStack mysteriousItemEight;
+    public static ItemStack mysteriousItemStack;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.BROWN_CANDLE,1);
@@ -30,6 +32,30 @@ public class MysteriousItem {
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(im);
         mysteriousItem = item;
+
+        item = new ItemStack(Material.BROWN_CANDLE,8);
+        im = item.getItemMeta();
+        im.setDisplayName(ChatColor.DARK_RED + "§lA quite mysterious item");
+        lore = new ArrayList<>();
+        lore.add(ChatColor.LIGHT_PURPLE + "§lVery Rare Item");
+        lore.add("§8Quick trip to Yodie-land!");
+        im.setLore(lore);
+        im.addEnchant(Enchantment.LUCK, 1, false);
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(im);
+        mysteriousItemEight = item;
+
+        item = new ItemStack(Material.BROWN_CANDLE,64);
+        im = item.getItemMeta();
+        im.setDisplayName(ChatColor.DARK_RED + "§lA quite mysterious item");
+        lore = new ArrayList<>();
+        lore.add(ChatColor.LIGHT_PURPLE + "§lVery Rare Item");
+        lore.add("§8Quick trip to Yodie-land!");
+        im.setLore(lore);
+        im.addEnchant(Enchantment.LUCK, 1, false);
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(im);
+        mysteriousItemStack = item;
 
         // Shaped Recipe
         ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("mc_smoke"), item);

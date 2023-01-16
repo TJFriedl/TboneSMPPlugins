@@ -15,6 +15,8 @@ import java.util.List;
 public class CrystalFruit {
 
     public static ItemStack crystalFruit;
+    public static ItemStack crystalFruitEight;
+    public static ItemStack crystalFruitStack;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.CHORUS_FRUIT, 1);
@@ -28,6 +30,30 @@ public class CrystalFruit {
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(im);
         crystalFruit = item;
+
+        item = new ItemStack(Material.CHORUS_FRUIT, 8);
+        im = item.getItemMeta();
+        im.setDisplayName("§bCrystal Fruit");
+        lore = new ArrayList<>();
+        lore.add("§bAllows user to obtain a potion effect at random.");
+        lore.add("§bEffect lasts §d20 §bseconds.");
+        im.setLore(lore);
+        im.addEnchant(Enchantment.LUCK, 1, false);
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(im);
+        crystalFruitEight = item;
+
+        item = new ItemStack(Material.CHORUS_FRUIT, 64);
+        im = item.getItemMeta();
+        im.setDisplayName("§bCrystal Fruit");
+        lore = new ArrayList<>();
+        lore.add("§bAllows user to obtain a potion effect at random.");
+        lore.add("§bEffect lasts §d20 §bseconds.");
+        im.setLore(lore);
+        im.addEnchant(Enchantment.LUCK, 1, false);
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(im);
+        crystalFruitStack = item;
 
         //Shaped Recipe
         ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("crys_fruit"), item);

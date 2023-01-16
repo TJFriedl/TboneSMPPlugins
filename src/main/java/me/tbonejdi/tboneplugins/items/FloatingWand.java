@@ -15,6 +15,8 @@ import java.util.List;
 public class FloatingWand {
 
     public static ItemStack floatingWand;
+    public static ItemStack floatingWandEight;
+    public static ItemStack floatingWandStack;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
@@ -28,6 +30,30 @@ public class FloatingWand {
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(im);
         floatingWand = item;
+
+        item = new ItemStack(Material.STICK, 8);
+        im = item.getItemMeta();
+        im.setDisplayName("§eFloating Wand");
+        lore = new ArrayList<>();
+        lore.add("§7This wand holds the power to make the user levitate!");
+        lore.add("§7Only the most powerful of sorcerers can use this item.");
+        im.setLore(lore);
+        im.addEnchant(Enchantment.LUCK, 1, false);
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(im);
+        floatingWandEight = item;
+
+        item = new ItemStack(Material.STICK, 64);
+        im = item.getItemMeta();
+        im.setDisplayName("§eFloating Wand");
+        lore = new ArrayList<>();
+        lore.add("§7This wand holds the power to make the user levitate!");
+        lore.add("§7Only the most powerful of sorcerers can use this item.");
+        im.setLore(lore);
+        im.addEnchant(Enchantment.LUCK, 1, false);
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(im);
+        floatingWandStack = item;
 
         //Shaped Recipe
         ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("floating_wand"), item);

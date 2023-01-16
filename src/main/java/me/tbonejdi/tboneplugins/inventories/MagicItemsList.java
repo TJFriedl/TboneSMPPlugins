@@ -25,8 +25,8 @@ public class MagicItemsList implements InventoryHolder {
 
     //TODO: Error is being thrown below
     private void init() {
-        for (int i = 0; i < ItemHandler.magicItems.size(); i+=3) {
-            inv.setItem(i, ItemHandler.magicItems.get(i/3));
+        for (int i = 0; i < ItemHandler.magicItems.size(); i++) {
+            inv.setItem(i, ItemHandler.magicItems.get(i));
         }
         ItemStack item = createItem("§4§lExit", Material.RED_STAINED_GLASS_PANE,
                 Collections.singletonList("§4§lEXIT"));

@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.inventories;
 
 import me.tbonejdi.tboneplugins.classes.ClassFile;
 import me.tbonejdi.tboneplugins.classes.Warrior;
+import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.tomes.TomeSelection;
@@ -11,11 +12,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryEvents implements Listener {
 
@@ -143,29 +147,43 @@ public class InventoryEvents implements Listener {
             Player player = (Player) e.getWhoClicked();
             player.closeInventory();
             MagicItemAmount gui = new MagicItemAmount(e.getCurrentItem());
+            PlayerStates states = FileStartupEvents.playerStates.get(player.getName());
+            states.magicItemGive = e.getCurrentItem();
+            FileStartupEvents.playerStates.replace(player.getName(), states);
             player.openInventory(gui.getInventory());
         }
 
         if (e.getClickedInventory().getHolder() instanceof  MagicItemAmount) {
 
+            Player player = (Player) e.getWhoClicked();
+            PlayerStates states = FileStartupEvents.playerStates.get(player.getName());
+            ItemStack item = states.magicItemGive;
+
             if (e.getCurrentItem().getType().equals(Material.BARRIER)) {
                 e.getWhoClicked().closeInventory();
+                states.magicItemGive = null;
+                FileStartupEvents.playerStates.replace(player.getName(), states);
                 return;
             }
 
-            MagicItemAmount inventory = (MagicItemAmount) e.getClickedInventory();
+            if (e.getSlot() == 0) {
+                player.getInventory().addItem(item);
 
-            Player player = (Player) e.getWhoClicked();
-            if (e.getCurrentItem().getItemMeta().toString().contains("1")) {
-                player.getInventory().addItem(inventory.getCustomItem());
-            } else if (e.getCurrentItem().getItemMeta().toString().contains("8")) {
-                for (int i = 0; i < 7; i++) {
-                    player.getInventory().addItem(inventory.getCustomItem());
-                }
-            } else if (e.getCurrentItem().getItemMeta().toString().contains("64")) {
-                for (int i = 0; i < 63; i++) {
-                    player.getInventory().addItem(inventory.getCustomItem());
-                }
+            } else if (e.getSlot() == 2) {
+                ItemStack newItem = new ItemStack(item.getType(), 8);
+                ItemMeta im = item.getItemMeta();
+                item.setItemMeta(im);
+                player.getInventory().addItem(newItem);
+                states.magicItemGive = null;
+                FileStartupEvents.playerStates.replace(player.getName(), states);
+
+            } else if (e.getSlot() == 4) {
+                ItemStack newItem = new ItemStack(item.getType(), 64);
+                ItemMeta im = item.getItemMeta();
+                item.setItemMeta(im);
+                player.getInventory().addItem(newItem);
+                states.magicItemGive = null;
+                FileStartupEvents.playerStates.replace(player.getName(), states);
             }
         }
 

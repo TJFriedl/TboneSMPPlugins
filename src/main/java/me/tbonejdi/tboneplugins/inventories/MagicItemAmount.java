@@ -28,9 +28,9 @@ public class MagicItemAmount implements InventoryHolder {
     public ItemStack getCustomItem() { return customItem; }
 
     private void init() {
-        ItemStack item = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§l1"), 1);
-        ItemStack item2 = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§l8"), 8);
-        ItemStack item3 = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§l64"), 64);
+        ItemStack item = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§lOne"), 1);
+        ItemStack item2 = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§lEight"), 8);
+        ItemStack item3 = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§lSixty-four"), 64);
         ItemStack item4 = createItem(Material.BARRIER, Collections.singletonList("§4§lEXIT"), 1);
 
         inv.setItem(0, item);

@@ -1,6 +1,7 @@
 package me.tbonejdi.tboneplugins.commands;
 
 import me.tbonejdi.tboneplugins.inventories.MagicItemsList;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,6 +45,11 @@ public class ItemCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("magicitems")) {
+
+            if (!p.isOp()) {
+                p.sendMessage(ChatColor.RED + "You must have op permissions to run this command.");
+                return true;
+            }
             p.sendMessage("Select some magic items!");
             MagicItemsList gui = new MagicItemsList();
             p.openInventory(gui.getInventory());

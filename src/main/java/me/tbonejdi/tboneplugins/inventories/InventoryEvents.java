@@ -8,11 +8,13 @@ import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.tomes.TomeSelection;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -146,7 +148,7 @@ public class InventoryEvents implements Listener {
 
             Player player = (Player) e.getWhoClicked();
             player.closeInventory();
-            MagicItemAmount gui = new MagicItemAmount(e.getCurrentItem());
+            MagicItemAmount gui = new MagicItemAmount();
             PlayerStates states = FileStartupEvents.playerStates.get(player.getName());
             states.magicItemGive = e.getCurrentItem();
             FileStartupEvents.playerStates.replace(player.getName(), states);
@@ -159,6 +161,8 @@ public class InventoryEvents implements Listener {
             PlayerStates states = FileStartupEvents.playerStates.get(player.getName());
             ItemStack item = states.magicItemGive;
 
+            if (e.getCurrentItem().getType().equals(null)) return;
+
             if (e.getCurrentItem().getType().equals(Material.BARRIER)) {
                 e.getWhoClicked().closeInventory();
                 states.magicItemGive = null;
@@ -168,22 +172,33 @@ public class InventoryEvents implements Listener {
 
             if (e.getSlot() == 0) {
                 player.getInventory().addItem(item);
+                player.closeInventory();
 
             } else if (e.getSlot() == 2) {
                 ItemStack newItem = new ItemStack(item.getType(), 8);
                 ItemMeta im = item.getItemMeta();
-                item.setItemMeta(im);
+                if (item.getItemMeta().hasEnchants()) {
+                    im.addEnchant(Enchantment.LUCK, 1, false);
+                    im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                }
+                newItem.setItemMeta(im);
                 player.getInventory().addItem(newItem);
                 states.magicItemGive = null;
                 FileStartupEvents.playerStates.replace(player.getName(), states);
+                player.closeInventory();
 
             } else if (e.getSlot() == 4) {
                 ItemStack newItem = new ItemStack(item.getType(), 64);
                 ItemMeta im = item.getItemMeta();
-                item.setItemMeta(im);
+                if (item.getItemMeta().hasEnchants()) {
+                    im.addEnchant(Enchantment.LUCK, 1, false);
+                    im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                }
+                newItem.setItemMeta(im);
                 player.getInventory().addItem(newItem);
                 states.magicItemGive = null;
                 FileStartupEvents.playerStates.replace(player.getName(), states);
+                player.closeInventory();
             }
         }
 

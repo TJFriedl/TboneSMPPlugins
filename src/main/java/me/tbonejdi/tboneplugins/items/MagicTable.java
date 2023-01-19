@@ -16,8 +16,6 @@ import java.util.List;
 public class MagicTable {
 
     public static ItemStack magicTable;
-    public static ItemStack magicTableEight;
-    public static ItemStack magicTableStack;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.CRAFTING_TABLE,1);
@@ -31,30 +29,6 @@ public class MagicTable {
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(im);
         magicTable = item;
-
-        item = new ItemStack(Material.CRAFTING_TABLE,8);
-        im = item.getItemMeta();
-        im.setDisplayName("§4Mag§4§ki§4c Crafting Table");
-        lore = new ArrayList<>();
-        lore.add(ChatColor.BLUE + "§lRare Item");
-        lore.add("§8Used in the process of creating magic crafting items.");
-        im.setLore(lore);
-        im.addEnchant(Enchantment.LUCK, 1, false);
-        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        item.setItemMeta(im);
-        magicTableEight = item;
-
-        item = new ItemStack(Material.CRAFTING_TABLE,64);
-        im = item.getItemMeta();
-        im.setDisplayName("§4Mag§4§ki§4c Crafting Table");
-        lore = new ArrayList<>();
-        lore.add(ChatColor.BLUE + "§lRare Item");
-        lore.add("§8Used in the process of creating magic crafting items.");
-        im.setLore(lore);
-        im.addEnchant(Enchantment.LUCK, 1, false);
-        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        item.setItemMeta(im);
-        magicTableStack = item;
 
         //Shaped Recipe
         ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("magic_bench"), item);

@@ -14,18 +14,13 @@ public class MagicItemAmount implements InventoryHolder {
 
     private Inventory inv;
 
-    private ItemStack customItem;
-
-    public MagicItemAmount(ItemStack item) {
+    public MagicItemAmount() {
         inv = Bukkit.createInventory(this, 9, "Magic item amount");
-        customItem = item;
         init();
     }
 
     @Override
     public Inventory getInventory() { return inv; }
-
-    public ItemStack getCustomItem() { return customItem; }
 
     private void init() {
         ItemStack item = createItem(Material.GREEN_WOOL, Collections.singletonList("§2§lOne"), 1);

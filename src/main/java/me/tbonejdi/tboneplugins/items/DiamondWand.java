@@ -15,38 +15,12 @@ import java.util.List;
 public class DiamondWand {
 
     public static ItemStack diamondWand;
-    public static ItemStack diamondWandEight;
-    public static ItemStack diamondWandStack;
 
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
         ItemMeta im = item.getItemMeta();
         im.setDisplayName("§bDiamond Detecting Wand");
         List<String> lore = new ArrayList<>();
-        lore.add("§7With this powerful wand, we can detect nearby diamonds!");
-        lore.add("§7Only the most powerful of sorcerers can use this item.");
-        im.setLore(lore);
-        im.addEnchant(Enchantment.LUCK, 1, false);
-        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        item.setItemMeta(im);
-        diamondWand = item;
-
-        item = new ItemStack(Material.STICK, 8);
-        im = item.getItemMeta();
-        im.setDisplayName("§bDiamond Detecting Wand");
-        lore = new ArrayList<>();
-        lore.add("§7With this powerful wand, we can detect nearby diamonds!");
-        lore.add("§7Only the most powerful of sorcerers can use this item.");
-        im.setLore(lore);
-        im.addEnchant(Enchantment.LUCK, 1, false);
-        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        item.setItemMeta(im);
-        diamondWandEight = item;
-
-        item = new ItemStack(Material.STICK, 64);
-        im = item.getItemMeta();
-        im.setDisplayName("§bDiamond Detecting Wand");
-        lore = new ArrayList<>();
         lore.add("§7With this powerful wand, we can detect nearby diamonds!");
         lore.add("§7Only the most powerful of sorcerers can use this item.");
         im.setLore(lore);

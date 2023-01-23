@@ -132,7 +132,6 @@ public class ItemEvents implements Listener {
             }
         }
     }
-    // TODO: Eventually we need to change this only for cases when is consumed by the crystal fruit.
     @EventHandler
     public static void onItemTeleport(PlayerTeleportEvent e) {
         if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT) &&

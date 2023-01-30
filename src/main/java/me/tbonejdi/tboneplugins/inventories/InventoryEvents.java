@@ -88,7 +88,7 @@ public class InventoryEvents implements Listener {
             }
 
             if (e.getCurrentItem().getItemMeta().equals(TomeSelection.magicCraftingBook.getItemMeta())) {
-                //TODO: Add different tiers so that we can have players "unlock" the missing pages.
+                //Add different tiers so that we can have players "unlock" the missing pages.
                 PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
                 if (pckg.tfw.isBookDiscovered(2)) {
                     ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
@@ -102,7 +102,7 @@ public class InventoryEvents implements Listener {
                             "remind me of that damn symbol. What is it??");
                     pages.add(2, "\n\n\n\n\n|﹉|   |﹉|   |﹉|\n|﹉|   |﹉|   |﹉|  ->  |§kx§0|" +
                             "\n|﹉|   |﹉|   |﹉|\n§f|§0﹉    ﹉    ﹉§f|");
-                    pages.add(3, "TODO: Add more later :) Good job!");
+                    pages.add(3, "January 9th, 1462\nTODO: Add more later!");
                     meta.setPages(pages);
                     book.setItemMeta(meta);
                     p.closeInventory();

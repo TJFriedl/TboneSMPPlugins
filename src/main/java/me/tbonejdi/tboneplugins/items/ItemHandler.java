@@ -23,6 +23,7 @@ public class ItemHandler {
         SecondTomePage.registerItem();
         GreenStuff.registerItem();
         MysteriousItem.registerItem();
+        BeastAmulet.registerItem();
     }
 
     public static void populateStaticList() {
@@ -43,6 +44,8 @@ public class ItemHandler {
         magicItems.add(GreenStuff.greenStuff);
         // Mysterious Item Instance
         magicItems.add(MysteriousItem.mysteriousItem);
+        // Beast Amulet Instance
+        magicItems.add(BeastAmulet.beastAmulet);
     }
 
 }

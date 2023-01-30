@@ -16,7 +16,7 @@ public class MagicItemsList implements InventoryHolder {
     private Inventory inv;
 
     public MagicItemsList() {
-        inv = Bukkit.createInventory(this, 9, "Magic items");
+        inv = Bukkit.createInventory(this, 18, "Magic items");
         init();
     }
 
@@ -30,7 +30,7 @@ public class MagicItemsList implements InventoryHolder {
         }
         ItemStack item = createItem("§4§lExit", Material.RED_STAINED_GLASS_PANE,
                 Collections.singletonList("§4§lEXIT"));
-        inv.setItem(8, item);
+        inv.setItem(inv.getSize()-1, item);
     }
 
     private ItemStack createItem(String name, Material mat, List<String> lore) {

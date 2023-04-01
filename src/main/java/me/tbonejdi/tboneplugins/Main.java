@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins;
 
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
 import me.tbonejdi.tboneplugins.commands.*;
+import me.tbonejdi.tboneplugins.daycycle.NewDayEvents;
 import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
@@ -50,21 +51,9 @@ public final class Main extends JavaPlugin implements Listener {
 
 
         /*
-            THESE ARE PRESET PLUGINS YOU WROTE - DO NOT DELETE!!!
+            IMPORTANT!! This enables all of the events we have wrote. Please do not delete.
          */
-        getServer().getPluginManager().registerEvents(new ItemEvents(), this);
-        getServer().getPluginManager().registerEvents(new InventoryEvents(), this);
-        getServer().getPluginManager().registerEvents(new FileStartupEvents(), this);
-        getServer().getPluginManager().registerEvents(new CantripEvents(), this);
-        getServer().getPluginManager().registerEvents(new MobDropEvents(), this);
-        getServer().getPluginManager().registerEvents(new TomeEvents(), this);
-        getServer().getPluginManager().registerEvents(new ClassXPEvents(), this);
-        getServer().getPluginManager().registerEvents(new LevelProgressionEvents(), this);
-        getServer().getPluginManager().registerEvents(new EnchantEvents(), this);
-        getServer().getPluginManager().registerEvents(new CraftingEvents(), this);
-        getServer().getPluginManager().registerEvents(new PortalEvents(), this);
-        getServer().getPluginManager().registerEvents(new SpiderEvents(), this);
-        getServer().getPluginManager().registerEvents(new PigEvents(), this);
+        EventRegistrar.EnableAllEvents(mainClassCall);
 
          /*
             Score board functionality (in the main method)

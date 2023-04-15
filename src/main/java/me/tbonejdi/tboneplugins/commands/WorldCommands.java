@@ -1,9 +1,8 @@
 package me.tbonejdi.tboneplugins.commands;
 
+import me.tbonejdi.tboneplugins.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,6 +33,11 @@ public class WorldCommands implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("returnfromaether")) {
             p.teleport(Bukkit.getServer().getWorlds().get(0).getSpawnLocation());
             p.sendMessage("WOOSH!");
+        }
+
+        if (cmd.getName().equalsIgnoreCase("getcurrenttime")) {
+            p.sendMessage("Current time is: " + p.getWorld().getTime());
+            p.sendMessage("Calculated in game time: " + Main.handleInGameTime(p));
         }
 
         return true;

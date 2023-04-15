@@ -78,3 +78,6 @@ commands:
   magicitems:
     description: Opens an inventory to add new items
     usage: /<command>
+  getcurrenttime:
+    description: Gets the in game tick time of the world (0 - 24000)
+    usage: /<command>

@@ -103,6 +103,7 @@ public final class Main extends JavaPlugin implements Listener {
         WorldCommands wc = new WorldCommands();
         getCommand("sendtoaether").setExecutor(wc);
         getCommand("returnfromaether").setExecutor(wc);
+        getCommand("getcurrenttime").setExecutor(wc);
 
 
         CustomEnchants.register();
@@ -248,7 +249,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         Score topBar = obj.getScore("§7§l=-=-=-=-=-=-=");
         topBar.setScore(8);
-        Score playerCt = obj.getScore(ChatColor.RED +"Time: " + ChatColor.GOLD+handleInGameTime(player));
+        Score playerCt = obj.getScore(ChatColor.RED +"Time: " + ChatColor.GOLD + handleInGameTime(player));
         playerCt.setScore(7);
         Score currentClass = obj.getScore(ChatColor.RED + "Class: §c" + classStats.getCurrentClass());
         currentClass.setScore(6);
@@ -272,18 +273,16 @@ public final class Main extends JavaPlugin implements Listener {
 
     }
 
-    public String handleInGameTime(Player player) {
+    public static String handleInGameTime(Player player) {
 
-        World world = player.getWorld();
+        long currentTime = player.getWorld().getFullTime();
+        int hour = (int) ((currentTime / 1000) + 6) % 12;
+        String minute = Integer.toString((int) ((currentTime % 1000) * 60 / 1000));
 
-        long currentTime = world.getFullTime();
-        int hour = (int) ((currentTime * 12 / 1000) + 6 ) % 12;
+        if (hour == 0) hour = 12;
+        if (Integer.parseInt(minute) < 10) minute = "0" + minute;
 
-        if (hour == 0)
-            hour = 12;
-
-        int minute = (int) ((currentTime % 1000) * 60 / 1000);
-        String ampm = (currentTime < 12000) ? "AM" : "PM";
+        String ampm = (currentTime < 18000 && currentTime > 6000) ? "PM" : "AM";
 
         return hour + ":" + minute + " " + ampm;
 

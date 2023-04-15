@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TboneSMPPlugins.iml" filepath="$PROJECT_DIR$/TboneSMPPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TbonePlugins.iml" filepath="$PROJECT_DIR$/TbonePlugins.iml" />
     </modules>
   </component>
 </project>

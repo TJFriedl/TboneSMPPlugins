@@ -248,7 +248,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         Score topBar = obj.getScore("§7§l=-=-=-=-=-=-=");
         topBar.setScore(8);
-        Score playerCt = obj.getScore(ChatColor.RED +"Players: " + ChatColor.GOLD+Bukkit.getOnlinePlayers().size());
+        Score playerCt = obj.getScore(ChatColor.RED +"Time: " + ChatColor.GOLD+handleInGameTime(player));
         playerCt.setScore(7);
         Score currentClass = obj.getScore(ChatColor.RED + "Class: §c" + classStats.getCurrentClass());
         currentClass.setScore(6);
@@ -269,6 +269,23 @@ public final class Main extends JavaPlugin implements Listener {
         Score classXP = obj.getScore("§f§l" + classStats.getClassExp() + "/" + classStats.getClassMaxExp());
         classXP.setScore(0);
         player.setScoreboard(board);
+
+    }
+
+    public String handleInGameTime(Player player) {
+
+        World world = player.getWorld();
+
+        long currentTime = world.getFullTime();
+        int hour = (int) ((currentTime * 12 / 1000) + 6 ) % 12;
+
+        if (hour == 0)
+            hour = 12;
+
+        int minute = (int) ((currentTime % 1000) * 60 / 1000);
+        String ampm = (currentTime < 12000) ? "AM" : "PM";
+
+        return hour + ":" + minute + " " + ampm;
 
     }
 }

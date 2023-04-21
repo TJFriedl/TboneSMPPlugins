@@ -2,7 +2,6 @@ package me.tbonejdi.tboneplugins;
 
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
 import me.tbonejdi.tboneplugins.commands.*;
-import me.tbonejdi.tboneplugins.daycycle.NewDayEvents;
 import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.*;

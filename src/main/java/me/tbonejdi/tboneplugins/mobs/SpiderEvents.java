@@ -108,4 +108,58 @@ public class SpiderEvents implements Listener {
         }
 
     }
+
+    public Spider castToLeveledSpider(Spider spider) {
+
+        int level = new Random().nextInt(20) + 1;
+
+        spider.setCustomName("Spider | §6Lv. " + level);
+        spider.setCustomNameVisible(true);
+        Attributable spiderAt = spider;
+        AttributeInstance health = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        health.setBaseValue(health.getBaseValue() * 1.0 + (0.1 * level));
+        AttributeInstance damage = spiderAt.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        damage.setBaseValue(damage.getBaseValue() * 1.0 + (0.1 * level));
+
+        return spider;
+
+    }
+
+    public Spider castToLeapingSpider(Spider spider) {
+
+        spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
+        spider.setCustomNameVisible(true);
+        Attributable spiderAt = spider;
+        AttributeInstance attribute = spiderAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        attribute.setBaseValue(100);
+        spider.setHealth(100);
+
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                if(!spider.isDead()) {
+                    if (spider.getTarget() == null) {
+                        for (Entity entity : spider.getNearbyEntities(10, 10, 10)) {
+                            if (entity instanceof Player) {
+                                Player player = (Player) entity;
+                                spider.setTarget(player);
+                            }
+                        }
+                    } else {
+                        LivingEntity target = spider.getTarget();
+                        if (target.getLocation().distanceSquared(spider.getLocation()) > 25) {
+                            spider.getWorld().playSound(spider.getLocation(), Sound.ENTITY_WITHER_SHOOT, 5, 5);
+                            spider.getWorld().spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, spider.getLocation(), 10);
+                            spider.setVelocity(target.getLocation().add(0, 2, 0).subtract(spider.getLocation()).toVector().multiply(0.275));
+                        }
+                    }
+                } else {
+                    cancel();
+                }
+            }
+        }.runTaskTimer(Main.mainClassCall, 0L, 20L);
+
+        return spider;
+
+    }
 }

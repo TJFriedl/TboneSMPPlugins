@@ -98,6 +98,7 @@ public final class Main extends JavaPlugin implements Listener {
         EntityCommands enc = new EntityCommands();
         getCommand("removechunkentities").setExecutor(enc);
         getCommand("leapingspider").setExecutor(enc);
+        getCommand("leveledspider").setExecutor(enc);
 
         WorldCommands wc = new WorldCommands();
         getCommand("sendtoaether").setExecutor(wc);

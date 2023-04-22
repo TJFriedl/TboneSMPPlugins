@@ -1,6 +1,5 @@
 package me.tbonejdi.tboneplugins.mobs;
 
-import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Pig;
@@ -20,13 +19,10 @@ public class PigEvents implements Listener {
 
         Pig pig = (Pig) e.getEntity();
 
-        pig.setCustomName("Pig | §6Lv. " + level);
+        pig.setCustomName("§6Lv. " + level);
         pig.setCustomNameVisible(true);
-        Attributable pigAt = pig;
-        AttributeInstance health = pigAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        AttributeInstance health = pig.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         health.setBaseValue(health.getBaseValue() * 1.0 + (0.5 * level));
-        AttributeInstance damage = pigAt.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
-        damage.setBaseValue(damage.getBaseValue() * 1.0 + (0.5 * level));
     }
 
     @EventHandler
@@ -35,9 +31,11 @@ public class PigEvents implements Listener {
         if (e.getEntity() instanceof Pig && e.getEntity().getCustomName() != null) {
             Pig pig = (Pig) e.getEntity();
             int health = (int) (pig.getHealth() - e.getDamage());
+            if (health < 0) health = 0;
+
             int level = parseLevel(pig.getCustomName());
 
-            pig.setCustomName("Pig | §6Lv. " + level + " §c(" + health + "/"
+            pig.setCustomName("§6Lv. " + level + " §c(" + health + "/"
             + (int) pig.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + "❤)");
         }
 

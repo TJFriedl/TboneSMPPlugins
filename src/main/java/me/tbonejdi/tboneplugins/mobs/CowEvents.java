@@ -1,10 +1,8 @@
 package me.tbonejdi.tboneplugins.mobs;
 
-import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Cow;
-import org.bukkit.entity.Pig;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -21,12 +19,11 @@ public class CowEvents implements Listener {
 
         Cow cow = (Cow) e.getEntity();
 
-        cow.setCustomName("Cow | §6Lv. " + level);
+        cow.setCustomName("§6Lv. " + level);
         cow.setCustomNameVisible(true);
-        Attributable cowAt = cow;
-        AttributeInstance health = cowAt.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        AttributeInstance health = cow.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         health.setBaseValue(health.getBaseValue() * 1.0 + (0.5 * level));
-        AttributeInstance damage = cowAt.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        AttributeInstance damage = cow.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
         damage.setBaseValue(damage.getBaseValue() * 1.0 + (0.5 * level));
     }
 
@@ -38,7 +35,7 @@ public class CowEvents implements Listener {
             int health = (int) (cow.getHealth() - e.getDamage());
             int level = parseLevel(cow.getCustomName());
 
-            cow.setCustomName("Cow | §6Lv. " + level + " §c(" + health + "/"
+            cow.setCustomName("§6Lv. " + level + " §c(" + health + "/"
                     + (int) cow.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + "❤)");
         }
 

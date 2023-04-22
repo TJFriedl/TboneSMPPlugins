@@ -7,10 +7,10 @@ me\tbonejdi\tboneplugins\items\SecondTome.class
 me\tbonejdi\tboneplugins\classes\ClassXPEvents$1.class
 me\tbonejdi\tboneplugins\datacontainer\PlayerStates.class
 me\tbonejdi\tboneplugins\enchants\CustomEnchants.class
+me\tbonejdi\tboneplugins\mobs\CowEvents.class
 me\tbonejdi\tboneplugins\commands\ClassCommands.class
 me\tbonejdi\tboneplugins\fileadministrators\PlayerInfo.class
 me\tbonejdi\tboneplugins\inventories\MagicItemsList.class
-me\tbonejdi\tboneplugins\daycycle\NewDayEvents.class
 me\tbonejdi\tboneplugins\scoreboards\LobbyBoard.class
 me\tbonejdi\tboneplugins\classes\ClassType.class
 me\tbonejdi\tboneplugins\items\ItemManager.class

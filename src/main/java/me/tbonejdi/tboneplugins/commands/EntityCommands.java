@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Spider;
 
 public class EntityCommands implements CommandExecutor {
 
@@ -32,8 +33,11 @@ public class EntityCommands implements CommandExecutor {
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("leapingspider")) {
-            SpiderEvents.spawnLeapingSpider(p.getLocation());
+            SpiderEvents.castToLeapingSpider(p.getWorld().spawn(p.getLocation(), Spider.class));
             return true;
+        }
+        if (cmd.getName().equalsIgnoreCase("leveledspider")) {
+            SpiderEvents.castToLeveledSpider(p.getWorld().spawn(p.getLocation(), Spider.class));
         }
 
         return true;

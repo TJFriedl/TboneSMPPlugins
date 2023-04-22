@@ -16,6 +16,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class SpiderEvents implements Listener {
@@ -85,7 +87,6 @@ public class SpiderEvents implements Listener {
     public static Spider castToLeapingSpider(Spider spider) {
 
         spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
-        spider.setCustomNameVisible(true);
         AttributeInstance attribute = spider.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         attribute.setBaseValue(100);
         spider.setHealth(100);
@@ -110,6 +111,19 @@ public class SpiderEvents implements Listener {
                             spider.setVelocity(target.getLocation().add(0, 2, 0).subtract(spider.getLocation()).toVector().multiply(0.275));
                         }
                     }
+                    boolean canBeSeen = false;
+                    for (Entity e : spider.getLocation().getChunk().getEntities()) {
+                        if (e instanceof Player && ((Player) e).hasLineOfSight(spider)) {
+                            spider.setCustomNameVisible(true);
+                            canBeSeen = true;
+                            break;
+                        }
+                    }
+
+                    if (!canBeSeen) {
+                        spider.setCustomNameVisible(false);
+                    }
+
                 } else {
                     cancel();
                 }

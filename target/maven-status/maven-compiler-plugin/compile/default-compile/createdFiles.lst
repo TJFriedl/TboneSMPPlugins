@@ -7,7 +7,6 @@ me\tbonejdi\tboneplugins\items\SecondTome.class
 me\tbonejdi\tboneplugins\classes\ClassXPEvents$1.class
 me\tbonejdi\tboneplugins\datacontainer\PlayerStates.class
 me\tbonejdi\tboneplugins\enchants\CustomEnchants.class
-me\tbonejdi\tboneplugins\mobs\CowEvents.class
 me\tbonejdi\tboneplugins\commands\ClassCommands.class
 me\tbonejdi\tboneplugins\fileadministrators\PlayerInfo.class
 me\tbonejdi\tboneplugins\inventories\MagicItemsList.class
@@ -34,10 +33,10 @@ me\tbonejdi\tboneplugins\events\LevelProgressionEvents$1.class
 me\tbonejdi\tboneplugins\Main$1.class
 me\tbonejdi\tboneplugins\fileadministrators\ClassInfo.class
 me\tbonejdi\tboneplugins\fileadministrators\FileStartupEvents.class
+me\tbonejdi\tboneplugins\mobs\MobEvents$1.class
 me\tbonejdi\tboneplugins\fileadministrators\PackageInitializer.class
 me\tbonejdi\tboneplugins\fileadministrators\TomesFileWorker.class
 me\tbonejdi\tboneplugins\items\FirstTome.class
-me\tbonejdi\tboneplugins\mobs\PigEvents.class
 me\tbonejdi\tboneplugins\inventories\ClassSelection.class
 me\tbonejdi\tboneplugins\events\CantripEvents.class
 me\tbonejdi\tboneplugins\items\SecondTomePage.class
@@ -51,6 +50,7 @@ me\tbonejdi\tboneplugins\commands\PlayerInfoCommands.class
 me\tbonejdi\tboneplugins\classes\ClassXPEvents.class
 me\tbonejdi\tboneplugins\tomes\TomesCommands.class
 me\tbonejdi\tboneplugins\classes\ClassFile.class
+me\tbonejdi\tboneplugins\mobs\MobEvents.class
 me\tbonejdi\tboneplugins\events\LevelProgressionEvents.class
 me\tbonejdi\tboneplugins\mobs\SpiderEvents$1.class
 me\tbonejdi\tboneplugins\events\CraftingEvents.class

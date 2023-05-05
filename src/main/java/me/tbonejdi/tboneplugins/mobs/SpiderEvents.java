@@ -65,7 +65,6 @@ public class SpiderEvents implements Listener {
         Spider spider = (Spider) e.getEntity();
 
         if (seed % 9 == 0) castToLeapingSpider(spider);
-        else if (seed % 9 == 1) castToLeveledSpider(spider);
 
     }
 

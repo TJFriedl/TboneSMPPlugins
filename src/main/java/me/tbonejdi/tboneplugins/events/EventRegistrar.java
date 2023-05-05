@@ -5,8 +5,7 @@ import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
-import me.tbonejdi.tboneplugins.mobs.CowEvents;
-import me.tbonejdi.tboneplugins.mobs.PigEvents;
+import me.tbonejdi.tboneplugins.mobs.MobEvents;
 import me.tbonejdi.tboneplugins.mobs.SpiderEvents;
 import me.tbonejdi.tboneplugins.portals.PortalEvents;
 import me.tbonejdi.tboneplugins.tomes.TomeEvents;
@@ -26,8 +25,7 @@ public class EventRegistrar {
         main.getServer().getPluginManager().registerEvents(new CraftingEvents(), main);
         main.getServer().getPluginManager().registerEvents(new PortalEvents(), main);
         main.getServer().getPluginManager().registerEvents(new SpiderEvents(), main);
-        main.getServer().getPluginManager().registerEvents(new PigEvents(), main);
-        main.getServer().getPluginManager().registerEvents(new CowEvents(), main);
+        main.getServer().getPluginManager().registerEvents(new MobEvents(), main);
     }
 
 }

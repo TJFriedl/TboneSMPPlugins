@@ -2,9 +2,7 @@ package me.tbonejdi.tboneplugins.mobs;
 
 import me.tbonejdi.tboneplugins.Main;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Mob;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -13,12 +11,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-public class MobEvents implements Listener {
+public class MonsterEvents implements Listener {
 
     @EventHandler
     public void onMobSpawn(EntitySpawnEvent e) {
 
-        if (!(e.getEntity() instanceof Mob)) return;
+        /* Has been changed to only suit monsters (for now) */
+        if (!(e.getEntity() instanceof Monster)) return;
 
         int level = new Random().nextInt(20) + 1;
 
@@ -26,7 +25,7 @@ public class MobEvents implements Listener {
         mob.setCustomName("§6Lv. " + level);
         mob.setCustomNameVisible(true);
         mob.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mob.getAttribute(Attribute.GENERIC_MAX_HEALTH)
-                .getBaseValue() * 1.0 + (0.5 * level));
+                .getBaseValue() + (0.5 * level));
 
         new BukkitRunnable() {
 

@@ -44,6 +44,7 @@ me\tbonejdi\tboneplugins\items\SecondTomePage.class
 me\tbonejdi\tboneplugins\tomes\TomeEvents.class
 me\tbonejdi\tboneplugins\commands\EnchantCommands.class
 me\tbonejdi\tboneplugins\portals\PortalEvents.class
+me\tbonejdi\tboneplugins\items\KeenCleaver.class
 me\tbonejdi\tboneplugins\items\FloatingWand.class
 me\tbonejdi\tboneplugins\items\ItemHandler.class
 me\tbonejdi\tboneplugins\classes\Warrior.class

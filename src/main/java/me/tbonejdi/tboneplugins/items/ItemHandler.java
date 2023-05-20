@@ -25,6 +25,7 @@ public class ItemHandler {
         MysteriousItem.registerItem();
         BeastAmulet.registerItem();
         KeenBlade.registerItem();
+        KeenCleaver.registerItem();
     }
 
     public static void populateStaticList() {
@@ -41,7 +42,7 @@ public class ItemHandler {
         magicItems.add(MagicMirror.magicMirror);
         // Magic Table Instance
         magicItems.add(MagicTable.magicTable);
-        // "Green Stuff" Instance
+        // "Green Stuff" Instance/c
         magicItems.add(GreenStuff.greenStuff);
         // Mysterious Item Instance
         magicItems.add(MysteriousItem.mysteriousItem);
@@ -49,6 +50,8 @@ public class ItemHandler {
         magicItems.add(BeastAmulet.beastAmulet);
         // Keen Blade Instance
         magicItems.add(KeenBlade.keenBlade);
+        // keen Cleaver Instance
+        magicItems.add(KeenCleaver.keenCleaver);
     }
 
 }

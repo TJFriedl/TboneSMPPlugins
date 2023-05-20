@@ -3,6 +3,7 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,8 @@ public class LevelProgressionEvents implements Listener {
 
     @EventHandler
     public void gainXPEvent(BlockBreakEvent e) { // Change this to its own class?
+
+        if (!(e.getPlayer().getGameMode().equals(GameMode.SURVIVAL))) return;
 
         PackageInitializer pckg = FileStartupEvents.playerData.get(e.getPlayer().getName());
         Player player = e.getPlayer();

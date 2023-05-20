@@ -3,6 +3,7 @@ package me.tbonejdi.tboneplugins.classes;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -18,7 +19,8 @@ public class ClassXPEvents implements Listener {
         PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
         int xp;
 
-        if (e.getEntity() instanceof Player || e.getEntity().getKiller() == null) { return; } // Has to be player killing a mob
+        if (e.getEntity() instanceof Player || e.getEntity().getKiller() == null ||
+                (!(e.getEntity().getKiller().getGameMode().equals(GameMode.SURVIVAL))))  return; // Has to be player killing a mob
 
         switch (e.getEntity().getType()) {
             case ZOMBIE:

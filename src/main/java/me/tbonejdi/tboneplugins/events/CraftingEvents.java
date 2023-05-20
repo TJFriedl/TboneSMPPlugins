@@ -6,10 +6,7 @@ import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.MagicBlockManager;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import me.tbonejdi.tboneplugins.items.*;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -149,13 +146,15 @@ public class CraftingEvents implements Listener {
 
         ArrayList<Material> recipeList = new ArrayList<>();
         for (ItemStack i : e.getInventory().getMatrix()) {
-            try {
-                recipeList.add(i.getType());
-            } catch (NullPointerException ne) {}
+
+            if (i == null) recipeList.add(Material.AIR);
+            else recipeList.add(i.getType());
         }
 
         if (recipeList.equals(MagicMirror.recipeList)) {
             e.getInventory().setResult(MagicMirror.magicMirror);
+        } else if (recipeList.equals(KeenBlade.recipeList)) {
+            e.getInventory().setResult(KeenBlade.keenBlade);
         }
 
     }

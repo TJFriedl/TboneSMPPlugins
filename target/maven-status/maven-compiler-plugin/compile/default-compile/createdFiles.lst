@@ -36,6 +36,7 @@ me\tbonejdi\tboneplugins\fileadministrators\ClassInfo.class
 me\tbonejdi\tboneplugins\fileadministrators\FileStartupEvents.class
 me\tbonejdi\tboneplugins\fileadministrators\PackageInitializer.class
 me\tbonejdi\tboneplugins\fileadministrators\TomesFileWorker.class
+me\tbonejdi\tboneplugins\items\KeenBlade.class
 me\tbonejdi\tboneplugins\items\FirstTome.class
 me\tbonejdi\tboneplugins\inventories\ClassSelection.class
 me\tbonejdi\tboneplugins\events\CantripEvents.class

@@ -14,18 +14,32 @@ public class EventRegistrar {
 
     public static void EnableAllEvents(Main main) {
         main.getServer().getPluginManager().registerEvents(new ItemEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new InventoryEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new FileStartupEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new CantripEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new MobDropEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new TomeEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new ClassXPEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new LevelProgressionEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new EnchantEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new CraftingEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new PortalEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new SpiderEvents(), main);
+
         main.getServer().getPluginManager().registerEvents(new MonsterEvents(), main);
+
+        main.getServer().getPluginManager().registerEvents(new CombatEvents(), main);
     }
 
 }

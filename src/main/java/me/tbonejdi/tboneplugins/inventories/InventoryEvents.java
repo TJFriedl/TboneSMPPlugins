@@ -37,11 +37,8 @@ public class InventoryEvents implements Listener {
             e.setCancelled(true);
             Player p = (Player) e.getWhoClicked();
             if (e.getCurrentItem() == null) { return; }
-            if (e.getCurrentItem().getType() == Material.RED_STAINED_GLASS_PANE) {
-                p.sendMessage("§4Exiting Process...");
-                p.closeInventory();
-            }
-            else if(e.getSlot() == 0) {
+            if (e.getCurrentItem().getType() == Material.BARRIER) p.closeInventory();
+            else if(e.getSlot() == 11) {
                 p.sendMessage("§6Selecting the §cWarrior §6class!");
                 pckg.cw.saveToFile(pckg.cInfo); // Check this, sorta skeptical for errors.
                 ClassFile.resetPlayer(p);

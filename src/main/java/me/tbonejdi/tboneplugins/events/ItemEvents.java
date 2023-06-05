@@ -1,5 +1,10 @@
 package me.tbonejdi.tboneplugins.events;
 
+import me.tbonejdi.tboneplugins.Main;
+import me.tbonejdi.tboneplugins.classes.ClassType;
+import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
+import me.tbonejdi.tboneplugins.fileadministrators.ClassInfo;
+import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.items.*;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -16,8 +21,11 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
+
+import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
 
 public class ItemEvents implements Listener {
 
@@ -59,6 +67,44 @@ public class ItemEvents implements Listener {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1000, 10));
                 if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
                 e.getItem().setAmount(e.getItem().getAmount()-1);
+                return;
+            }
+
+            if (e.getItem().getItemMeta().getLore()
+                    .equals(KeenBlade.keenBlade.getItemMeta().getLore())) {
+
+                if (!(e.getAction().name().contains("RIGHT_CLICK"))) return;
+
+                ClassInfo classInfo = FileStartupEvents.playerData.get(e.getPlayer().getName()).cInfo;
+                PlayerStates playerStates = FileStartupEvents.playerStates.get(e.getPlayer().getName());
+
+                if (playerStates.isChargingCenteredStrike) return;
+
+                if (!(classInfo.getCurrentClass()).equals(ClassType.WARRIOR)) {
+                    e.getPlayer().sendMessage(ChatColor.RED + "Cannot activate this weapon!");
+                    return;
+                } else if (classInfo.getClassLvl() < 5) {
+                    e.getPlayer().sendMessage(ChatColor.RED + "You need to be at least level 5 to use this ability!");
+                    return;
+                } else {
+                    e.getPlayer().sendMessage(ChatColor.GRAY + "Charging " + ChatColor.GOLD +
+                            "Centered Strike" + ChatColor.GRAY + "...");
+                    playerStates.isChargingCenteredStrike = true;
+                    FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                    new BukkitRunnable() {
+
+                        @Override
+                        public void run() {
+                            if (FileStartupEvents.playerStates.get(e.getPlayer().getName()).isChargingCenteredStrike == false)
+                                return;
+                            e.getPlayer().sendMessage(ChatColor.GRAY + "Lowering " + ChatColor.GOLD +
+                                    "Centered Strike" + ChatColor.GRAY + " focus...");
+                            playerStates.isChargingCenteredStrike = false;
+                            FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                        }
+                    }.runTaskLater(Main.mainClassCall, 100L);
+                    return;
+                }
             }
         }
     }

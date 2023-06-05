@@ -5,11 +5,14 @@ me\tbonejdi\tboneplugins\Main.class
 me\tbonejdi\tboneplugins\events\EventRegistrar.class
 me\tbonejdi\tboneplugins\items\SecondTome.class
 me\tbonejdi\tboneplugins\classes\ClassXPEvents$1.class
+me\tbonejdi\tboneplugins\events\CombatEvents.class
+me\tbonejdi\tboneplugins\events\ItemEvents$1.class
 me\tbonejdi\tboneplugins\datacontainer\PlayerStates.class
 me\tbonejdi\tboneplugins\enchants\CustomEnchants.class
 me\tbonejdi\tboneplugins\commands\ClassCommands.class
 me\tbonejdi\tboneplugins\fileadministrators\PlayerInfo.class
 me\tbonejdi\tboneplugins\inventories\MagicItemsList.class
+me\tbonejdi\tboneplugins\items\classxp\RareFlask.class
 me\tbonejdi\tboneplugins\scoreboards\LobbyBoard.class
 me\tbonejdi\tboneplugins\classes\ClassType.class
 me\tbonejdi\tboneplugins\items\ItemManager.class
@@ -27,6 +30,7 @@ me\tbonejdi\tboneplugins\commands\WorldCommands.class
 me\tbonejdi\tboneplugins\inventories\MagicItemAmount.class
 me\tbonejdi\tboneplugins\fileadministrators\PlayerFileWorker.class
 me\tbonejdi\tboneplugins\items\BeastAmulet.class
+me\tbonejdi\tboneplugins\items\classxp\CommonFlask.class
 me\tbonejdi\tboneplugins\portals\AetherPortal.class
 me\tbonejdi\tboneplugins\items\MagicTable.class
 me\tbonejdi\tboneplugins\items\MysteriousItem.class
@@ -42,6 +46,7 @@ me\tbonejdi\tboneplugins\inventories\ClassSelection.class
 me\tbonejdi\tboneplugins\events\CantripEvents.class
 me\tbonejdi\tboneplugins\items\SecondTomePage.class
 me\tbonejdi\tboneplugins\tomes\TomeEvents.class
+me\tbonejdi\tboneplugins\items\classxp\VeryRareFlask.class
 me\tbonejdi\tboneplugins\commands\EnchantCommands.class
 me\tbonejdi\tboneplugins\portals\PortalEvents.class
 me\tbonejdi\tboneplugins\items\KeenCleaver.class

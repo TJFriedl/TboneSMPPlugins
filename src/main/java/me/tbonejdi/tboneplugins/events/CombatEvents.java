@@ -3,12 +3,18 @@ package me.tbonejdi.tboneplugins.events;
 import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.items.KeenBlade;
+import me.tbonejdi.tboneplugins.items.KeenCleaver;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CombatEvents implements Listener {
 
@@ -34,6 +40,34 @@ public class CombatEvents implements Listener {
             state.isChargingCenteredStrike = false;
             FileStartupEvents.playerStates.replace(damager.getName(), state);
             return;
+        }
+
+        if (damager.getInventory().getItemInMainHand().getItemMeta().getLore()
+                .equals(KeenCleaver.keenCleaver.getItemMeta().getLore())) {
+
+            PlayerStates state = FileStartupEvents.playerStates.get(damager.getName());
+            if (state.isChargingCenteredSweep == false) return;
+
+            damager.sendMessage(ChatColor.GOLD + "Centered Sweep " + ChatColor.GRAY + "activate!");
+
+            //TODO: Work on getting something cool for a centered sweep
+            ArrayList<Entity> nearbyEntities = (ArrayList<Entity>) damager.getWorld().getNearbyEntities
+                    (damager.getLocation(), 3.0, 3.0, 3.0);
+
+            Vector direction = damager.getLocation().getDirection().normalize();
+
+            for (Entity mob : nearbyEntities) {
+
+                Vector knockback = direction.multiply(1.5);
+                mob.setVelocity(knockback);
+
+            }
+
+            // End process of centered sweep
+            state.isChargingCenteredSweep = false;
+            FileStartupEvents.playerStates.replace(damager.getName(), state);
+            return;
+
         }
     }
 

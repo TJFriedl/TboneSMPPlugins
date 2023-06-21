@@ -80,7 +80,7 @@ public class ItemEvents implements Listener {
 
                 if (playerStates.isChargingCenteredStrike) return;
 
-                if (!(classInfo.getCurrentClass()).equals(ClassType.WARRIOR)) {
+                if (!(classInfo.getCurrentClass().equals(ClassType.WARRIOR))) {
                     e.getPlayer().sendMessage(ChatColor.RED + "Cannot activate this weapon!");
                     return;
                 } else if (classInfo.getClassLvl() < 5) {
@@ -105,6 +105,42 @@ public class ItemEvents implements Listener {
                     }.runTaskLater(Main.mainClassCall, 100L);
                     return;
                 }
+            }
+
+            if (e.getItem().getItemMeta().getLore()
+                    .equals(KeenCleaver.keenCleaver.getItemMeta().getLore())) {
+
+                ClassInfo classInfo = FileStartupEvents.playerData.get(e.getPlayer().getName()).cInfo;
+                PlayerStates playerStates = FileStartupEvents.playerStates.get(e.getPlayer().getName());
+
+                if (playerStates.isChargingCenteredSweep) return;
+
+                if (!(classInfo.getCurrentClass().equals(ClassType.WARRIOR))) {
+                    e.getPlayer().sendMessage(ChatColor.RED + "Cannot activate this weapon!");
+                    return;
+                } else if (classInfo.getClassLvl() < 5) {
+                    e.getPlayer().sendMessage(ChatColor.RED + "You need to be at least level 5 to use this ability!");
+                    return;
+                } else {
+                    e.getPlayer().sendMessage(ChatColor.GRAY + "Charging " + ChatColor.GOLD +
+                            "Centered Sweep" + ChatColor.GRAY + "...");
+                    playerStates.isChargingCenteredSweep = true;
+                    FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                    new BukkitRunnable() {
+
+                        @Override
+                        public void run() {
+                            if (FileStartupEvents.playerStates.get(e.getPlayer().getName()).isChargingCenteredSweep == false)
+                                return;
+                            e.getPlayer().sendMessage(ChatColor.GRAY + "Lowering " + ChatColor.GOLD +
+                                    "Centered Sweep" + ChatColor.GRAY + " focus...");
+                            playerStates.isChargingCenteredSweep = false;
+                            FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                        }
+                    }.runTaskLater(Main.mainClassCall, 100L);
+                    return;
+                }
+
             }
         }
     }

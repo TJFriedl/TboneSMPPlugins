@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.items;
 
+import me.tbonejdi.tboneplugins.items.classxp.CommonFlask;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ItemHandler {
         BeastAmulet.registerItem();
         KeenBlade.registerItem();
         KeenCleaver.registerItem();
+        SigiledShield.registerItem();
     }
 
     public static void populateStaticList() {

@@ -7,6 +7,8 @@ public class PlayerStates {
     public boolean isPlayerReset;
     public boolean isChargingCenteredStrike;
     public boolean isChargingCenteredSweep;
+    public boolean isChargingSigiledShield;
+    public boolean sigiledShieldisCharged;
     public ItemStack magicItemGive;
 
     public PlayerStates() {
@@ -15,6 +17,8 @@ public class PlayerStates {
         isPlayerReset = false;
         isChargingCenteredStrike = false;
         isChargingCenteredSweep = false;
+        isChargingSigiledShield = false;
+        sigiledShieldisCharged = false;
         magicItemGive = null;
     }
 }

@@ -38,6 +38,7 @@ me\tbonejdi\tboneplugins\events\LevelProgressionEvents$1.class
 me\tbonejdi\tboneplugins\Main$1.class
 me\tbonejdi\tboneplugins\fileadministrators\ClassInfo.class
 me\tbonejdi\tboneplugins\fileadministrators\FileStartupEvents.class
+me\tbonejdi\tboneplugins\items\SigiledShield.class
 me\tbonejdi\tboneplugins\fileadministrators\PackageInitializer.class
 me\tbonejdi\tboneplugins\fileadministrators\TomesFileWorker.class
 me\tbonejdi\tboneplugins\items\KeenBlade.class
@@ -49,6 +50,7 @@ me\tbonejdi\tboneplugins\tomes\TomeEvents.class
 me\tbonejdi\tboneplugins\items\classxp\VeryRareFlask.class
 me\tbonejdi\tboneplugins\commands\EnchantCommands.class
 me\tbonejdi\tboneplugins\portals\PortalEvents.class
+me\tbonejdi\tboneplugins\events\ItemEvents$3.class
 me\tbonejdi\tboneplugins\items\KeenCleaver.class
 me\tbonejdi\tboneplugins\items\FloatingWand.class
 me\tbonejdi\tboneplugins\items\ItemHandler.class
@@ -65,4 +67,5 @@ me\tbonejdi\tboneplugins\items\DiamondWand.class
 me\tbonejdi\tboneplugins\events\ItemEvents.class
 me\tbonejdi\tboneplugins\fileadministrators\DataManager.class
 me\tbonejdi\tboneplugins\mobs\MonsterEvents$1.class
+me\tbonejdi\tboneplugins\events\ItemEvents$2.class
 me\tbonejdi\tboneplugins\items\CrystalFruit.class

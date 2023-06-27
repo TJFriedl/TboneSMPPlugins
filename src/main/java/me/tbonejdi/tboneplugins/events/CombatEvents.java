@@ -6,6 +6,8 @@ import me.tbonejdi.tboneplugins.items.KeenBlade;
 import me.tbonejdi.tboneplugins.items.KeenCleaver;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +16,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CombatEvents implements Listener {
 
@@ -28,7 +29,7 @@ public class CombatEvents implements Listener {
                 .equals(KeenBlade.keenBlade.getItemMeta().getLore())) {
 
             PlayerStates state = FileStartupEvents.playerStates.get(damager.getName());
-            if (state.isChargingCenteredStrike == false) return;
+            if (!state.isChargingCenteredStrike) return;
 
             damager.sendMessage(ChatColor.GOLD + "Centered Strike " + ChatColor.GRAY + "activated!");
 
@@ -46,20 +47,26 @@ public class CombatEvents implements Listener {
                 .equals(KeenCleaver.keenCleaver.getItemMeta().getLore())) {
 
             PlayerStates state = FileStartupEvents.playerStates.get(damager.getName());
-            if (state.isChargingCenteredSweep == false) return;
+            if (!state.isChargingCenteredSweep) return;
 
             damager.sendMessage(ChatColor.GOLD + "Centered Sweep " + ChatColor.GRAY + "activate!");
 
             //TODO: Work on getting something cool for a centered sweep
             ArrayList<Entity> nearbyEntities = (ArrayList<Entity>) damager.getWorld().getNearbyEntities
                     (damager.getLocation(), 3.0, 3.0, 3.0);
-
+            ArrayList<Mob> nearbyMobs = new ArrayList<>();
             Vector direction = damager.getLocation().getDirection().normalize();
+            Double damage = e.getDamage();
 
-            for (Entity mob : nearbyEntities) {
+            for (Entity entity : nearbyEntities) {
+                if (entity instanceof Mob) nearbyMobs.add((Mob) entity);
+            }
 
-                Vector knockback = direction.multiply(1.5);
+            for (LivingEntity mob : nearbyMobs) {
+
+                Vector knockback = direction.multiply(2.0);
                 mob.setVelocity(knockback);
+                mob.damage(damage);
 
             }
 

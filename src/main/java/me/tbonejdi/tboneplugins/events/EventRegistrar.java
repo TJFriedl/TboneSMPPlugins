@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.events;
 
 import me.tbonejdi.tboneplugins.Main;
 import me.tbonejdi.tboneplugins.classes.ClassXPEvents;
+import me.tbonejdi.tboneplugins.classes.Warrior;
 import me.tbonejdi.tboneplugins.enchants.EnchantEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.inventories.InventoryEvents;
@@ -40,6 +41,9 @@ public class EventRegistrar {
         main.getServer().getPluginManager().registerEvents(new MonsterEvents(), main);
 
         main.getServer().getPluginManager().registerEvents(new CombatEvents(), main);
+
+        //EVENTS ENCAPSULATED IN CLASSES FILE...
+        main.getServer().getPluginManager().registerEvents(new Warrior(), main);
     }
 
 }

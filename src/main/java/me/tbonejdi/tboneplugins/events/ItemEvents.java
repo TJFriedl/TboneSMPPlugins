@@ -142,6 +142,41 @@ public class ItemEvents implements Listener {
                 }
 
             }
+
+            if (e.getItem().getItemMeta().getLore().equals(SigiledShield.sigiledShield.getItemMeta().getLore())) {
+
+                ClassInfo classInfo = FileStartupEvents.playerData.get(e.getPlayer().getName()).cInfo;
+                PlayerStates playerStates =  FileStartupEvents.playerStates.get(e.getPlayer().getName());
+
+                if (playerStates.isChargingSigiledShield) return;
+
+                if (!(p.isSneaking() && p.isBlocking())) return; // Player needs to be using shield and crouching.
+
+                if (!(classInfo.getCurrentClass()).equals(ClassType.WARRIOR)) {
+                    p.sendMessage(ChatColor.RED + "Cannot activate this weapon!");
+                    return;
+                } else if (classInfo.getClassLvl() < 15) {
+                    e.getPlayer().sendMessage(ChatColor.RED + "You need to be at least level 15 to use this ability!");
+                    return;
+                } else {
+                    e.getPlayer().sendMessage(ChatColor.GRAY + "Charging " + ChatColor.GOLD +
+                            "Ground Pound" + ChatColor.GRAY + "...");
+                    playerStates.isChargingSigiledShield = true;
+                    FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                    new BukkitRunnable() {
+
+                        @Override
+                        public void run() {
+                            if (playerStates.isChargingSigiledShield == false) return;
+
+                            e.getPlayer().sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "charged!");
+                            playerStates.sigiledShieldisCharged = true;
+                            playerStates.isChargingSigiledShield = false;
+                            FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                        }
+                    }.runTaskLater(Main.mainClassCall, 60L);
+                }
+            }
         }
     }
 

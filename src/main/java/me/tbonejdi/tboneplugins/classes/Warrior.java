@@ -1,11 +1,20 @@
 package me.tbonejdi.tboneplugins.classes;
 
+import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import me.tbonejdi.tboneplugins.fileadministrators.ClassInfo;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
 
 public class Warrior extends ClassFile implements Listener {
 
@@ -45,6 +54,43 @@ public class Warrior extends ClassFile implements Listener {
         else if (level >= 7 && level < 13) { return 3.0; }
         else if (level >= 14 && level < 18) { return 3.0; }
         else return 4.0;
+    }
+
+    @EventHandler
+    public void onGroundPound(PlayerMoveEvent e) {
+        PlayerStates playerStates = FileStartupEvents.playerStates.get(e.getPlayer().getName());
+        boolean isJumping = false;
+
+        if (e.getTo().getY() > e.getFrom().getY() && !(e.getPlayer().isFlying())) isJumping = true;
+
+        if (!(isJumping) || !(playerStates.sigiledShieldisCharged)) return;
+
+        //Handle Ground Pound Situation
+        Player player = e.getPlayer();
+        Vector velo = e.getPlayer().getVelocity();
+        velo.setY(5.0);
+        player.setVelocity(velo);
+
+
+    }
+
+    @EventHandler
+    public void onGroundPoundLanding(EntityDamageEvent e) {
+        if (!(e.getEntity() instanceof Player)) return;
+
+        Player player = (Player) e.getEntity();
+        PlayerStates playerStates = FileStartupEvents.playerStates.get(player.getName());
+        if (!(playerStates.sigiledShieldisCharged) ||
+                !(e.getCause().equals(EntityDamageEvent.DamageCause.FALL))) return;
+
+        e.setCancelled(true);
+        ArrayList<Mob> nearbyMobs = new ArrayList<>();
+        for (Entity entity : player.getNearbyEntities(5.0, 5.0, 5.0)) {
+            if (entity instanceof Mob) nearbyMobs.add((Mob) entity);
+        }
+
+        //TODO: Add logic to handle mobs affected by the ground pound
+
     }
 
 }

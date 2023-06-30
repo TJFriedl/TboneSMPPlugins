@@ -63,7 +63,7 @@ public class Warrior extends ClassFile implements Listener {
 
         if (e.getTo().getY() > e.getFrom().getY() && !(e.getPlayer().isFlying())) isJumping = true;
 
-        if (!(isJumping) || !(playerStates.sigiledShieldisCharged)) return;
+        if (!(isJumping) || !(playerStates.isChargingSigiledShield)) return;
 
         //Handle Ground Pound Situation
         Player player = e.getPlayer();
@@ -71,6 +71,8 @@ public class Warrior extends ClassFile implements Listener {
         velo.setY(5.0);
         player.setVelocity(velo);
 
+        playerStates.isChargingSigiledShield = false;
+        FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
 
     }
 
@@ -90,6 +92,17 @@ public class Warrior extends ClassFile implements Listener {
         }
 
         //TODO: Add logic to handle mobs affected by the ground pound
+        for (Mob mob : nearbyMobs) {
+            Vector sourceLocation = player.getLocation().toVector();
+            Vector targetLocation = mob.getLocation().toVector();
+            mob.damage(5.0 / player.getLocation().distance(mob.getLocation()));
+            Vector knockback = targetLocation.subtract(sourceLocation).normalize().multiply(3.0);
+            knockback.setY(2);
+            mob.setVelocity(knockback);
+        }
+
+        playerStates.sigiledShieldisCharged = false;
+        FileStartupEvents.playerStates.replace(player.getName(), playerStates);
 
     }
 

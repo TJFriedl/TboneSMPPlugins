@@ -55,7 +55,6 @@ public class CombatEvents implements Listener {
             ArrayList<Entity> nearbyEntities = (ArrayList<Entity>) damager.getWorld().getNearbyEntities
                     (damager.getLocation(), 3.0, 3.0, 3.0);
             ArrayList<Mob> nearbyMobs = new ArrayList<>();
-            Vector direction = damager.getLocation().getDirection().normalize();
             Double damage = e.getDamage();
 
             for (Entity entity : nearbyEntities) {
@@ -63,8 +62,9 @@ public class CombatEvents implements Listener {
             }
 
             for (LivingEntity mob : nearbyMobs) {
-
-                Vector knockback = direction.multiply(2.0);
+                Vector sourceLocation = damager.getLocation().toVector();
+                Vector targetLocation = mob.getLocation().toVector();
+                Vector knockback = targetLocation.subtract(sourceLocation).normalize().multiply(2.0);
                 mob.setVelocity(knockback);
                 mob.damage(damage);
 

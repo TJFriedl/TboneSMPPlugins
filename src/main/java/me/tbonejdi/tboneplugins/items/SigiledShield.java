@@ -18,7 +18,7 @@ public class SigiledShield {
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.SHIELD, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.BLUE + "Keen Cleaver");
+        meta.setDisplayName(ChatColor.BLUE + "Sigiled Shield");
         List<String> lore = new ArrayList<>();
         lore.add("§7A shield bearing an ancient Nordic engraving.");
         lore.add(ChatColor.GREEN + "Right click to activate ability! (Lv. 15 required)");

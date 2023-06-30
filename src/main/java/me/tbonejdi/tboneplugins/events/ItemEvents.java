@@ -150,7 +150,7 @@ public class ItemEvents implements Listener {
 
                 if (playerStates.isChargingSigiledShield) return;
 
-                if (!(p.isSneaking() && p.isBlocking())) return; // Player needs to be using shield and crouching.
+                if (!(p.isSneaking())) return; // Player needs to be using shield and crouching.
 
                 if (!(classInfo.getCurrentClass()).equals(ClassType.WARRIOR)) {
                     p.sendMessage(ChatColor.RED + "Cannot activate this weapon!");
@@ -171,7 +171,6 @@ public class ItemEvents implements Listener {
 
                             e.getPlayer().sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "charged!");
                             playerStates.sigiledShieldisCharged = true;
-                            playerStates.isChargingSigiledShield = false;
                             FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
                         }
                     }.runTaskLater(Main.mainClassCall, 60L);

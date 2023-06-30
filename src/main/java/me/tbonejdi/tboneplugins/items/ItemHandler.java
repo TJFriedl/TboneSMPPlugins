@@ -52,8 +52,10 @@ public class ItemHandler {
         magicItems.add(BeastAmulet.beastAmulet);
         // Keen Blade Instance
         magicItems.add(KeenBlade.keenBlade);
-        // keen Cleaver Instance
+        // Keen Cleaver Instance
         magicItems.add(KeenCleaver.keenCleaver);
+        // Sigiled Shield Instance
+        magicItems.add(SigiledShield.sigiledShield);
     }
 
 }

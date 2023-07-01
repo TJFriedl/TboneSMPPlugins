@@ -88,8 +88,19 @@ public class CombatEvents implements Listener {
         if (states.isChargingCenteredStrike) {
             player.sendMessage(ChatColor.GOLD + "Centered Strike " + ChatColor.GRAY + "focus lost...");
             states.isChargingCenteredStrike = false;
-            FileStartupEvents.playerStates.replace(player.getName(), states);
         }
+
+        if (states.isChargingCenteredSweep) {
+            player.sendMessage(ChatColor.GOLD + "Centered Sweep" + ChatColor.GRAY + "focus lost...");
+            states.isChargingCenteredSweep = false;
+        }
+
+        if (states.isChargingSigiledShield && !(player.isBlocking())) {
+            player.sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "broken...");
+            states.isChargingSigiledShield = false;
+        }
+
+        FileStartupEvents.playerStates.replace(player.getName(), states);
     }
 
 }

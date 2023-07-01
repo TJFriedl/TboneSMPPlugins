@@ -54,14 +54,17 @@ me\tbonejdi\tboneplugins\events\ItemEvents$3.class
 me\tbonejdi\tboneplugins\items\KeenCleaver.class
 me\tbonejdi\tboneplugins\items\FloatingWand.class
 me\tbonejdi\tboneplugins\items\ItemHandler.class
+me\tbonejdi\tboneplugins\effects\ParticleEffects.class
 me\tbonejdi\tboneplugins\classes\Warrior.class
 me\tbonejdi\tboneplugins\commands\PlayerInfoCommands.class
+me\tbonejdi\tboneplugins\effects\BlockEffects$1.class
 me\tbonejdi\tboneplugins\classes\ClassXPEvents.class
 me\tbonejdi\tboneplugins\tomes\TomesCommands.class
 me\tbonejdi\tboneplugins\classes\ClassFile.class
 me\tbonejdi\tboneplugins\events\LevelProgressionEvents.class
 me\tbonejdi\tboneplugins\mobs\SpiderEvents$1.class
 me\tbonejdi\tboneplugins\events\CraftingEvents.class
+me\tbonejdi\tboneplugins\effects\BlockEffects.class
 me\tbonejdi\tboneplugins\enchants\EnchantmentWrapper.class
 me\tbonejdi\tboneplugins\items\DiamondWand.class
 me\tbonejdi\tboneplugins\events\ItemEvents.class

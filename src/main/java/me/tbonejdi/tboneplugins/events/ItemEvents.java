@@ -25,8 +25,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
-
 public class ItemEvents implements Listener {
 
     @EventHandler
@@ -69,6 +67,9 @@ public class ItemEvents implements Listener {
                 e.getItem().setAmount(e.getItem().getAmount()-1);
                 return;
             }
+
+            // If the lore is null terminate beyond this point.
+            if (e.getItem().getItemMeta().getLore() == null) return;
 
             if (e.getItem().getItemMeta().getLore()
                     .equals(KeenBlade.keenBlade.getItemMeta().getLore())) {
@@ -163,17 +164,28 @@ public class ItemEvents implements Listener {
                             "Ground Pound" + ChatColor.GRAY + "...");
                     playerStates.isChargingSigiledShield = true;
                     FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                    final int[] count = {0};
                     new BukkitRunnable() {
 
                         @Override
                         public void run() {
-                            if (playerStates.isChargingSigiledShield == false) return;
-
-                            e.getPlayer().sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "charged!");
-                            playerStates.sigiledShieldisCharged = true;
-                            FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
+                            if (FileStartupEvents.playerStates.get(e.getPlayer().getName()).isChargingSigiledShield == false)
+                                return;
+                            if (!p.isHandRaised() || count[0] >= 3) {
+                                if (count[0] >= 3) {
+                                    p.sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "charged!");
+                                    playerStates.sigiledShieldisCharged = true;
+                                } else {
+                                    p.sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "focus lost.");
+                                }
+                                playerStates.isChargingSigiledShield = false;
+                                FileStartupEvents.playerStates.replace(p.getName(), playerStates);
+                                this.cancel();
+                            } else {
+                                count[0]++;
+                            }
                         }
-                    }.runTaskLater(Main.mainClassCall, 60L);
+                    }.runTaskTimer(Main.mainClassCall, 20, 20);
                 }
             }
         }

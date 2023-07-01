@@ -1,9 +1,13 @@
 package me.tbonejdi.tboneplugins.classes;
 
 import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
+import me.tbonejdi.tboneplugins.effects.BlockEffects;
 import me.tbonejdi.tboneplugins.fileadministrators.ClassInfo;
 import me.tbonejdi.tboneplugins.fileadministrators.FileStartupEvents;
 import me.tbonejdi.tboneplugins.fileadministrators.PackageInitializer;
+import me.tbonejdi.tboneplugins.effects.ParticleEffects;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
@@ -63,13 +67,17 @@ public class Warrior extends ClassFile implements Listener {
 
         if (e.getTo().getY() > e.getFrom().getY() && !(e.getPlayer().isFlying())) isJumping = true;
 
-        if (!(isJumping) || !(playerStates.isChargingSigiledShield)) return;
+        if (!(isJumping) || !(playerStates.sigiledShieldisCharged) || playerStates.isGroundPounding)
+            return;
 
         //Handle Ground Pound Situation
+        playerStates.isGroundPounding = true;
         Player player = e.getPlayer();
         Vector velo = e.getPlayer().getVelocity();
-        velo.setY(5.0);
+        velo.setY(2.0);
         player.setVelocity(velo);
+
+        player.playSound(player, Sound.ENTITY_FIREWORK_ROCKET_SHOOT, 1, 1);
 
         playerStates.isChargingSigiledShield = false;
         FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
@@ -80,27 +88,31 @@ public class Warrior extends ClassFile implements Listener {
     public void onGroundPoundLanding(EntityDamageEvent e) {
         if (!(e.getEntity() instanceof Player)) return;
 
+
         Player player = (Player) e.getEntity();
         PlayerStates playerStates = FileStartupEvents.playerStates.get(player.getName());
         if (!(playerStates.sigiledShieldisCharged) ||
                 !(e.getCause().equals(EntityDamageEvent.DamageCause.FALL))) return;
-
+        player.playSound(player, Sound.ENTITY_WITHER_SPAWN, 1, 1);
+        ParticleEffects.createHorizontalRing(player, Particle.CLOUD, 3.0, 50);
         e.setCancelled(true);
         ArrayList<Mob> nearbyMobs = new ArrayList<>();
         for (Entity entity : player.getNearbyEntities(5.0, 5.0, 5.0)) {
             if (entity instanceof Mob) nearbyMobs.add((Mob) entity);
         }
 
-        //TODO: Add logic to handle mobs affected by the ground pound
         for (Mob mob : nearbyMobs) {
             Vector sourceLocation = player.getLocation().toVector();
             Vector targetLocation = mob.getLocation().toVector();
             mob.damage(5.0 / player.getLocation().distance(mob.getLocation()));
-            Vector knockback = targetLocation.subtract(sourceLocation).normalize().multiply(3.0);
-            knockback.setY(2);
+            Vector knockback = targetLocation.subtract(sourceLocation).normalize().multiply(2.0);
+            knockback.setY(1);
             mob.setVelocity(knockback);
         }
 
+        BlockEffects.createGroundPoundExplosion(player, 5);
+
+        playerStates.isGroundPounding = false;
         playerStates.sigiledShieldisCharged = false;
         FileStartupEvents.playerStates.replace(player.getName(), playerStates);
 

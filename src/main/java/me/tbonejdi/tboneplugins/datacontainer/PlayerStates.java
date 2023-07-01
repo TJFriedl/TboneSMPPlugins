@@ -8,6 +8,7 @@ public class PlayerStates {
     public boolean isChargingCenteredStrike;
     public boolean isChargingCenteredSweep;
     public boolean isChargingSigiledShield;
+    public boolean isGroundPounding;
     public boolean sigiledShieldisCharged;
     public ItemStack magicItemGive;
 
@@ -18,6 +19,7 @@ public class PlayerStates {
         isChargingCenteredStrike = false;
         isChargingCenteredSweep = false;
         isChargingSigiledShield = false;
+        isGroundPounding = false;
         sigiledShieldisCharged = false;
         magicItemGive = null;
     }

@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.enchants;
 
+import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -30,7 +31,7 @@ public class CustomEnchants {
                 Field f = Enchantment.class.getDeclaredField("acceptingNew");
                 f.setAccessible(true);
                 f.set(null, true);
-                Enchantment.registerEnchantment(enchantment); //TODO: Needs to be updated to 1.20.4 version
+                // Enchantment.registerEnchantment(enchantment); //TODO: Needs to be updated to 1.20.4 version
             } catch (Exception e) {
                 e.printStackTrace();
             }

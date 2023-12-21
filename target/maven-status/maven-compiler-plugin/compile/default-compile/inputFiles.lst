@@ -1,65 +1,65 @@
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\ClassXPEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\ClassType.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\PackageInitializer.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\ClassInfo.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\TomesFileWorker.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\enchants\EnchantmentWrapper.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\Warrior.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\EntityCommands.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\PlayerInfo.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\portals\PortalEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\CombatEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\FileStartupEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\KeenCleaver.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\tomes\TomeEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\FloatingWand.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\MagicMirror.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\PlayerInfoCommands.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\classxp\CommonFlask.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\GreenStuff.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\CraftingEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\DataManager.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\KeenBlade.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\MysteriousItem.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\ItemManager.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\classxp\VeryRareFlask.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\CrystalFruit.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\MagicItemsList.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\SecondTomePage.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\mobs\MonsterEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\enchants\CustomEnchants.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\mobs\SpiderEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\MagicTable.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\CantripEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\LevelProgressionEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\classxp\RareFlask.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\EnchantCommands.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\enchants\EnchantEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\SecondTome.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\InventoryEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\WorldCommands.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\MobDropEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\DiamondWand.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\SigiledShield.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\Main.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\portals\AetherPortal.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\MagicItemAmount.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\scoreboards\LobbyBoard.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\ClassWorker.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\ClassCommands.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\PlayerFileWorker.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\ClassSelection.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\BeastAmulet.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\ItemHandler.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\ClassInfoManager.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\FirstTome.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\tomes\TomeSelection.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\effects\BlockEffects.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\EventRegistrar.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\ItemEvents.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\datacontainer\PlayerStates.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\tomes\TomesCommands.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\MagicBlockManager.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\ClassFile.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\effects\ParticleEffects.java
-C:\Users\Trevor\Desktop\CodingProjects\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\ItemCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\enchants\EnchantEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\ClassInfoManager.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\KeenCleaver.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\PlayerFileWorker.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\ClassSelection.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\ClassType.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\enchants\EnchantmentWrapper.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\SecondTomePage.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\enchants\CustomEnchants.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\SecondTome.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\ItemEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\FirstTome.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\ClassXPEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\PlayerInfo.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\effects\BlockEffects.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\LevelProgressionEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\MagicItemsList.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\ClassFile.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\FileStartupEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\EventRegistrar.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\CantripEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\classxp\RareFlask.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\classxp\VeryRareFlask.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\classes\Warrior.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\MagicItemAmount.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\ItemHandler.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\MysteriousItem.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\tomes\TomesCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\EnchantCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\tomes\TomeSelection.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\BeastAmulet.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\KeenBlade.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\WorldCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\scoreboards\LobbyBoard.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\DataManager.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\effects\ParticleEffects.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\GreenStuff.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\SigiledShield.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\MagicTable.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\DiamondWand.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\tomes\TomeEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\EntityCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\datacontainer\PlayerStates.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\mobs\SpiderEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\CombatEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\portals\AetherPortal.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\inventories\InventoryEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\portals\PortalEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\ItemCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\ClassWorker.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\mobs\MonsterEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\MagicMirror.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\MobDropEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\ClassCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\classxp\CommonFlask.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\events\CraftingEvents.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\TomesFileWorker.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\CrystalFruit.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\FloatingWand.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\PackageInitializer.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\commands\PlayerInfoCommands.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\ClassInfo.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\items\ItemManager.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\Main.java
+C:\Users\Trevor Friedl\Desktop\Programming\TboneSMPPlugins\src\main\java\me\tbonejdi\tboneplugins\fileadministrators\MagicBlockManager.java

@@ -25,8 +25,9 @@ public class EnchantCommands implements CommandExecutor {
             item.addUnsafeEnchantment(CustomEnchants.TELEPATHY, 1);
 
             ItemMeta meta = item.getItemMeta();
+            meta.addEnchant(CustomEnchants.TELEPATHY, 1, true); //TODO: Check for functionality
             List<String> lore = new ArrayList<String>();
-            lore.add(ChatColor.GRAY + "Telepathy I");
+            // lore.add(ChatColor.GRAY + "Telepathy I");
 
             if (meta.hasLore())
                 for (String l : meta.getLore())
@@ -44,6 +45,7 @@ public class EnchantCommands implements CommandExecutor {
             item.addUnsafeEnchantment(CustomEnchants.BLAZED_TIP, 1);
 
             ItemMeta meta = item.getItemMeta();
+            meta.addEnchant(CustomEnchants.BLAZED_TIP, 1, true); // TODO: Check for functionality
             List<String> lore = new ArrayList<String>();
             lore.add(ChatColor.GOLD + "Blazed Tip I");
 

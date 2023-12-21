@@ -99,7 +99,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("getcurrenttime").setExecutor(wc);
 
 
-        CustomEnchants.register();
+        // CustomEnchants.register(); //TODO: This has been disabled to test new implementation of custom plugins
 
          /*
               RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to

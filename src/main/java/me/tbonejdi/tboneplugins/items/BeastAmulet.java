@@ -1,6 +1,5 @@
 package me.tbonejdi.tboneplugins.items;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

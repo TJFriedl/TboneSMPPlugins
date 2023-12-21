@@ -2,6 +2,7 @@ package me.tbonejdi.tboneplugins.effects;
 
 import me.tbonejdi.tboneplugins.Main;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
@@ -18,41 +19,22 @@ public class BlockEffects {
 
         Location location = player.getLocation();
         List<Block> blocks = new ArrayList<>();
+        Random random = new Random();
 
         // Handle populating the blocks list first
         for (int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
             for (int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
-                blocks.add(location.getWorld().getHighestBlockAt(x, z)
-                        .getLocation().subtract(0,1,0).getBlock());
+                blocks.add(location.getWorld().getHighestBlockAt(x, z));
             }
         }
 
-        new BukkitRunnable() {
-            int count = 0;
-            List<FallingBlock> fblocks = new ArrayList<>();
-            @Override
-            public void run() {
-                if (count == 300) {
-                    cancel();
-                    for (FallingBlock block : fblocks)
-                        block.setGravity(true);
-                    return;
-                }
-                Random random = new Random();
-                Block block = blocks.get(random.nextInt(blocks.size() - 0) + 0);
-                FallingBlock fblock = player.getWorld().spawnFallingBlock(block.getLocation(), block.getBlockData());
-                fblock.setVelocity((fblock.getLocation().toVector().subtract(player.getLocation().toVector())
-                        .multiply(2.0).normalize()));
-                fblock.setGravity(false);
-                fblock.setDropItem(false);
-                fblock.setHurtEntities(false);
+        for (Block block : blocks) {
+            if (random.nextInt(5) != 4 && block.getType().equals(Material.GRASS_BLOCK))
+                block.setType(Material.DIRT);
+        }
 
-                fblocks.add(fblock);
 
-                count++;
-                player.sendMessage("Count: " + count);
-            }
-        }.runTaskTimer(Main.mainClassCall, 0, 0);
+
     }
 
 }

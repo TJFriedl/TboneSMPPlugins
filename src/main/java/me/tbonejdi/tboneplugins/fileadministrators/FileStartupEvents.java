@@ -1,5 +1,6 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
+import me.tbonejdi.tboneplugins.Main;
 import me.tbonejdi.tboneplugins.datacontainer.PlayerStates;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +9,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class FileStartupEvents implements Listener {
@@ -38,7 +41,7 @@ public class FileStartupEvents implements Listener {
         String username = p.getName();
 
         PackageInitializer pckgInit = new
-                PackageInitializer("//home//container//plugins//playerFiles//" + username, p);
+                PackageInitializer(Main.mainClassCall.getDataFolder()+ "//playerFiles//" + username, p);
 
         try {
             pckgInit.checkForPlayerLevelsFile();
@@ -55,6 +58,19 @@ public class FileStartupEvents implements Listener {
 
         PlayerStates states = new PlayerStates();
         playerStates.put(username, states);
+    }
+
+    public static String getSystemTime() {
+        long systemTime = System.currentTimeMillis();
+
+        Date date = new Date(systemTime);
+        System.out.println("Test: current time RAW: " + date);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = sdf.format(date);
+        System.out.println("Test: current time FORMATTED: " + formattedTime);
+
+        return formattedTime;
     }
 
 }

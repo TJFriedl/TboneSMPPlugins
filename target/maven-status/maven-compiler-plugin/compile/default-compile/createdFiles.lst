@@ -57,7 +57,7 @@ me\tbonejdi\tboneplugins\items\ItemHandler.class
 me\tbonejdi\tboneplugins\effects\ParticleEffects.class
 me\tbonejdi\tboneplugins\classes\Warrior.class
 me\tbonejdi\tboneplugins\commands\PlayerInfoCommands.class
-me\tbonejdi\tboneplugins\effects\BlockEffects$1.class
+me\tbonejdi\tboneplugins\fileadministrators\ClassInfoManager.class
 me\tbonejdi\tboneplugins\classes\ClassXPEvents.class
 me\tbonejdi\tboneplugins\tomes\TomesCommands.class
 me\tbonejdi\tboneplugins\classes\ClassFile.class

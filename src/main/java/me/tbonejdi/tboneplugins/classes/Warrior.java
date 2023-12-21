@@ -110,7 +110,7 @@ public class Warrior extends ClassFile implements Listener {
             mob.setVelocity(knockback);
         }
 
-        BlockEffects.createGroundPoundExplosion(player, 5);
+        BlockEffects.createGroundPoundExplosion(player, 3);
 
         playerStates.isGroundPounding = false;
         playerStates.sigiledShieldisCharged = false;

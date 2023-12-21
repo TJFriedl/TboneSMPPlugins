@@ -23,7 +23,6 @@ public class MagicBlockManager {
 
     private Main main;
     private FileConfiguration config = null;
-
     private File configFile = null;
     public static ArrayList<Location> tables;
 

@@ -1,5 +1,5 @@
 name: TbonePlugins
-version: '1.19-SNAPSHOT'
+version: '1.20.4'
 main: me.tbonejdi.tboneplugins.Main
 api-version: 1.19
 authors: [ Trevor ]

@@ -1,6 +1,7 @@
 package me.tbonejdi.tboneplugins.fileadministrators;
 
 import me.tbonejdi.tboneplugins.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -55,8 +56,9 @@ public class DataManager {
     }
 
     public void saveDefaultConfig() {
-        if (this.configFile == null)
+        if (this.configFile == null) {
             this.configFile = new File(this.main.getDataFolder(), "data.yml");
+        }
 
         if (!this.configFile.exists()) {
 

@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -35,6 +36,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         mainClassCall = this;
 
+        new File(this.getDataFolder().getPath()).mkdirs(); // Needed for the below methods to work?
         this.data = new DataManager(mainClassCall);
         this.magicBlock = new MagicBlockManager(mainClassCall);
 

@@ -35,8 +35,8 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
 
         mainClassCall = this;
-
-        new File(this.getDataFolder().getPath()).mkdirs(); // Needed for the below methods to work?
+        File directory = new File(this.getDataFolder().getPath());
+        if (!(directory.exists())) { directory.mkdirs(); }
         this.data = new DataManager(mainClassCall);
         this.magicBlock = new MagicBlockManager(mainClassCall);
 

@@ -6,7 +6,7 @@
 
     <groupId>me.TboneJDI</groupId>
     <artifactId>TbonePlugins</artifactId>
-    <version>1.20.4</version>
+    <version>1.21.1</version>
     <packaging>jar</packaging>
 
     <name>TbonePlugins</name>

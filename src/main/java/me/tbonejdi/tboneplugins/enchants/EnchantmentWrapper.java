@@ -65,4 +65,9 @@ public class EnchantmentWrapper extends Enchantment {
     public NamespacedKey getKey() {
         return namespace;
     }
+
+    @Override
+    public String getTranslationKey() {
+        return "";
+    }
 }

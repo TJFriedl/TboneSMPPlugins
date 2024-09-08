@@ -5,8 +5,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
-import javax.xml.stream.events.Namespace;
-
 public class EnchantmentWrapper extends Enchantment {
 
     // Minecraft(Unbreaking(1) 1)

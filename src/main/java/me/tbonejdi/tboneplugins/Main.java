@@ -142,11 +142,13 @@ public final class Main extends JavaPlugin implements Listener {
         this.magicBlock.saveConfig();
 
         // TODO: Make offset of 0.5 to actually grab entities (has this already been done?)
-        for (Location loc : MagicBlockManager.tables) {
-            Entity[] entities = loc.getChunk().getEntities();
-            for (Entity e : entities) {
-                if (e.getType().equals(EntityType.ARMOR_STAND))
-                    e.remove();
+        if (MagicBlockManager.tables != null) {
+            for (Location loc : MagicBlockManager.tables) {
+                Entity[] entities = loc.getChunk().getEntities();
+                for (Entity e : entities) {
+                    if (e.getType().equals(EntityType.ARMOR_STAND))
+                        e.remove();
+                }
             }
         }
     }

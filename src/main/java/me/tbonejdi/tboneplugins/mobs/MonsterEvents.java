@@ -73,7 +73,8 @@ public class MonsterEvents implements Listener {
     public void onMobDamage(EntityDeathEvent e) {
 
         if (e.getEntity() instanceof Mob && e.getEntity().getCustomName() != null) {
-            e.getEntity().setCustomName("");
+            e.getEntity().setCustomName(null);
+            e.getEntity().setCustomNameVisible(false);
         }
 
     }

@@ -85,10 +85,6 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("printlocation").setExecutor(pic);
         getCommand("quit").setExecutor(pic);
 
-        EnchantCommands ec = new EnchantCommands();
-        getCommand("telepathy").setExecutor(ec);
-        getCommand("blazedtip").setExecutor(ec);
-
         EntityCommands enc = new EntityCommands();
         getCommand("removechunkentities").setExecutor(enc);
         getCommand("leapingspider").setExecutor(enc);

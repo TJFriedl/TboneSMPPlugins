@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -26,7 +27,9 @@ public class CombatEvents implements Listener {
         Player damager = (Player) e.getDamager();
 
         // Return prematurely - no operation needed.
-        if (!damager.getInventory().getItemInMainHand().getItemMeta().hasLore())
+        if (damager.getInventory().getItemInMainHand().getItemMeta() == null)
+            return;
+        else if (!(damager.getInventory().getItemInMainHand().getItemMeta().hasLore()))
             return;
 
         if (damager.getInventory().getItemInMainHand().getItemMeta().getLore()
@@ -89,6 +92,13 @@ public class CombatEvents implements Listener {
         Player player = (Player) e.getEntity();
         PlayerStates states = FileStartupEvents.playerStates.get(player.getName());
 
+        // TODO: Test this. This is testing for a current mob feature.
+        if (((player.getHealth() - e.getFinalDamage()) <= 0) && (player.getKiller() instanceof Mob)) {
+            Mob mob = (Mob) player.getKiller();
+            mob.setCustomName(null);
+            mob.setCustomNameVisible(false);
+        }
+
         if (states.isChargingCenteredStrike) {
             player.sendMessage(ChatColor.GOLD + "Centered Strike " + ChatColor.GRAY + "focus lost...");
             states.isChargingCenteredStrike = false;
@@ -106,5 +116,15 @@ public class CombatEvents implements Listener {
 
         FileStartupEvents.playerStates.replace(player.getName(), states);
     }
+
+//    @EventHandler
+//    public void onPlayerDeath(PlayerDeathEvent e) {
+//        if (!(e.getEntity().getKiller() instanceof Mob)) return;
+//
+//        if (e.getEntity().getKiller() instanceof Mob && (e.getEntity().getKiller().getCustomName() != null)) {
+//            e.getEntity().getKiller().setCustomName(null);
+//            e.getEntity().getKiller().setCustomNameVisible(false);
+//        }
+//    }
 
 }

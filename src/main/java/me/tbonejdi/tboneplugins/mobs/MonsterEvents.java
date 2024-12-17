@@ -6,6 +6,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -66,6 +67,15 @@ public class MonsterEvents implements Listener {
             mob.setCustomName("§6Lv. " + level + " §c(" + health + "/"
                     + (int) mob.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + "❤)");
         }
+    }
+
+    @EventHandler
+    public void onMobDamage(EntityDeathEvent e) {
+
+        if (e.getEntity() instanceof Mob && e.getEntity().getCustomName() != null) {
+            e.getEntity().setCustomName("");
+        }
+
     }
 
     private int parseLevel(String customName) {

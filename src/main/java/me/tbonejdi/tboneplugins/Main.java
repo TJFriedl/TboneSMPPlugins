@@ -1,7 +1,6 @@
 package me.tbonejdi.tboneplugins;
 
 import me.tbonejdi.tboneplugins.commands.*;
-import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.items.*;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
@@ -100,9 +99,6 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("returnfromaether").setExecutor(wc);
         getCommand("getcurrenttime").setExecutor(wc);
 
-
-        // CustomEnchants.register(); //TODO: This has been disabled to test new implementation of custom plugins
-
          /*
               RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to
               be a static call from main...
@@ -141,7 +137,6 @@ public final class Main extends JavaPlugin implements Listener {
         this.magicBlock.getConfig().set("magictables", MagicBlockManager.tables);
         this.magicBlock.saveConfig();
 
-        // TODO: Make offset of 0.5 to actually grab entities (has this already been done?)
         if (MagicBlockManager.tables != null) {
             for (Location loc : MagicBlockManager.tables) {
                 Entity[] entities = loc.getChunk().getEntities();

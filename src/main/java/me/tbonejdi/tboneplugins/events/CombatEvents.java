@@ -25,6 +25,10 @@ public class CombatEvents implements Listener {
 
         Player damager = (Player) e.getDamager();
 
+        // Return prematurely - no operation needed.
+        if (!damager.getInventory().getItemInMainHand().getItemMeta().hasLore())
+            return;
+
         if (damager.getInventory().getItemInMainHand().getItemMeta().getLore()
                 .equals(KeenBlade.keenBlade.getItemMeta().getLore())) {
 

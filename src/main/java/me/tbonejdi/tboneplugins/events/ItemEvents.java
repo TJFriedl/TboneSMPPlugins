@@ -27,20 +27,30 @@ import java.util.Random;
 
 public class ItemEvents implements Listener {
 
+    /**
+     * Event tracks when player interacts (right-clicks) using specific items.
+     *
+     * @param e
+     */
     @EventHandler
     public static void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
+
+        // Check to make sure player is doing some type of right click interaction
         if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR)
                 && e.getItem() != null) {
 
+            // Check for diamond wand item meta
             if (e.getItem().getItemMeta().equals(DiamondWand.diamondWand.getItemMeta())) {
                 p.performCommand("diamonddetect");
                 return;
             }
 
+            // Check for magic mirror item meta
             if (e.getItem().getItemMeta().equals(MagicMirror.magicMirror.getItemMeta())) {
                 Location bedSpawnLoc = p.getBedSpawnLocation();
 
+                // If bed spawn does not exist, then cancel the action.
                 if (bedSpawnLoc == null) {
                     p.sendMessage(ChatColor.YELLOW + "Doesn't seen like you have a bed spawn set...");
                 }
@@ -48,11 +58,14 @@ public class ItemEvents implements Listener {
                     p.teleport(bedSpawnLoc);
                     p.sendMessage(ChatColor.GOLD + "§lWOOSH!");
                     if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
+
+                    // Use one of the magic mirrors
                     e.getItem().setAmount(e.getItem().getAmount()-1);
                 }
                 return;
             }
 
+            // Check for the floating wand item meta
             if (e.getItem().getItemMeta().equals(FloatingWand.floatingWand.getItemMeta())) {
                 p.sendMessage("§e§lYou have been picked up by the wind, WOOSH!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1));
@@ -60,6 +73,7 @@ public class ItemEvents implements Listener {
                 return;
             }
 
+            // Check for the mysterious-item item meta
             if (e.getItem().getItemMeta().equals(MysteriousItem.mysteriousItem.getItemMeta())) {
                 p.sendMessage("§2§lZOO WEE MAMA!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1000, 10));
@@ -71,29 +85,38 @@ public class ItemEvents implements Listener {
             // If the lore is null terminate beyond this point.
             if (e.getItem().getItemMeta().getLore() == null) return;
 
+            // Check for the keen blade item meta's lore
             if (e.getItem().getItemMeta().getLore()
                     .equals(KeenBlade.keenBlade.getItemMeta().getLore())) {
 
+                // TODO: Is this redundant? Can't remember. Seems to check for what we specified above.
                 if (!(e.getAction().name().contains("RIGHT_CLICK"))) return;
 
                 ClassInfo classInfo = FileStartupEvents.playerData.get(e.getPlayer().getName()).cInfo;
                 PlayerStates playerStates = FileStartupEvents.playerStates.get(e.getPlayer().getName());
 
+                // Return if player is already charging centered strike
                 if (playerStates.isChargingCenteredStrike) return;
 
+                // Return if player is not "warrior" class
                 if (!(classInfo.getCurrentClass().equals(ClassType.WARRIOR))) {
                     e.getPlayer().sendMessage(ChatColor.RED + "Cannot activate this weapon!");
                     return;
-                } else if (classInfo.getClassLvl() < 5) {
+                }
+                // Return if player's warrior level has not yet reached level 5
+                else if (classInfo.getClassLvl() < 5) {
                     e.getPlayer().sendMessage(ChatColor.RED + "You need to be at least level 5 to use this ability!");
                     return;
-                } else {
+                }
+                // Cases passed, activate effect.
+                else {
                     e.getPlayer().sendMessage(ChatColor.GRAY + "Charging " + ChatColor.GOLD +
                             "Centered Strike" + ChatColor.GRAY + "...");
                     playerStates.isChargingCenteredStrike = true;
                     FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
                     new BukkitRunnable() {
 
+                        // Run Bukkit thread for centered strike
                         @Override
                         public void run() {
                             if (FileStartupEvents.playerStates.get(e.getPlayer().getName()).isChargingCenteredStrike == false)
@@ -108,27 +131,35 @@ public class ItemEvents implements Listener {
                 }
             }
 
+            // Check for the keen clever item meta lore
             if (e.getItem().getItemMeta().getLore()
                     .equals(KeenCleaver.keenCleaver.getItemMeta().getLore())) {
 
                 ClassInfo classInfo = FileStartupEvents.playerData.get(e.getPlayer().getName()).cInfo;
                 PlayerStates playerStates = FileStartupEvents.playerStates.get(e.getPlayer().getName());
 
+                // Return if player is already charging centered sweep
                 if (playerStates.isChargingCenteredSweep) return;
 
+                // Return if player is not using warrior class currently
                 if (!(classInfo.getCurrentClass().equals(ClassType.WARRIOR))) {
                     e.getPlayer().sendMessage(ChatColor.RED + "Cannot activate this weapon!");
                     return;
-                } else if (classInfo.getClassLvl() < 5) {
+                }
+                // Return if player's warrior level is not yet level 5
+                else if (classInfo.getClassLvl() < 5) {
                     e.getPlayer().sendMessage(ChatColor.RED + "You need to be at least level 5 to use this ability!");
                     return;
-                } else {
+                }
+                // Cases passed, enter centered sweep state.
+                else {
                     e.getPlayer().sendMessage(ChatColor.GRAY + "Charging " + ChatColor.GOLD +
                             "Centered Sweep" + ChatColor.GRAY + "...");
                     playerStates.isChargingCenteredSweep = true;
                     FileStartupEvents.playerStates.replace(e.getPlayer().getName(), playerStates);
                     new BukkitRunnable() {
 
+                        // Bukkit thread to run centered sweep state
                         @Override
                         public void run() {
                             if (FileStartupEvents.playerStates.get(e.getPlayer().getName()).isChargingCenteredSweep == false)
@@ -144,22 +175,30 @@ public class ItemEvents implements Listener {
 
             }
 
+            // Check for the sigiled shield item meta lore
             if (e.getItem().getItemMeta().getLore().equals(SigiledShield.sigiledShield.getItemMeta().getLore())) {
 
                 ClassInfo classInfo = FileStartupEvents.playerData.get(e.getPlayer().getName()).cInfo;
                 PlayerStates playerStates =  FileStartupEvents.playerStates.get(e.getPlayer().getName());
 
+                // Return if already charging sigiled shield
                 if (playerStates.isChargingSigiledShield) return;
 
-                if (!(p.isSneaking())) return; // Player needs to be using shield and crouching.
+                // Player needs to be using shield and crouching.
+                if (!(p.isSneaking())) return;
 
+                // Return if player is not using warrior class.
                 if (!(classInfo.getCurrentClass()).equals(ClassType.WARRIOR)) {
                     p.sendMessage(ChatColor.RED + "Cannot activate this weapon!");
                     return;
-                } else if (classInfo.getClassLvl() < 15) {
+                }
+                // Return if player's warrior class level is lower than level 15.
+                else if (classInfo.getClassLvl() < 15) {
                     e.getPlayer().sendMessage(ChatColor.RED + "You need to be at least level 15 to use this ability!");
                     return;
-                } else {
+                }
+                // Cases passed, entered sigiled shield ability.
+                else {
                     e.getPlayer().sendMessage(ChatColor.GRAY + "Charging " + ChatColor.GOLD +
                             "Ground Pound" + ChatColor.GRAY + "...");
                     playerStates.isChargingSigiledShield = true;
@@ -167,15 +206,22 @@ public class ItemEvents implements Listener {
                     final int[] count = {0};
                     new BukkitRunnable() {
 
+                        // Bukkit thread to control sigiled shield ability.
                         @Override
                         public void run() {
+                            // Return if player is not charging sigiled shield
                             if (FileStartupEvents.playerStates.get(e.getPlayer().getName()).isChargingSigiledShield == false)
                                 return;
+                            // Enter if not blocking with sigiled shield OR if it has been at least 3 seconds time.
+                            // TODO: Full logic seems a little funky to say out-loud. Maybe rework?
                             if (!p.isHandRaised() || count[0] >= 3) {
+                                // If it has been 3 seconds...
                                 if (count[0] >= 3) {
                                     p.sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "charged!");
                                     playerStates.sigiledShieldisCharged = true;
-                                } else {
+                                }
+                                // Assume the latter.
+                                else {
                                     p.sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "focus lost.");
                                 }
                                 playerStates.isChargingSigiledShield = false;

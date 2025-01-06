@@ -45,7 +45,7 @@ public class CantripEvents implements Listener {
             return;
         }
 
-        // Below logic is implemented for when
+        // Below logic is implemented for when magic table sequence is detected.
         if (block.getType() == Material.CRAFTING_TABLE) {
             PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
             Location location = e.getBlock().getLocation();
@@ -58,6 +58,7 @@ public class CantripEvents implements Listener {
                 }
             }
 
+            // The below block of conditionals check for certain blocks at specific coordinates
             if (p.getWorld().getBlockAt(location.getBlockX() - 1, location.getBlockY(),
                     location.getBlockZ()).getType() != Material.LECTERN) {
                 return;
@@ -80,10 +81,13 @@ public class CantripEvents implements Listener {
             Lectern lectern = (Lectern) p.getWorld().getBlockAt(location.getBlockX(),
                     location.getBlockY(), location.getBlockZ()-1).getState();
 
+            // Check that the lectern has a book in it
             if (lectern.getInventory().isEmpty()) { return; }
             p.getWorld().strikeLightningEffect(location);
             block.setType(Material.AIR);
             location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
+
+            // Create tome for player if it has not been already discovered
             if (!(pckg.tfw.isBookDiscovered(2))) {
                 SecondTomePage.resetItem();
                 ItemStack item = SecondTomePage.secondTomePage;
@@ -95,6 +99,8 @@ public class CantripEvents implements Listener {
 
                 location.getWorld().dropItemNaturally(location, item);
             }
+
+            // Update surrounding blocks
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
                     p.getWorld().getBlockAt(location.getBlockX()+x, location.getBlockY()-1,

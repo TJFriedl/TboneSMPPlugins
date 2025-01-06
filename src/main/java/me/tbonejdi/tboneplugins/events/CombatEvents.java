@@ -20,6 +20,11 @@ import java.util.ArrayList;
 
 public class CombatEvents implements Listener {
 
+    /**
+     * Event used to track when players use class weapons for attacking mobs
+     *
+     * @param e
+     */
     @EventHandler
     public static void onAttackEvent(EntityDamageByEntityEvent e) {
         if (!(e.getDamager() instanceof Player)) return;
@@ -32,10 +37,13 @@ public class CombatEvents implements Listener {
         else if (!(damager.getInventory().getItemInMainHand().getItemMeta().hasLore()))
             return;
 
+        // If the identified weapon matches the keen blade
         if (damager.getInventory().getItemInMainHand().getItemMeta().getLore()
                 .equals(KeenBlade.keenBlade.getItemMeta().getLore())) {
 
             PlayerStates state = FileStartupEvents.playerStates.get(damager.getName());
+
+            // Return if we are not charging the centered strike ability
             if (!state.isChargingCenteredStrike) return;
 
             damager.sendMessage(ChatColor.GOLD + "Centered Strike " + ChatColor.GRAY + "activated!");
@@ -50,24 +58,29 @@ public class CombatEvents implements Listener {
             return;
         }
 
+        // If the identified weapon matches the keen cleaver
         if (damager.getInventory().getItemInMainHand().getItemMeta().getLore()
                 .equals(KeenCleaver.keenCleaver.getItemMeta().getLore())) {
 
             PlayerStates state = FileStartupEvents.playerStates.get(damager.getName());
+
+            // Return if we are not charging the centered sweep ability
             if (!state.isChargingCenteredSweep) return;
 
             damager.sendMessage(ChatColor.GOLD + "Centered Sweep " + ChatColor.GRAY + "activate!");
 
-            //TODO: Work on getting something cool for a centered sweep
+            // TODO: Work on getting something cool for a centered sweep
             ArrayList<Entity> nearbyEntities = (ArrayList<Entity>) damager.getWorld().getNearbyEntities
                     (damager.getLocation(), 3.0, 3.0, 3.0);
             ArrayList<Mob> nearbyMobs = new ArrayList<>();
             Double damage = e.getDamage();
 
+            // Filter mobs from nearby entities
             for (Entity entity : nearbyEntities) {
                 if (entity instanceof Mob) nearbyMobs.add((Mob) entity);
             }
 
+            // Apply weapon affect to nearby mobs
             for (LivingEntity mob : nearbyMobs) {
                 Vector sourceLocation = damager.getLocation().toVector();
                 Vector targetLocation = mob.getLocation().toVector();
@@ -85,6 +98,11 @@ public class CombatEvents implements Listener {
         }
     }
 
+    /**
+     * Event used to track when players take damage and specific class states apply
+     *
+     * @param e
+     */
     @EventHandler
     public static void onTakeDamageEvent(EntityDamageEvent e) {
         if (!((e.getEntity()) instanceof Player)) return;
@@ -99,16 +117,19 @@ public class CombatEvents implements Listener {
             mob.setCustomNameVisible(false);
         }
 
+        // Lose centered strike focus if attacked
         if (states.isChargingCenteredStrike) {
             player.sendMessage(ChatColor.GOLD + "Centered Strike " + ChatColor.GRAY + "focus lost...");
             states.isChargingCenteredStrike = false;
         }
 
+        // Lose centered sweep focus if attacked
         if (states.isChargingCenteredSweep) {
             player.sendMessage(ChatColor.GOLD + "Centered Sweep" + ChatColor.GRAY + "focus lost...");
             states.isChargingCenteredSweep = false;
         }
 
+        // If sigiled shield is being charged and player is not actively blocking with shield
         if (states.isChargingSigiledShield && !(player.isBlocking())) {
             player.sendMessage(ChatColor.GOLD + "Ground Pound " + ChatColor.GRAY + "broken...");
             states.isChargingSigiledShield = false;

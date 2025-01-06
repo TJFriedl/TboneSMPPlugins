@@ -7,6 +7,14 @@ import org.bukkit.entity.Player;
 
 public class ParticleEffects {
 
+    /**
+     * Creates a horizonal particle (as defined in code) ring around a player.
+     *
+     * @param player
+     * @param particle
+     * @param radius
+     * @param particleCount
+     */
     public static void createHorizontalRing(Player player, Particle particle, double radius, int particleCount) {
         Location location = player.getLocation();
         World world = location.getWorld();
@@ -18,7 +26,8 @@ public class ParticleEffects {
             double y = location.getY();
             double z = location.getZ() + radius * Math.sin(angle);
 
-            Location particleLocation = new Location(world, x, y, z);
+            //Location particleLocation = new Location(world, x, y, z);
+
             world.spawnParticle(particle, location, 1);
         }
     }

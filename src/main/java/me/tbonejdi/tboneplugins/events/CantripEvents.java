@@ -20,12 +20,17 @@ import java.util.List;
 
 public class CantripEvents implements Listener {
 
+    /**
+     * Event used to strike lightning when specific blocks are placed in game.
+     *
+     * @param e
+     */
     @EventHandler
     public static void playerStrike(BlockPlaceEvent e) {
         Player p = e.getPlayer();
         Block block = e.getBlockPlaced();
 
-        /** This below is just some test code, remove this at some point. **/
+        // This below is just some test code, remove this at some point. **/
         if (block.getType() == Material.LAPIS_BLOCK) {
             int x = block.getLocation().getBlockX();
             int y = block.getLocation().getBlockY();
@@ -40,6 +45,7 @@ public class CantripEvents implements Listener {
             return;
         }
 
+        // Below logic is implemented for when
         if (block.getType() == Material.CRAFTING_TABLE) {
             PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
             Location location = e.getBlock().getLocation();

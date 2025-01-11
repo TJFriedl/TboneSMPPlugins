@@ -19,6 +19,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+/**
+ * Manages magic blocks placed around the map in-game.
+ */
 public class MagicBlockManager {
 
     private Main main;
@@ -26,6 +29,10 @@ public class MagicBlockManager {
     private File configFile = null;
     public static ArrayList<Location> tables;
 
+    /**
+     * Construct for MagicBlockManager. Uses instance of main.
+     * @param main
+     */
     public MagicBlockManager(Main main) {
         this.main = main;
         saveDefaultConfig();
@@ -34,6 +41,9 @@ public class MagicBlockManager {
         populateHashSet();
     }
 
+    /**
+     * Reload the magic blocks file into the server.
+     */
     public void reloadConfig() {
         if (this.configFile == null)
             this.configFile = new File(this.main.getDataFolder(), "magicblocks.yml");
@@ -47,12 +57,19 @@ public class MagicBlockManager {
         }
     }
 
+    /**
+     * Grab MagicBlockManager configuration file.
+     * @return
+     */
     public FileConfiguration getConfig() {
         if (this.config == null) reloadConfig();
 
         return this.config;
     }
 
+    /**
+     * Saves magic block information back to the configuration file.
+     */
     public void saveConfig() {
         if (this.config == null || this.configFile == null) return;
 
@@ -63,6 +80,9 @@ public class MagicBlockManager {
         }
     }
 
+    /**
+     * Saves magic block information back to the configuration file, if one does not exist already.
+     */
     public void saveDefaultConfig() {
         if (this.configFile == null)
             this.configFile = new File(this.main.getDataFolder(), "magicblocks.yml");
@@ -77,6 +97,9 @@ public class MagicBlockManager {
         }
     }
 
+    /**
+     * Populate the magicBlockTable "tables" hashSet with all magic table locations.
+     */
     private void populateHashSet() {
 
         tables = (ArrayList<Location>) getConfig().get("magictables");
@@ -90,6 +113,10 @@ public class MagicBlockManager {
 
     }
 
+    /**
+     * Creates hidden armor stand that acts as a text entity whenever a magic table is placed.
+     * @param location
+     */
     public static void createTextEntity(Location location) {
         Location updatedLoc = new Location(location.getWorld(), location.getBlockX() + 0.5, location.getBlockY() - 0.75,
                 location.getBlockZ() + 0.5 );
@@ -101,6 +128,10 @@ public class MagicBlockManager {
         stand.setCustomName("§6§lMagic Workbench");
     }
 
+    /**
+     * Remove the text entity whenever a magic table is broken.
+     * @param location
+     */
     public static void removeTextEntity(Location location) {
         Entity[] entities = location.getChunk().getEntities();
         Location updatedLoc = new Location(Bukkit.getWorlds().get(0), location.getBlockX() + 0.5, location.getBlockY() - 0.75,
@@ -117,6 +148,10 @@ public class MagicBlockManager {
         }
     }
 
+    /**
+     * Add metaData to the crafting table block when it is placed.
+     * @param location
+     */
     public static void updateTableData(Location location) {
         location.getBlock().setMetadata("MagicCraftingTable",
                 new FixedMetadataValue(Main.mainClassCall, "magic-craft"));

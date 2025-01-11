@@ -1,16 +1,19 @@
 package me.tbonejdi.tboneplugins.items;
 
-import me.tbonejdi.tboneplugins.items.classxp.CommonFlask;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
+/**
+ * Class for ItemHandler - responsible for registering all items during server initialization.
+ */
 public class ItemHandler {
 
     public static ArrayList<ItemStack> magicItems;
 
     /**
      * ADDS ALL OF THE CURRENT CUSTOM ITEMS INTO STATIC VARIABLES, THIS IS VERY IMPORTANT
+     * Call registerItem for every single custom item in the server.
      */
     public static void implementCustomItems() {
         CrystalFruit.registerItem();
@@ -30,6 +33,9 @@ public class ItemHandler {
         SigiledShield.registerItem();
     }
 
+    /**
+     * Populate global arrayList with all custom items registered.
+     */
     public static void populateStaticList() {
         magicItems = new ArrayList<>();
         // Crystal Fruit Instance

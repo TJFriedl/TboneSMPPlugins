@@ -5,6 +5,9 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Initializes the package used to track player information (pInfo) and player class information (cInfo).
+ */
 public class PackageInitializer {
     private static String directory;
     private Player player;
@@ -14,7 +17,11 @@ public class PackageInitializer {
     public ClassWorker cw;
     public ClassInfo cInfo;
 
-
+    /**
+     * Constructor for PackageInitializer. Takes arguments (String) directory and (Player) player.
+     * @param directory
+     * @param player
+     */
     public PackageInitializer(String directory, Player player) {
         this.directory = directory;
         this.player = player;
@@ -32,6 +39,10 @@ public class PackageInitializer {
         }
     }
 
+    /**
+     * Checks to make sure that a player's level file exists in the server file system.
+     * @throws IOException
+     */
     public void checkForPlayerLevelsFile() throws IOException {
         File f = new File(directory + "//_" + player.getName().toLowerCase() + "_lvls.txt");
         PlayerFileWorker fw;
@@ -55,6 +66,10 @@ public class PackageInitializer {
         this.fw = fw;
     }
 
+    /**
+     * Checks to make sure that a player's tome file exists in the server file system.
+     * @throws IOException
+     */
     public void checkForPlayerTomesFile() throws IOException {
         TomesFileWorker tfw;
         File f = new File(directory + "//_" + player.getName().toLowerCase() + "_tomes.txt");
@@ -74,6 +89,10 @@ public class PackageInitializer {
         this.tfw = tfw;
     }
 
+    /**
+     * Initializes player's class info. Otherwise, creates a new class file for player.
+     * @throws IOException
+     */
     public void checkForClassInit() throws IOException {
         ClassWorker cw;
         ClassInfo cInfo;

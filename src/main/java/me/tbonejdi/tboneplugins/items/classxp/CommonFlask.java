@@ -2,18 +2,22 @@ package me.tbonejdi.tboneplugins.items.classxp;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for CommonFlask item.
+ */
 public class CommonFlask {
 
     public static ItemStack commonFlask;
 
+    /**
+     * Registers item in the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.EXPERIENCE_BOTTLE, 1);
         ItemMeta im = item.getItemMeta();

@@ -14,17 +14,26 @@ import java.util.Random;
 
 public class LevelProgressionEvents implements Listener {
 
+    /**
+     * Event tracks when a player breaks an ore block, adding to their custom XP amount
+     *
+     * @param e
+     */
     @EventHandler
     public void gainXPEvent(BlockBreakEvent e) { // Change this to its own class?
 
+        // Check to make sure player is in Survival
         if (!(e.getPlayer().getGameMode().equals(GameMode.SURVIVAL))) return;
 
+        // Grab event player's information to link back to database
         PackageInitializer pckg = FileStartupEvents.playerData.get(e.getPlayer().getName());
         Player player = e.getPlayer();
         Random rand = new Random();
         int XP;
 
         Material block = e.getBlock().getType();
+
+        // Check to see which ore block was broken, and handle case specifically.
         switch (block) {
             case EMERALD_ORE:
                 XP = rand.nextInt(10) + 50;

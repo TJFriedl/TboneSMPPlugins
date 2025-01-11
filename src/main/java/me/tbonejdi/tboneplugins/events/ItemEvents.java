@@ -237,14 +237,20 @@ public class ItemEvents implements Listener {
         }
     }
 
-
+    /**
+     * Event tracks when player consumes an item caught by this event.
+     *
+     * @param e
+     */
     @EventHandler
     public static void onItemConsume(PlayerItemConsumeEvent e) {
+        // Checks if item matches crystal fruit itemMeta
         if (e.getItem().getItemMeta().equals(CrystalFruit.crystalFruit.getItemMeta())) {
             Player player = e.getPlayer();
             Random rand = new Random();
             int randomNum = rand.nextInt(19);
 
+            // Choose one out of nineteen random options.
             switch (randomNum) {
                 case 0:
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1));
@@ -306,14 +312,25 @@ public class ItemEvents implements Listener {
             }
         }
     }
+
+    /**
+     * Tracks when player consumes a "crystalFruit" item - cancels teleport event for chorus fruit
+     *
+     * @param e
+     */
     @EventHandler
     public static void onItemTeleport(PlayerTeleportEvent e) {
         if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT) &&
                 e.getPlayer().getInventory().getItemInMainHand().getItemMeta().equals(CrystalFruit.crystalFruit.getItemMeta())) {
-            e.setCancelled(true);
+            e.setCancelled(true); // Cancel teleport
         }
     }
 
+    /**
+     * Tracks event when player breaks a "large fern" block.
+     *
+     * @param e
+     */
     @EventHandler
     public static void onBlockBreak(BlockBreakEvent e) {
 
@@ -323,11 +340,14 @@ public class ItemEvents implements Listener {
         int Y = e.getBlock().getY();
         int Z = e.getBlock().getZ();
 
+        // Check in 5x5x5 chunk
         for (int x = -2; x <= 2; x++) {
             for (int y = -2; y <= 2; y++) {
                 for (int z = -2; z <= 2; z++) {
 
                     Block block = e.getBlock().getWorld().getBlockAt(X+x, Y+y, Z+z);
+
+                    // If there is an end-rod nearby, drop greenStuff
                     if (block.getType().equals(Material.END_ROD)) {
                         e.setCancelled(true);
                         e.getBlock().setType(Material.AIR);

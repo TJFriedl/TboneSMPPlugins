@@ -18,17 +18,22 @@ import java.io.IOException;
 
 public class TomeEvents implements Listener {
 
+    /**
+     * Tracks event when "tome" books are right-clicked in game.
+     * @param e
+     * @throws IOException
+     */
     @EventHandler
     public static void onTomeRightClick(PlayerInteractEvent e) throws IOException {
+        // Check to make sure we have an item and that it has metadata.
         if (e.getItem() == null) { return; }
         else if (e.getItem().getItemMeta() == null) { return; }
+
         Player p = e.getPlayer();
         PackageInitializer pckg = FileStartupEvents.playerData.get(e.getPlayer().getName());
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
-            /*
-            Preset designed for the first tome
-             */
+            // ------------ FIRST TOME ------------
             if (e.getItem().getItemMeta().getDisplayName().equals(FirstTome.firstTome.getItemMeta().getDisplayName())) {
                 if (pckg.tfw.isBookDiscovered(0)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated that tome.");
@@ -50,9 +55,7 @@ public class TomeEvents implements Listener {
                 return;
             }
 
-            /*
-            Preset designed for the second tome (with missing page)
-             */
+            // ------------ SECOND TOME (w/ missing page) ------------
             if (e.getItem().getItemMeta().getDisplayName().equals(SecondTome.secondTome.getItemMeta().getDisplayName())) {
                 if (pckg.tfw.isBookDiscovered(1)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated that tome.");
@@ -75,9 +78,8 @@ public class TomeEvents implements Listener {
                 FileStartupEvents.playerData.replace(e.getPlayer().getName(), pckg);
                 return;
             }
-            /*
-            Preset designed for the second tome's missing page
-             */
+
+            // ------------ SECOND TOME'S MISSING PAGE ------------
             if (e.getItem().getItemMeta().getDisplayName().equals(SecondTomePage.secondTomePage.getItemMeta().getDisplayName())) {
                 if (pckg.tfw.isBookDiscovered(2)) {
                     p.sendMessage(ChatColor.GRAY + "You've already activated this page.");

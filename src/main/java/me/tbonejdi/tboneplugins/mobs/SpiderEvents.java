@@ -18,6 +18,10 @@ import java.util.Random;
 
 public class SpiderEvents implements Listener {
 
+    /**
+     * Event tracks when a player is attacked by a leaping spider mob.
+     * @param e
+     */
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Spider && e.getDamager().getCustomName() != null &&
@@ -27,6 +31,10 @@ public class SpiderEvents implements Listener {
         }
     }
 
+    /**
+     * Event tracks when a leaping spider takes damage.
+     * @param e
+     */
     @EventHandler
     public void onSpiderDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof  Spider && e.getEntity().getCustomName() != null &&
@@ -51,12 +59,19 @@ public class SpiderEvents implements Listener {
         }
     }
 
+    /**
+     * Event tracks when a spider is spawned and casts it to a leaping spider based on probability.
+     *
+     * @param e
+     */
     @EventHandler
     public void castSpiderSpawn(CreatureSpawnEvent e) {
 
         int seed = new Random().nextInt(9);
 
-        if (!(e.getEntity() instanceof Spider) || e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.COMMAND)) return;
+        // Return if not a spider or if mob was summoned by a command.
+        if (!(e.getEntity() instanceof Spider) ||
+                e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.COMMAND)) return;
 
         Spider spider = (Spider) e.getEntity();
 
@@ -64,6 +79,12 @@ public class SpiderEvents implements Listener {
 
     }
 
+    /**
+     * Casts spider to a leveled spider.
+     *
+     * @param spider
+     * @return instance of leveled spider.
+     */
     public static Spider castToLeveledSpider(Spider spider) {
 
         int level = new Random().nextInt(20) + 1;
@@ -79,6 +100,12 @@ public class SpiderEvents implements Listener {
 
     }
 
+    /**
+     * Casts spider to a leaping spider.
+     *
+     * @param spider
+     * @return instance of leaping spider.
+     */
     public static Spider castToLeapingSpider(Spider spider) {
 
         spider.setCustomName(ChatColor.DARK_GRAY + "Leaping Spider §c(100/100❤)");
@@ -86,6 +113,7 @@ public class SpiderEvents implements Listener {
         attribute.setBaseValue(100);
         spider.setHealth(100);
 
+        // Create a new thread that acts as the implemented "brains" of the leaping spider.
         new BukkitRunnable(){
             @Override
             public void run() {
@@ -128,6 +156,12 @@ public class SpiderEvents implements Listener {
         return spider;
     }
 
+    /**
+     * Helper method for parsing level of spider mob.
+     *
+     * @param customName
+     * @return level
+     */
     private int parseLevel(String customName) {
         String level = "";
         for (int i = customName.lastIndexOf('.') + 2; i < customName.length(); i++) {

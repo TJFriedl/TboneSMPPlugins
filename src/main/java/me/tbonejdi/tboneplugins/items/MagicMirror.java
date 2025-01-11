@@ -10,11 +10,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for MagicMirror item.
+ */
 public class MagicMirror {
 
     public static ItemStack magicMirror;
     public static ArrayList<Material> recipeList = new ArrayList<>();
 
+    /**
+     * Register item to the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.CLOCK, 1);
         ItemMeta im = item.getItemMeta();

@@ -12,8 +12,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
+
 public class MonsterEvents implements Listener {
 
+    /**
+     * Event tracks when a mob spawns in game
+     *
+     * @param e
+     */
     @EventHandler
     public void onMobSpawn(EntitySpawnEvent e) {
 
@@ -28,6 +34,7 @@ public class MonsterEvents implements Listener {
         mob.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mob.getAttribute(Attribute.GENERIC_MAX_HEALTH)
                 .getBaseValue() + (0.5 * level));
 
+        // Run a thread that prints level and health bar if visible to player.
         new BukkitRunnable() {
 
             @Override
@@ -53,9 +60,14 @@ public class MonsterEvents implements Listener {
 
     }
 
+    /**
+     * Event tracks when a mob takes damage in game.
+     * @param e
+     */
     @EventHandler
     public void onMobDamage(EntityDamageEvent e) {
 
+        // Checks for an instance of a "Leaping" mob. In this case, a spider.
         if (e.getEntity() instanceof Mob && e.getEntity().getCustomName() != null &&
                 !e.getEntity().getCustomName().contains("Leaping")) {
             Mob mob = (Mob) e.getEntity();
@@ -69,8 +81,13 @@ public class MonsterEvents implements Listener {
         }
     }
 
+    /**
+     * Event tracks when a mob dies in game.
+     *
+     * @param e
+     */
     @EventHandler
-    public void onMobDamage(EntityDeathEvent e) {
+    public void onMobDeath(EntityDeathEvent e) {
 
         if (e.getEntity() instanceof Mob && e.getEntity().getCustomName() != null) {
             e.getEntity().setCustomName(null);
@@ -79,6 +96,12 @@ public class MonsterEvents implements Listener {
 
     }
 
+    /**
+     * Helper method used to parse the level of a mob the has been spawned.
+     *
+     * @param customName
+     * @return
+     */
     private int parseLevel(String customName) {
         String level = "";
         for (int i = customName.lastIndexOf('.') + 2; i < customName.length(); i++) {

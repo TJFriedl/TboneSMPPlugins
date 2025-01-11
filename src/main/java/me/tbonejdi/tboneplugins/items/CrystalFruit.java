@@ -12,10 +12,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for CrystalFruit item.
+ */
 public class CrystalFruit {
 
     public static ItemStack crystalFruit;
 
+    /**
+     * Registers item in the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.CHORUS_FRUIT, 1);
         ItemMeta im = item.getItemMeta();

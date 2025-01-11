@@ -1,7 +1,6 @@
 package me.tbonejdi.tboneplugins;
 
 import me.tbonejdi.tboneplugins.commands.*;
-import me.tbonejdi.tboneplugins.enchants.CustomEnchants;
 import me.tbonejdi.tboneplugins.fileadministrators.*;
 import me.tbonejdi.tboneplugins.items.*;
 import me.tbonejdi.tboneplugins.tomes.TomesCommands;
@@ -31,6 +30,11 @@ public final class Main extends JavaPlugin implements Listener {
     public DataManager data;
     public MagicBlockManager magicBlock;
 
+    /**
+     * Handles the startup logic for the server.
+     *
+     * This method should not be called within the API itself. Is called by the server service handler.
+     */
     @Override
     public void onEnable() {
 
@@ -40,39 +44,37 @@ public final class Main extends JavaPlugin implements Listener {
         this.data = new DataManager(mainClassCall);
         this.magicBlock = new MagicBlockManager(mainClassCall);
 
-        // Plugin startup logic
+        // Prints startup message to terminal
         getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Starting up...");
 
-
-        /*
-            IMPORTANT!! This enables all of the events we have wrote. Please do not delete.
-         */
+        // Register all spigot-related events outside of Main.java
         EventRegistrar.EnableAllEvents(mainClassCall);
 
-         /*
-            Score board functionality (in the main method)
-          */
+        // Register all spigot-related events in Main.java
         this.getServer().getPluginManager().registerEvents(this, this);
 
-         /*
-            Registers all the custom items into static objects
-          */
+        // Register custom items defined in the plugin
         getServer().getConsoleSender().sendMessage("§6§lTboneSMPPlugin: Registering Items...");
         ItemHandler.implementCustomItems();
         ItemHandler.populateStaticList();
 
+        // REGISTER ALL CLASS COMMANDS DOWN BELOW
+        // ------------ Class Commands ------------
         ClassCommands t = new ClassCommands();
         getCommand("select").setExecutor(t);
         getCommand("chooseclass").setExecutor(t);
 
+        // ------------ Tome Commands -----------
         TomesCommands tc = new TomesCommands();
         getCommand("tomes").setExecutor(tc);
         getCommand("detecttome").setExecutor(tc);
 
+        // ----------- Item Commands ------------
         ItemCommands ic = new ItemCommands();
         getCommand("diamonddetect").setExecutor(ic);
         getCommand("magicitems").setExecutor(ic);
 
+        // ----------- Player Info Commands ------------
         PlayerInfoCommands pic = new PlayerInfoCommands();
         getCommand("setplayerxp").setExecutor(pic);
         getCommand("setplayerlevel").setExecutor(pic);
@@ -86,27 +88,21 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("printlocation").setExecutor(pic);
         getCommand("quit").setExecutor(pic);
 
-        EnchantCommands ec = new EnchantCommands();
-        getCommand("telepathy").setExecutor(ec);
-        getCommand("blazedtip").setExecutor(ec);
-
+        // ------------ Entity Commands ------------
         EntityCommands enc = new EntityCommands();
         getCommand("removechunkentities").setExecutor(enc);
         getCommand("leapingspider").setExecutor(enc);
         getCommand("leveledspider").setExecutor(enc);
 
+        // ------------ World Commands ------------
         WorldCommands wc = new WorldCommands();
         getCommand("sendtoaether").setExecutor(wc);
         getCommand("returnfromaether").setExecutor(wc);
         getCommand("getcurrenttime").setExecutor(wc);
 
 
-        // CustomEnchants.register(); //TODO: This has been disabled to test new implementation of custom plugins
-
-         /*
-              RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to
-              be a static call from main...
-          */
+        // RESETS THE SCOREBOARDS IN THE CASE THAT THE SERVER EXECUTES /reload, might need to be changed in order to
+        // be a static call from main...
         if(!Bukkit.getOnlinePlayers().isEmpty()) {
             for (Player online: Bukkit.getOnlinePlayers()) {
                 try {
@@ -124,9 +120,7 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
 
-        /**
-         * This is disabled for now. Look at issues later and look into why there are potential errors?
-         */
+          //TODO: This is disabled for now. Look at issues later and look into why there are potential errors?
 //        getServer().getConsoleSender().sendMessage("§6Creating \"Aether\" dimension... may take a minute.");
 //        WorldCreator c = new WorldCreator("aether");
 //        c.type(WorldType.AMPLIFIED);
@@ -135,13 +129,17 @@ public final class Main extends JavaPlugin implements Listener {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "TboneSMPPlugins: Boot success!");
     }
 
+    /**
+     * Handles shutdown logic for the server.
+     *
+     * This method should not be called within the API itself. Is called by the server service handler.
+     */
     @Override
     public void onDisable() {
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "TboneSMP plugin shutting down!");
         this.magicBlock.getConfig().set("magictables", MagicBlockManager.tables);
         this.magicBlock.saveConfig();
 
-        // TODO: Make offset of 0.5 to actually grab entities (has this already been done?)
         if (MagicBlockManager.tables != null) {
             for (Location loc : MagicBlockManager.tables) {
                 Entity[] entities = loc.getChunk().getEntities();
@@ -153,18 +151,41 @@ public final class Main extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Handles logic to create player scoreboard.
+     *
+     * This method currently calls "createBoard" and "start", two other methods responsible in the process
+     * of creating and deploying scoreboards to each user.
+     *
+     * @param event
+     * @throws IOException
+     */
     @EventHandler
     public void onJoin(PlayerJoinEvent event) throws IOException {
         createBoard(event.getPlayer());
         start(event.getPlayer());
     }
 
+    /**
+     * Handles logic for scoreboard teardown.
+     *
+     * Checks to make sure that scoreboard exists for each user (expected to exist). If it does, then the event handler
+     * calls the corresponding "stop" function.
+     *
+     * @param event
+     */
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         LobbyBoard board = new LobbyBoard(event.getPlayer().getUniqueId());
         if (board.hasID()) { board.stop(); }
     }
 
+    /**
+     * TODO: Move or delete this function eventually. I believe this was made for some type of test and it is not
+     * entirely needed for the functionality of this plugin.
+     *
+     * @param e
+     */
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         if (e.getBlock().getType().equals(Material.DIAMOND_ORE)) {
@@ -181,6 +202,13 @@ public final class Main extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Control logic for each player's scoreboard.
+     *
+     * Features a case counter that allows for an "animation" of a cascading character in the title.
+     * @param player
+     * @throws IOException
+     */
     public void start(Player player) throws IOException{
         taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 
@@ -234,6 +262,14 @@ public final class Main extends JavaPlugin implements Listener {
         }, 0, 10);
     }
 
+    /**
+     * Creates player scoreboard.
+     *
+     * Called once a player joins the server using this plugin. Will instantiate the scoreboard and place the UID of
+     * scoreboard in Bukkit storage. This is where different fields can be defined for the scoreboard.
+     * @param player
+     * @throws IOException
+     */
     public void createBoard(Player player) throws IOException {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
@@ -270,6 +306,13 @@ public final class Main extends JavaPlugin implements Listener {
 
     }
 
+    /**
+     * Handles in-game time to real day/night time conversion.
+     *
+     * Allows for the player to see what time of day it is in game with a more readable format.
+     * @param player
+     * @return
+     */
     public static String handleInGameTime(Player player) {
 
         long currentTime = player.getWorld().getFullTime();

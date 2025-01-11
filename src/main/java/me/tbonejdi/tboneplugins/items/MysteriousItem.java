@@ -14,10 +14,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for MysteriousItem item.
+ */
 public class MysteriousItem {
 
     public static ItemStack mysteriousItem;
 
+    /**
+     * Register item to the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.BROWN_CANDLE,1);
         ItemMeta im = item.getItemMeta();

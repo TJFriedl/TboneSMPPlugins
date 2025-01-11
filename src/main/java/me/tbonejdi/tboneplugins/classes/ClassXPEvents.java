@@ -12,6 +12,13 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 public class ClassXPEvents implements Listener {
 
+    /**
+     * Handles event when a mob is killed by a player.
+     *
+     * The case statement below handles the logic for dispersing earned XP to each player once an enemy is killed
+     * in game.
+     * @param e
+     */
     @EventHandler
     public static void onMobKill(EntityDeathEvent e) {
         if (!(e.getEntity().getKiller() instanceof Player)) { return; } // Prevents next line errors

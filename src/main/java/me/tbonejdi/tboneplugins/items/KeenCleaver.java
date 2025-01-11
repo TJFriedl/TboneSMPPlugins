@@ -10,11 +10,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for KeenCleaver item.
+ */
 public class KeenCleaver {
 
     public static ItemStack keenCleaver;
     public static ArrayList<Material> recipeList = new ArrayList<>();
 
+    /**
+     * Register item to the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.IRON_AXE, 1);
         ItemMeta meta = item.getItemMeta();

@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Lectern;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,17 +16,21 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CantripEvents implements Listener {
 
+    /**
+     * Event used to strike lightning when specific blocks are placed in game.
+     *
+     * @param e
+     */
     @EventHandler
     public static void playerStrike(BlockPlaceEvent e) {
         Player p = e.getPlayer();
         Block block = e.getBlockPlaced();
 
-        /** This below is just some test code, remove this at some point. **/
+        // This below is just some test code, remove this at some point. **/
         if (block.getType() == Material.LAPIS_BLOCK) {
             int x = block.getLocation().getBlockX();
             int y = block.getLocation().getBlockY();
@@ -42,6 +45,7 @@ public class CantripEvents implements Listener {
             return;
         }
 
+        // Below logic is implemented for when magic table sequence is detected.
         if (block.getType() == Material.CRAFTING_TABLE) {
             PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
             Location location = e.getBlock().getLocation();
@@ -54,6 +58,7 @@ public class CantripEvents implements Listener {
                 }
             }
 
+            // The below block of conditionals check for certain blocks at specific coordinates
             if (p.getWorld().getBlockAt(location.getBlockX() - 1, location.getBlockY(),
                     location.getBlockZ()).getType() != Material.LECTERN) {
                 return;
@@ -76,10 +81,13 @@ public class CantripEvents implements Listener {
             Lectern lectern = (Lectern) p.getWorld().getBlockAt(location.getBlockX(),
                     location.getBlockY(), location.getBlockZ()-1).getState();
 
+            // Check that the lectern has a book in it
             if (lectern.getInventory().isEmpty()) { return; }
             p.getWorld().strikeLightningEffect(location);
             block.setType(Material.AIR);
             location.getWorld().dropItemNaturally(location, new ItemStack(MagicTable.magicTable));
+
+            // Create tome for player if it has not been already discovered
             if (!(pckg.tfw.isBookDiscovered(2))) {
                 SecondTomePage.resetItem();
                 ItemStack item = SecondTomePage.secondTomePage;
@@ -91,6 +99,8 @@ public class CantripEvents implements Listener {
 
                 location.getWorld().dropItemNaturally(location, item);
             }
+
+            // Update surrounding blocks
             for (int x = -1; x <= 1; x++) {
                 for (int z = -1; z <= 1; z++) {
                     p.getWorld().getBlockAt(location.getBlockX()+x, location.getBlockY()-1,
@@ -102,6 +112,6 @@ public class CantripEvents implements Listener {
             return;
         }
 
-        return;
+        return; // TODO: Investigate this eventually. I might have put this here for a reason lol.
     }
 }

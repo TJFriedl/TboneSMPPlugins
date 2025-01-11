@@ -11,6 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 
+/**
+ * Represents the object for the server's class information manager. Allows for mechanisms such as reloading a player
+ * configuration, saving, returning, and updating.
+ */
 public class ClassInfoManager {
 
     private Main main;
@@ -24,6 +28,9 @@ public class ClassInfoManager {
         saveConfig();
     }
 
+    /**
+     * Refreshes a player's configuration to the server file system, reflective of the server's current data.
+     */
     public void reloadConfig() {
         if (this.configFile == null)
             this.configFile = new File(this.main.getDataFolder() + "//playerfiles//" + player.getUniqueId(), "classdata.yml");
@@ -39,12 +46,20 @@ public class ClassInfoManager {
         }
     }
 
+    /**
+     * Grabs server configuration.
+     *
+     * @return server configuration.
+     */
     public FileConfiguration getConfig() {
         if (this.config == null) reloadConfig();
 
         return this.config;
     }
 
+    /**
+     * Saves player's configuration data to the server filesystem.
+     */
     public void saveConfig() {
         if (this.config == null || this.configFile == null) return;
 
@@ -55,6 +70,9 @@ public class ClassInfoManager {
         }
     }
 
+    /**
+     * Saves player's configuration file if one has not been created already.
+     */
     public void saveDefaultConfig() {
         if (this.configFile == null)
             this.configFile = new File(this.main.getDataFolder() + "//playerfiles//" + player.getUniqueId(), "classdata.yml");

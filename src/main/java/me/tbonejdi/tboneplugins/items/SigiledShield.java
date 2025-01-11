@@ -10,11 +10,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for SigiledShield item.
+ */
 public class SigiledShield {
 
     public static ItemStack sigiledShield;
     public static ArrayList<Material> recipeList = new ArrayList<>();
 
+    /**
+     * Registers item to the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.SHIELD, 1);
         ItemMeta meta = item.getItemMeta();

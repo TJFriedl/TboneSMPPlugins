@@ -10,10 +10,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for ItemManager item.
+ */
 public class ItemManager {
 
     public static ItemStack wand;
 
+    /**
+     * Registers item to the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
         ItemMeta meta = item.getItemMeta();

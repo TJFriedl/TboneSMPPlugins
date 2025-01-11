@@ -11,15 +11,26 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Custom Inventory GUI responsible for allowing players to choose a magic item.
+ */
 public class MagicItemsList implements InventoryHolder {
 
     private Inventory inv;
 
+    /**
+     * Constructor for MagicItemsList
+     */
     public MagicItemsList() {
         inv = Bukkit.createInventory(this, 18, "Magic items");
         init();
     }
 
+    /**
+     * Gets specific inventory invoked by player.
+     *
+     * @return
+     */
     @Override
     public Inventory getInventory() { return inv; }
 
@@ -33,6 +44,14 @@ public class MagicItemsList implements InventoryHolder {
         inv.setItem(inv.getSize()-1, item);
     }
 
+    /**
+     * Helper method for creating special items to be placed in the GUI
+     *
+     * @param name
+     * @param mat
+     * @param lore
+     * @return
+     */
     private ItemStack createItem(String name, Material mat, List<String> lore) {
         ItemStack item = new ItemStack(mat, 1);
         ItemMeta meta = item.getItemMeta();

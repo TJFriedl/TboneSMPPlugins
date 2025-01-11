@@ -12,10 +12,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for DiamondWand item.
+ */
 public class DiamondWand {
 
     public static ItemStack diamondWand;
 
+    /**
+     * Registers item in the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.STICK, 1);
         ItemMeta im = item.getItemMeta();

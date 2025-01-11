@@ -9,11 +9,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for KeenBlade item.
+ */
 public class KeenBlade {
 
     public static ItemStack keenBlade;
     public static ArrayList<Material> recipeList = new ArrayList<>();
 
+    /**
+     * Register item to the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta meta = item.getItemMeta();

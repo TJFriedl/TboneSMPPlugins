@@ -2,14 +2,20 @@ package me.tbonejdi.tboneplugins.fileadministrators;
 
 import java.io.*;
 
+/**
+ * File I/O handler for general player information. Uses a write and read buffer in order to handle file operations
+ * to the server file system.
+ */
 public class PlayerFileWorker {
 
     private File currentFile;
     private BufferedWriter writer;
     private BufferedReader reader;
 
-    /*
-     * Default constructor
+    /**
+     * Construct for PlayerFileWorker. Uses instance of file and creates new reader/writer
+     * @param currentFile
+     * @throws IOException
      */
     public PlayerFileWorker(File currentFile) throws IOException {
         this.currentFile = currentFile;
@@ -18,6 +24,11 @@ public class PlayerFileWorker {
 
     }
 
+    /**
+     * Initializes player files for player information.
+     * @param username
+     * @throws IOException
+     */
     public void initialize(String username) throws IOException {
         // Firstly, we are assuming that the current file we are looking at is new, so
         // it should be empty...
@@ -30,18 +41,11 @@ public class PlayerFileWorker {
         writer.close();
     }
 
-    public void saveToFile(PlayerInfo p) throws IOException {
-        resetReader();
-        writer = new BufferedWriter(new FileWriter(currentFile));
-        writer.write("LEVELS FILE:\n");
-        writer.write("Player Info:\n");
-        writer.write(p.getName() + "\n");
-        writer.write("CURRENT LVL:\n" + p.getLevel() + "\n");
-        writer.write("EXP:\n" + p.getExp() + "\n");
-        writer.write("EXP NEEDED:\n" + p.getMaxExp() + "\n");
-        writer.close();
-    }
-
+    /**
+     * Grabs the current server level for a player.
+     * @return Player's current level.
+     * @throws IOException
+     */
     public int parseLevel() throws IOException {
         resetReader();
         String line = reader.readLine();
@@ -57,6 +61,11 @@ public class PlayerFileWorker {
         return level;
     }
 
+    /**
+     * Grabs the current amount of experience.
+     * @return Player's current experience.
+     * @throws IOException
+     */
     public int parseExp() throws IOException {
         resetReader();
         String line = reader.readLine();
@@ -73,6 +82,11 @@ public class PlayerFileWorker {
         return exp;
     }
 
+    /**
+     * Grabs the maximum amount of experience associated with player's server level.
+     * @return
+     * @throws IOException
+     */
     public int parseMaxExp() throws IOException {
         resetReader();
         String line = reader.readLine();
@@ -89,6 +103,26 @@ public class PlayerFileWorker {
         return maxExp;
     }
 
+    /**
+     * Saves player information back to file to be sent out to the server file system.
+     * @param p
+     * @throws IOException
+     */
+    public void saveToFile(PlayerInfo p) throws IOException {
+        resetReader();
+        writer = new BufferedWriter(new FileWriter(currentFile));
+        writer.write("LEVELS FILE:\n");
+        writer.write("Player Info:\n");
+        writer.write(p.getName() + "\n");
+        writer.write("CURRENT LVL:\n" + p.getLevel() + "\n");
+        writer.write("EXP:\n" + p.getExp() + "\n");
+        writer.write("EXP NEEDED:\n" + p.getMaxExp() + "\n");
+        writer.close();
+    }
+
+    /**
+     * Deletes player level file (WARNING - careful usage)
+     */
     public void deleteFile() {
         currentFile.delete();
     }
@@ -96,7 +130,7 @@ public class PlayerFileWorker {
     /**
      * This method is meant to re-initialize the reader to the beginning of a file
      * every time a method in this class is called.
-     *
+     * @throws IOException
      */
     private void resetReader() throws IOException {
         reader = new BufferedReader(new FileReader(currentFile));

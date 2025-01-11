@@ -4,6 +4,9 @@ import org.bukkit.entity.Player;
 
 import java.io.*;
 
+/**
+ * Responsible for handling player tome file I/O.
+ */
 public class TomesFileWorker {
 
     private boolean[] bookCollection = new boolean[9];
@@ -12,6 +15,13 @@ public class TomesFileWorker {
     private BufferedReader reader;
     private Player player;
 
+    /**
+     * Constructor for TomeFileWorker. Takes tomeFile and player as arguments.\
+     *
+     * @param tomeFile
+     * @param player
+     * @throws IOException
+     */
     public TomesFileWorker(File tomeFile, Player player) throws IOException {
         this.tomeFile = tomeFile;
         this.reader = new BufferedReader(new FileReader(tomeFile));
@@ -20,6 +30,12 @@ public class TomesFileWorker {
         updateBookCollection();
     }
 
+    /**
+     * Initialize player's tome file data.
+     *
+     * @param username
+     * @throws IOException
+     */
     public void init(String username) throws IOException {
         writer.write("TOMES FILE:\n");
         writer.write("Player name:\n");
@@ -46,6 +62,10 @@ public class TomesFileWorker {
         writer.close();
     }
 
+    /**
+     * Save player's tome information from server to tome file. Gets sent back out to server file system.
+     * @throws IOException
+     */
     public void saveToFile() throws IOException {
         resetReader();
         writer = new BufferedWriter(new FileWriter(tomeFile));
@@ -74,6 +94,11 @@ public class TomesFileWorker {
         writer.close();
     }
 
+    /**
+     * Updates books found by player. Gets saved in player data and server file eventually.
+     *
+     * @throws IOException
+     */
     public void updateBookCollection() throws IOException {
         resetReader();
         for (int i = 0; i < 6; i++)  { reader.readLine(); }
@@ -86,6 +111,12 @@ public class TomesFileWorker {
         }
     }
 
+    /**
+     * Checks to see if player has discovered a specific book/tome.
+     *
+     * @param bookNum
+     * @return
+     */
     public boolean isBookDiscovered(int bookNum) {
         if ((bookNum < 0) || (bookNum > 8)) {
             player.sendMessage("Value was flagged false because number was out of range.");
@@ -94,16 +125,31 @@ public class TomesFileWorker {
         return bookCollection[bookNum];
     }
 
+    /**
+     * Sets a player's specific book status to found/not-found.
+     *
+     * @param bookNum
+     * @param truthVal
+     * @throws IOException
+     */
     public void setBookStatus(int bookNum, boolean truthVal) throws IOException {
         if (bookNum >= bookCollection.length || bookNum < 0) { return; }
         // Once this conditional has been passed...
         bookCollection[bookNum] = truthVal;
     }
 
+    /**
+     * Deletes player tome file (WARNING - use with caution)
+     */
     public void deleteFile() {
-        tomeFile.delete(); // This should delete the file?
+        tomeFile.delete();
     }
 
+    /**
+     * Resets tome file pointer to the head of the file.
+     *
+     * @throws IOException
+     */
     private void resetReader() throws IOException {
         reader = new BufferedReader(new FileReader(tomeFile));
     }

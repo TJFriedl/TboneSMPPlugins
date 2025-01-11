@@ -14,6 +14,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Custom Inventory GUI for selecting a tome in game.
+ */
 public class TomeSelection implements InventoryHolder {
 
     private Inventory inv;
@@ -21,6 +24,11 @@ public class TomeSelection implements InventoryHolder {
     public static ItemStack tutorialBook;
     public static ItemStack magicCraftingBook;
 
+    /**
+     * Constructor for TomeSelection. Takes player as an argument.
+     *
+     * @param player
+     */
     public TomeSelection(Player player) {
         this.player = player;
         inv = Bukkit.createInventory(this, 36, ChatColor.BOLD +
@@ -28,6 +36,9 @@ public class TomeSelection implements InventoryHolder {
         init();
     }
 
+    /**
+     * Initializes the tome GUI in game.
+     */
     private void init() {
         ItemStack item = createItem(" ", Material.GRAY_STAINED_GLASS_PANE, Collections.singletonList(""));
         for (int i = 0; i < 36; i++) {
@@ -69,6 +80,13 @@ public class TomeSelection implements InventoryHolder {
         if (pckg.tfw.isBookDiscovered(1)) { inv.setItem(7, item6); }
     }
 
+    /**
+     * Helper method for creating items to be placed in the inventory GUI.
+     * @param name
+     * @param mat
+     * @param lore
+     * @return
+     */
     private ItemStack createItem(String name, Material mat, List<String> lore) {
         ItemStack item = new ItemStack(mat, 1);
         ItemMeta meta = item.getItemMeta();
@@ -79,6 +97,11 @@ public class TomeSelection implements InventoryHolder {
         return item;
     }
 
+    /**
+     * Grabs the instance of the GUI created.
+     *
+     * @return instance of TomeSelection GUI.
+     */
     @Override
     public Inventory getInventory() {
         return inv;

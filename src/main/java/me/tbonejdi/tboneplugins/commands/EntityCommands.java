@@ -10,6 +10,15 @@ import org.bukkit.entity.Spider;
 
 public class EntityCommands implements CommandExecutor {
 
+    /**
+     * Handles event for entity command capture.
+     *
+     * @param sender
+     * @param cmd
+     * @param s
+     * @param args
+     * @return
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if (!(sender instanceof Player)) {
@@ -18,7 +27,8 @@ public class EntityCommands implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-        //TODO: Deal with apparent error coming from this?
+        // ------------ "removechunkentities" command ------------
+        // TODO: Deal with apparent error coming from this?
         if (cmd.getName().equalsIgnoreCase("removechunkentities")) {
             Entity[] entities = p.getLocation().getChunk().getEntities();
 
@@ -32,10 +42,12 @@ public class EntityCommands implements CommandExecutor {
             p.sendMessage("Chunk entities removed!");
             return true;
         }
+        // ------------ "leapingspider" command ------------
         if (cmd.getName().equalsIgnoreCase("leapingspider")) {
             SpiderEvents.castToLeapingSpider(p.getWorld().spawn(p.getLocation(), Spider.class));
             return true;
         }
+        // ------------ "leveledspider" command ------------
         if (cmd.getName().equalsIgnoreCase("leveledspider")) {
             SpiderEvents.castToLeveledSpider(p.getWorld().spawn(p.getLocation(), Spider.class));
         }

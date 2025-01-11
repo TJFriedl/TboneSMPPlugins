@@ -11,12 +11,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for FirstTome item.
+ */
 public class FirstTome {
 
     public static ItemStack firstTome;
 
+    /**
+     * Re-registers the item in the server.
+     */
     public static void resetItem() { registerItem(); }
 
+    /**
+     * Registers item in the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.BOOK, 1);
         ItemMeta im = item.getItemMeta();
@@ -31,6 +40,12 @@ public class FirstTome {
         firstTome = item;
     }
 
+    /**
+     * Checks to make sure that the book is meant for the person consuming it.
+     * @param book
+     * @param player
+     * @return
+     */
     public static boolean isIntendedUser(ItemStack book, Player player) {
 
         List<String> lore = book.getItemMeta().getLore();

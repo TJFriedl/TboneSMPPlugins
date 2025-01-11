@@ -17,18 +17,29 @@ import java.util.List;
 
 public class MobDropEvents implements Listener {
 
+    /**
+     * Event handles when a mob is killed by a player in-game.
+     *
+     * @param e
+     */
     @EventHandler
     public void onMobDeath(EntityDeathEvent e) {
+
+        // Return if mob was NOT killed by a player.
         if (e.getEntity().getKiller() == null || (!(e.getEntity().getKiller() instanceof Player))) { return; }
+        // Return if mob killed itself (it happens!)
         else if (e.getEntity().getKiller() == e.getEntity()) { return; }
 
+        // Grab player filesystem
         Player player = e.getEntity().getKiller();
         PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
 
         if (pckg.pInfo.getLevel() < 1) { return; } // Needs at least player lv. 1
         if (!pckg.tfw.isBookDiscovered(0)) { // Eventually check if item is already on ground
 
-            FirstTome.resetItem();
+            FirstTome.resetItem(); // TODO: Check why this is needed. Might just be to ensure data wasn't lossed.
+
+            // Create first tome book.
             ItemStack item = FirstTome.firstTome;
             ItemMeta im = item.getItemMeta();
             List<String> lore = im.getLore();
@@ -36,6 +47,7 @@ public class MobDropEvents implements Listener {
             im.setLore(lore);
             item.setItemMeta(im);
 
+            // Spawn the book where the mob died.
             LivingEntity mob = e.getEntity();
             mob.getLocation().getWorld().dropItemNaturally(mob.getLocation(), item);
             e.getEntity().getKiller().sendMessage(ChatColor.YELLOW + "It seems the creature has dropped a strange book?");

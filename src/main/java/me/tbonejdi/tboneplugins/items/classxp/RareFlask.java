@@ -8,10 +8,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for RareFlask item.
+ */
 public class RareFlask {
 
     public static ItemStack rareFlask;
 
+    /**
+     * Registers item in the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.EXPERIENCE_BOTTLE, 1);
         ItemMeta im = item.getItemMeta();

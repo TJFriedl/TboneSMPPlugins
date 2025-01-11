@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
@@ -21,17 +20,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class InventoryEvents implements Listener {
-
+    /**
+     * Event tracks when a slot in an inventory is clicked.
+     *
+     * @param e
+     * @throws IOException
+     */
     @EventHandler
     public void onClick(InventoryClickEvent e) throws IOException {
         if (e.getClickedInventory() == null) { return; }
 
-        /*
-        Is an instance of the class selection test inventory
-         */
+        // ------------ ClassSelection Inventory ------------
         if (e.getClickedInventory().getHolder() instanceof ClassSelection) {
             PackageInitializer pckg = FileStartupEvents.playerData.get(e.getWhoClicked().getName());
             e.setCancelled(true);
@@ -51,17 +53,14 @@ public class InventoryEvents implements Listener {
             return;
         }
 
-        /*
-        Is an instance of the TomeSelection inventory screen
-         */
+        // ------------ TomeSelection Inventory ------------
         if (e.getClickedInventory().getHolder() instanceof TomeSelection) {
             e.setCancelled(true);
             Player p = (Player) e.getWhoClicked();
             if (e.getCurrentItem() == null) { return; }
 
-            /*
-            This is only in place for the default book, needs to be updated once more books are added
-             */
+
+            // Player selected tutorialBook
             if (e.getCurrentItem().getItemMeta().equals(TomeSelection.tutorialBook.getItemMeta())) {
                 ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
                 BookMeta meta = (BookMeta) book.getItemMeta();
@@ -84,6 +83,7 @@ public class InventoryEvents implements Listener {
                 return;
             }
 
+            // Player selected magicCraftingBook
             if (e.getCurrentItem().getItemMeta().equals(TomeSelection.magicCraftingBook.getItemMeta())) {
                 //Add different tiers so that we can have players "unlock" the missing pages.
                 PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
@@ -125,19 +125,22 @@ public class InventoryEvents implements Listener {
                 return;
             }
 
-
+            // Player selected book - has not been 'discovered' just yet.
             if (e.getCurrentItem().getType() == Material.BOOK) {
                 p.sendMessage(ChatColor.GRAY + "Hmmm... It seems this knowledge is still undiscovered.");
                 return;
             }
 
+            // Barrier - exit symbol.
             if (e.getCurrentItem().getType() == Material.BARRIER) {
                 p.closeInventory();
             }
         }
 
+        // ------------ MagicItemsList Inventory ------------
         if (e.getClickedInventory().getHolder() instanceof MagicItemsList) {
 
+            // Barrier - exit symbol.
             if (e.getCurrentItem().getType().equals(Material.BARRIER)) {
                 e.getWhoClicked().closeInventory();
                 return;
@@ -152,25 +155,30 @@ public class InventoryEvents implements Listener {
             player.openInventory(gui.getInventory());
         }
 
-        if (e.getClickedInventory().getHolder() instanceof  MagicItemAmount) {
+        // ------------ MagicItemAmount Inventory ------------
+        if (e.getClickedInventory().getHolder() instanceof MagicItemAmount) {
 
             Player player = (Player) e.getWhoClicked();
             PlayerStates states = FileStartupEvents.playerStates.get(player.getName());
             ItemStack item = states.magicItemGive;
 
+            // If player clicked a null type, return.
             if (e.getCurrentItem().getType().equals(null)) return;
 
+            // Barrier - exit symbol.
             if (e.getCurrentItem().getType().equals(Material.BARRIER)) {
                 e.getWhoClicked().closeInventory();
                 states.magicItemGive = null;
                 FileStartupEvents.playerStates.replace(player.getName(), states);
                 return;
             }
-
+            // NEXT CONDITIONALS ARE SLOT-SPECIFIC. They deal with item amounts.
+            // Give player a single instance of an item
             if (e.getSlot() == 0) {
                 player.getInventory().addItem(item);
                 player.closeInventory();
 
+            // Give player 8x of an item.
             } else if (e.getSlot() == 2) {
                 ItemStack newItem = new ItemStack(item.getType(), 8);
                 ItemMeta im = item.getItemMeta();
@@ -184,6 +192,7 @@ public class InventoryEvents implements Listener {
                 FileStartupEvents.playerStates.replace(player.getName(), states);
                 player.closeInventory();
 
+            // Give player a full stack of an item.
             } else if (e.getSlot() == 4) {
                 ItemStack newItem = new ItemStack(item.getType(), 64);
                 ItemMeta im = item.getItemMeta();

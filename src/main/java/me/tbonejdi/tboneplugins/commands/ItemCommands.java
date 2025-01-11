@@ -10,6 +10,15 @@ import org.bukkit.entity.Player;
 
 public class ItemCommands implements CommandExecutor {
 
+    /**
+     * Handles event for item command capture
+     *
+     * @param sender
+     * @param cmd
+     * @param s
+     * @param args
+     * @return
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if (!(sender instanceof Player)) {
@@ -19,10 +28,13 @@ public class ItemCommands implements CommandExecutor {
 
         Player p = (Player) sender;
 
+        // ------------ "diamonddetect" command ------------
         if (cmd.getName().equalsIgnoreCase("diamonddetect")) {
             boolean diamondsFound = false;
             int diamondCtr = 0;
             p.sendMessage("§d§lScanning for diamonds...");
+
+            // Search in 5x5x5 spherical radius
             for (int x = -5; x <= 5; x++) {
                 for (int y = -5; y <= 5; y++) {
                     for (int z = -5; z <= 5; z++) {
@@ -44,6 +56,7 @@ public class ItemCommands implements CommandExecutor {
             }
         }
 
+        // ------------ "magicitems" command ------------
         if (cmd.getName().equalsIgnoreCase("magicitems")) {
 
             if (!p.isOp()) {

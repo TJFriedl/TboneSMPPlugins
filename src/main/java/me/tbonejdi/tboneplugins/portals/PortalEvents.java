@@ -18,9 +18,15 @@ import java.util.ArrayList;
 
 public class PortalEvents implements Listener {
 
+    /**
+     * Tracks event when a player would supposedly place water in an Aether portal.
+     * @param e
+     */
     @EventHandler
     public void createAetherPortal(PlayerBucketEmptyEvent e) {
         Block b = e.getBlock();
+
+        // We should make sure it's a water bucket...
         if (e.getBucket() != Material.WATER_BUCKET) { return; }
 
         World w = b.getWorld();
@@ -34,7 +40,7 @@ public class PortalEvents implements Listener {
         ArrayList<Location> portalFrame = new ArrayList<>();
         ArrayList<Location> portal = new ArrayList<>();
 
-        // Setting up portal frame search algo
+        // Setting up portal frame lazy search algo
         for (int x = -3; x <= 3; x++) {
             for (int y = -3; y <= 3; y++) {
                 for (int z = -3; z <= 3; z++) {
@@ -54,6 +60,8 @@ public class PortalEvents implements Listener {
                 }
             }
         }
+
+        // Return if not a full frame.
         if (glowStoneCt != 14) { return; }
         if (bigBlock.getBlockX() - smallBlock.getBlockX() == 0) { isZaxis = true; }
         if (isZaxis) { // Checking to make sure there is portal border.
@@ -132,12 +140,20 @@ public class PortalEvents implements Listener {
 
     }
 
+    /**
+     * Event stops the flowing of water in the Aether Portal to make it seem like an actual aether portal.
+     * @param e
+     */
     @EventHandler
     public void stopWaterFlow(BlockFromToEvent e) {
         if (e.getBlock().hasMetadata("AetherWater"))
             e.setCancelled(true);
     }
 
+    /**
+     * Event responsible for sending player to the "Aether" world when they step through the correct portal.
+     * @param e
+     */
     @EventHandler
     public void teleportToAether(PlayerMoveEvent e) {
         Block block = e.getTo().getBlock();
@@ -152,9 +168,15 @@ public class PortalEvents implements Listener {
         }
     }
 
+    /**
+     * Tracks when portal is destroyed.
+     * TODO: This still needs to be implemented.
+     *
+     * @param e
+     */
     @EventHandler
     public void onPortalDestroy(BlockBreakEvent e) {
-        //TODO:
+
     }
 
 

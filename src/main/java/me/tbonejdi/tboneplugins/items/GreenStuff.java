@@ -13,10 +13,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for GreenStuff item.
+ */
 public class GreenStuff {
 
     public static ItemStack greenStuff;
 
+    /**
+     * Registers item in the server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.LARGE_FERN);
         ItemMeta im = item.getItemMeta();

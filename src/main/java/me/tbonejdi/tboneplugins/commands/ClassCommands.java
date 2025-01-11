@@ -8,6 +8,15 @@ import org.bukkit.entity.Player;
 
 public class ClassCommands implements CommandExecutor {
 
+    /**
+     * Handles event for class command capture.
+     *
+     * @param sender
+     * @param cmd
+     * @param s
+     * @param strings
+     * @return
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] strings) {
         if (!(sender instanceof Player)) {
@@ -17,6 +26,7 @@ public class ClassCommands implements CommandExecutor {
 
         Player p = (Player) sender;
 
+        // ------------ "chooseclass" command ------------
         if (cmd.getName().equalsIgnoreCase("chooseclass")) {
             p.sendMessage("§6Change your class!");
             ClassSelection gui = new ClassSelection();

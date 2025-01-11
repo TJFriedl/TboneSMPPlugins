@@ -11,6 +11,12 @@ import java.util.Random;
 
 public class BlockEffects {
 
+    /**
+     * Handler for the block effects caused by ground pound explosion event in the warrior class.
+     *
+     * @param player
+     * @param radius
+     */
     public static void createGroundPoundExplosion(Player player, int radius) {
 
         Location location = player.getLocation();
@@ -24,6 +30,7 @@ public class BlockEffects {
             }
         }
 
+        // Logic to update nearby blocks
         for (Block block : blocks) {
             if (random.nextInt(5) != 4 && block.getType().equals(Material.GRASS_BLOCK))
                 block.setType(Material.DIRT);

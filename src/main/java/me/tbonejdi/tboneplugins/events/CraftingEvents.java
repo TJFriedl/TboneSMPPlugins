@@ -23,14 +23,20 @@ import java.util.List;
 
 public class CraftingEvents implements Listener {
 
+    /**
+     * Event tracks when a player discovers the first tome in game.
+     *
+     * @param e
+     */
     @EventHandler
     public void onItemCraft(CraftItemEvent e) {
-        // First thing we need to do is find the location of the crafting table used.
         Player player = (Player) e.getWhoClicked();
         PackageInitializer pckg = FileStartupEvents.playerData.get(player.getName());
 
+        // Return if player has already discovered the first tome
         if ((pckg.tfw.isBookDiscovered(1)) ||  pckg.pInfo.getLevel() < 2) { return; }
 
+        // Lazy search for location of the crafting table
         Location loc = player.getLocation();
         Location craftingTable;
         for (int x=-5; x<=5; x++) {
@@ -60,8 +66,13 @@ public class CraftingEvents implements Listener {
         }
     }
 
+    /**
+     * Event tracks when a player places a crafting table containing "magic table" metadata
+     * @param e
+     */
     @EventHandler
     public void placeMagicTableEvent (BlockPlaceEvent e) {
+        // Check item for magic table item meta
         if (e.getItemInHand().getItemMeta().equals(MagicTable.magicTable.getItemMeta())) {
             Block block = e.getBlockPlaced();
             block.setMetadata("MagicCraftingTable",
@@ -74,12 +85,14 @@ public class CraftingEvents implements Listener {
     @EventHandler
     public void breakMagicTableEvent (BlockBreakEvent e) {
 
+        // If player is in creative mode, do not drop the item - just delete it.
         if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
             MagicBlockManager.tables.remove(e.getBlock().getLocation());
             MagicBlockManager.removeTextEntity(e.getBlock().getLocation());
             return;
         }
 
+        // Otherwise, handle logic to drop the item "naturally" below.
         if (e.getBlock().hasMetadata("MagicCraftingTable")) {
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
@@ -90,15 +103,24 @@ public class CraftingEvents implements Listener {
             MagicBlockManager.removeTextEntity(e.getBlock().getLocation());
         }
     }
-    // TODO: Maybe try to improve this algorithm in the future... Currently brute-force.
+
+    /**
+     * Event tracks when player uses a "magic" crafting table.
+     *
+     * @param e
+     */
     @EventHandler
     public void openCraftingTable (InventoryOpenEvent e) {
+        // TODO: Maybe try to improve this algorithm in the future... Currently brute-force.
         PlayerStates states = FileStartupEvents.playerStates.get(e.getPlayer().getName());
+
+        // If player is not opening a crafting table or is already holding the magic crafting state
         if (!(e.getInventory() instanceof CraftingInventory) || states.isMagicCrafting)
             return;
         Player player = (Player) e.getPlayer();
         Location location = player.getLocation();
 
+        // Lazy search for nearby crafting table
         for (int x = -4; x <= 4; x++) {
             for (int y = -4; y <= 4; y++) {
                 for (int z = -4; z <= 4; z++) {
@@ -121,36 +143,53 @@ public class CraftingEvents implements Listener {
         }
     }
 
-
-    // Throwing an error: Called once data is deleted?
+    /**
+     * Event tracks when player closes a magic crafting table inventory
+     *
+     * @param e
+     */
     @EventHandler
     public void closeCraftingTable (InventoryCloseEvent e) {
+        // FIXME: Throwing an error: Called once data is deleted?
+        // Return if not crafting table inventory
         if (!(e.getInventory() instanceof CraftingInventory)) { return; }
 
-        // Sometimes thrown after player leaves game.
+        // TODO: Sometimes thrown after player leaves game. Investigate this??
         PlayerStates state = FileStartupEvents.playerStates.get(e.getPlayer().getName());
         if (!(FileStartupEvents.playerStates.containsKey(e.getPlayer().getName()))) { return; }
 
+        // Remove and update magic crafting state for player
         if (state.isMagicCrafting) {
             state.isMagicCrafting = false;
             FileStartupEvents.playerStates.replace(e.getPlayer().getName(), state);
         }
     }
 
+    /**
+     * Event tracks crafting events for magic items in the magic crafting table
+     *
+     * @param e
+     * @throws NullPointerException
+     */
     @EventHandler
     public void handleMagicCrafting (PrepareItemCraftEvent e) throws NullPointerException {
         Player player = (Player) e.getViewers().get(0); // Assuming only one person is viewing this inventory?
+
+        // Return if player is NOT magic crafting
         if (!(FileStartupEvents.playerStates.get(player.getName()).isMagicCrafting)) {
             return;
         }
 
         ArrayList<Material> recipeList = new ArrayList<>();
+
+        // Collect current recipe in the crafting table inventory
         for (ItemStack i : e.getInventory().getMatrix()) {
 
             if (i == null) recipeList.add(Material.AIR);
             else recipeList.add(i.getType());
         }
 
+        // Compare with all magic items. If match, set the result for the player.
         if (recipeList.equals(MagicMirror.recipeList)) {
             e.getInventory().setResult(MagicMirror.magicMirror);
         } else if (recipeList.equals(KeenBlade.recipeList)) {

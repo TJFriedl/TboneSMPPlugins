@@ -9,8 +9,19 @@ import org.bukkit.entity.Player;
 
 public class TomesCommands implements CommandExecutor {
 
+    /**
+     * Command meant for tome operation in the server.
+     *
+     * @param sender
+     * @param cmd
+     * @param s
+     * @param args
+     * @return
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+
+        // Make sure we have an instance of a player.
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only players can use that command!");
             return true;
@@ -19,12 +30,14 @@ public class TomesCommands implements CommandExecutor {
         Player p = (Player) sender;
         PackageInitializer pckg = FileStartupEvents.playerData.get(p.getName());
 
+        // ------------ "tomes" command ------------
         if (cmd.getName().equalsIgnoreCase("tomes")) {
             TomeSelection gui = new TomeSelection(p);
             p.openInventory(gui.getInventory());
             p.sendMessage("§6Opening available tomes...");
         }
 
+        // ------------ "detecttome" command ------------
         if (cmd.getName().equalsIgnoreCase("detecttome")) {
             if (args.length != 1) {
                 p.sendMessage("§6Expected format: /detecttome <bookNum>");

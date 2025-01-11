@@ -10,10 +10,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for beastAmulet item.
+ */
 public class BeastAmulet {
 
     public static ItemStack beastAmulet;
 
+    /**
+     * Registers item in server.
+     */
     protected static void registerItem() {
         ItemStack item = new ItemStack(Material.NAUTILUS_SHELL, 1);
         ItemMeta im = item.getItemMeta();
